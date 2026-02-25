@@ -1,0 +1,45 @@
+1. What things should the system do?
+  Idea is to present budget and account information in a way that allows the users to contrast income with expendeture.
+  View different expenses as seperate items
+  be able to output a file such as a csv 
+
+2. What info does the system need to have to be able to do these things?
+  Input from the user
+  Log in 
+  Understanding currency
+  Sections/folders
+  categorical information
+
+3. Is there a specific way the system should things? 
+  Exportability to CSV file
+  
+
+4. What features are essential?
+  Taking in the data and presenting a Visual
+  Organization of data
+  Ability to export to CSV file and import 
+  security/log on 
+
+
+5. Which features are helpful, but not quiet as important?
+  warning of over of budget
+  handling time based or free trials
+  dual log in that links to the same account
+  assign outflow of cash
+  account set up to taylor budget recommendation
+  
+
+6. Are there some requested features that your team could implement "if you have time"
+  choose the way you color code the application
+  color pallets
+  different ways to shape the data
+  net worth 
+
+Personas
+Jay - Teen
+Kelsey - Family & single mom & Military Bachlor
+Tom - Retieree & college Student
+Gavin - Dad and Enganged Women
+Ryan - Single middle age man
+Vincent - bachlor
+  
