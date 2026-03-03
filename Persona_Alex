@@ -10,3 +10,10 @@ and finds overly complex apps frustrating or confusing.
 He is mainly concerned with making sure he doesn’t run out of money before his next paycheck and wants a clearer way to see where his money is going. 
 He’s also starting to think about saving up for bigger purchases, 
 like a gaming console, and wants a straightforward way to track his progress.
+
+Alex user stories:
+When Alex makes a purchase, the system shall automatically subtract the amount from his available balance and display the updated total so he can clearly see how much money he has left before his next paycheck. 
+While his balance is below a user-defined threshold, the system shall display a low-balance warning to help prevent him from running out of money. 
+The system shall present his income, expenses, and remaining balance in a simple, easy-to-read dashboard to avoid overwhelming him with complex financial tools. 
+When Alex creates a savings goal for a larger purchase, the system shall display his progress as both a percentage and a remaining dollar amount so he can easily track how close he is to reaching it. 
+If Alex enters invalid transaction information, the system shall prompt him to correct it before saving to ensure accuracy.
