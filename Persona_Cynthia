@@ -10,3 +10,12 @@ She iss interested in MapMyMint to keep track of her retirement expenses against
 like to be able to look more closely at her husbands finances as he works to close his business. 
 With one of her children helping with her accounting, she wants to be able to share her budget without 
 having to make an excel spreadsheet every single time.
+
+
+Cynthia's user stories:
+When Cynthia logs into the system, the system shall require secure authentication to protect her financial information. 
+The system shall display her retirement income, monthly expenses, and remaining budget in a clear summary view to help her monitor spending against her fixed income. 
+While her expenses approach or exceed her set monthly budget, the system shall notify her with a visible alert. 
+When Cynthia selects her husband’s linked account, the system shall display a detailed breakdown of his business-related income and expenses to support their transition into full retirement. 
+When Cynthia chooses to share her budget with her child, the system shall generate a secure, shareable report without requiring her to manually create a spreadsheet. 
+If unauthorized access is attempted, the system shall deny access and log the event to maintain financial security.
