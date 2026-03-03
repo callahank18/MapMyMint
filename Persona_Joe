@@ -13,3 +13,10 @@ While he does not feel stressed about money, he has recently become frustrated w
 After noticing several recurring subscription charges on his card, he ended up pausing a credit card to simplify things and restart. 
 Joe is very comfortable with technology and uses digital tools daily for work. If he were to use a financial tracking system, he would want something simple and automated that gives him a clear overview of where his money is going without requiring detailed budgeting. 
 He wants a good display of where his money is going into categories and be able to store it on his computer in a CSV file to replace his current budgeting process.
+
+
+Joe user stories:
+The system shall allow Joe to automatically track all his expenses across multiple accounts, categorizing them clearly so he can quickly see where his money is going. 
+It shall highlight recurring charges and subscriptions to help him manage and simplify spending. 
+The app shall provide simple visual summaries and allow exporting the data in a CSV format for storage and further analysis. 
+The system shall require minimal manual input, offering an automated, easy-to-use overview of his finances without detailed budgeting.
