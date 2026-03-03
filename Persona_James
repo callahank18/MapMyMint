@@ -1,4 +1,4 @@
-Young Bachelor (Vincent)
+Young Bachelor
 James is a 27-year-old bachelor, working full time in a marketing role just outside of Green Bay. James grew up in Appleton, where his father worked 
 as a construction manager, and his mother worked as a receptionist at a local company. His family is supportive, but practical, and values saving and 
 future planning.  He started this job 3 years ago, just after graduating with a bachelor’s degree in marketing from UW-Green Bay. He pays $650 in rent 
@@ -8,8 +8,8 @@ Additionally, James pays for several streaming services (Netflix, Spotify, Disne
 James has recently begun to manage his budget a little closer, and wants to set up a saving plan.
 
 
-Vincent's user stories:
-When Vincent logs into the system, the system shall display his monthly income, fixed expenses, and remaining discretionary income in a clear dashboard. 
+James's user stories:
+When James logs into the system, the system shall display his monthly income, fixed expenses, and remaining discretionary income in a clear dashboard. 
 When he records shared bills, the system shall calculate only his portion of the expense. 
-While his spending approaches or exceeds his monthly budget, the system shall generate a notification alert. When Vincent sets a savings goal, the system shall calculate and track his required monthly contribution. 
+While his spending approaches or exceeds his monthly budget, the system shall generate a notification alert. When James sets a savings goal, the system shall calculate and track his required monthly contribution. 
 The system shall categorize discretionary expenses, such as dining and entertainment, to help him monitor spending trends.
