@@ -15,6 +15,9 @@ A financial management system that allows shared access, tracks spending categor
 
 
 Paige user stories:
+As a user with monthly and large upcoming expenses, I want to be able to track progress on saving goals.
+
+Requirement Specification:
 The system shall allow Paige and her fiancé to track shared expenses and categorize spending clearly, providing a transparent view of where their money is going each month. 
 It shall show progress toward short- and long-term savings goals, such as the wedding, a future home, or a new car, helping them plan without accumulating unnecessary debt. 
 The app shall allow secure shared access, generate simple visual summaries, and require minimal manual input while supporting both users in making collaborative financial decisions.

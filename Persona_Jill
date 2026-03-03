@@ -11,6 +11,9 @@ seamless way to track spending, so she or Jack can quickly review the budget and
 ok 
 
 Miller Family user stories:
+As a married user, I want to be able to share accounts with my partner for a full scope of family finances.
+
+Requirements Specification:
 The system shall allow Jill to track all high-volume household expenses, automatically categorizing them and updating budget totals in real time. 
 At any time, it shall highlight unusual or unnecessary spending, including small fragmented purchases and recurring subscriptions, using clear visual indicators. 
 The app shall provide easy-to-view metrics to show spending trends, budget status, and alerts for approaching limits. 

@@ -13,6 +13,9 @@ having to make an excel spreadsheet every single time.
 
 
 Cynthia's user stories:
+As a user familiar with secure systems, I want my accounts to be secure.
+
+Requirement Specification:
 When Cynthia logs into the system, the system shall require secure authentication to protect her financial information. 
 The system shall display her retirement income, monthly expenses, and remaining budget in a clear summary view to help her monitor spending against her fixed income. 
 While her expenses approach or exceed her set monthly budget, the system shall notify her with a visible alert. 

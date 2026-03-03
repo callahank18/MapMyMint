@@ -8,6 +8,9 @@ such as car repairs, arise. For Sarah, the goal is to optimize every dollar to p
 
 
 Sarah's user stories:
+As a user with a tight budget, I want to be warned if an expense goes higher than I can afford.
+
+Requirement Specification:
 The system shall allow Sarah to track all household expenses, automatically categorizing them to highlight high-priority spending on housing, childcare, and utilities. 
 It shall identify small, recurring costs and provide clear visual summaries to help prevent overspending and protect her emergency fund. 
 The app shall allow her to quickly spot trends, plan for unexpected expenses, and optimize her budget to maintain long-term financial stability for her family.

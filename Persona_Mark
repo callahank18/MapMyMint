@@ -8,11 +8,11 @@ He currently uses a basic spreadsheet but finds it time-consuming and difficult 
 Mark is comfortable with business software and data dashboards, but he does not want to manually build a complex dashboard
 and would prefer to have as little input as possible for initial setup, without compromising security. 
 
-Major goals:
-- Wants the software to be clean and free of clutter, ensuring he can check in on his finances during his busy workday
-
-
 Mark user stories:
+As a user with numerous expenses, I want the software to be clean and free of clutter, ensuring he can check in on his finances during his busy workday
+As a user with many responsibilities, I want the setup process to be straighforward.
+
+Requirement Specification:
 The system shall allow Mark to automatically track and categorize all his monthly expenses, providing a clear overview of where his money is going without requiring extensive manual input. 
 It shall generate simple, uncluttered visual summaries and highlight spending trends to help him quickly understand his financial situation. 
 The app shall ensure security while minimizing setup effort and allow easy access during his busy workday.
