@@ -13,6 +13,9 @@ can both move to once they graduate. He is hoping his current finances can last 
 and wants a better way to grasp his expenditure of money.
 
 William's user stories:
+As a user with limited income, I want to be able to plan for expenses ahead of time.
+
+Device Specification:
 The system shall allow William to track all personal expenses and categorize spending automatically, providing a clear view of where his money goes each month. 
 It shall generate simple, visual summaries that require minimal setup and interaction, helping him manage finances efficiently while balancing school, internship, and future relocation plans. 
 The app shall be convenient, fast, and easy to use, avoiding unnecessary steps that might discourage regular use, and shall support shared visibility with his fiancée for joint financial planning.
