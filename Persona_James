@@ -11,7 +11,7 @@ James has recently begun to manage his budget a little closer, and wants to set 
 James's user stories:
 As a user with many recurring subscribtions, I want a breakdown of these payments to determine whether they are worth the cost.
 
-
+Requirement Specification:
 When James logs into the system, the system shall display his monthly income, fixed expenses, and remaining discretionary income in a clear dashboard. 
 When he records shared bills, the system shall calculate only his portion of the expense. 
 While his spending approaches or exceeds his monthly budget, the system shall generate a notification alert. When James sets a savings goal, the system shall calculate and track his required monthly contribution. 
