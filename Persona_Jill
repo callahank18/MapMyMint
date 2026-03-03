@@ -13,6 +13,6 @@ ok
 Miller Family user stories:
 The system shall allow Jill to track all high-volume household expenses, automatically categorizing them and updating budget totals in real time. 
 At any time, it shall highlight unusual or unnecessary spending, including small fragmented purchases and recurring subscriptions, using clear visual indicators. 
-The app shall provide charts and graphs to show spending trends, budget status, and alerts for approaching limits. 
+The app shall provide easy-to-view metrics to show spending trends, budget status, and alerts for approaching limits. 
 Jill shall be able to securely share the budget with Jack or export summaries, and create future savings goals with simulations showing the impact of spending adjustments. 
 Upon login, the system shall display a dashboard of key financial metrics for fast, informed decision-making.
