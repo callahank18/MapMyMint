@@ -12,10 +12,9 @@ He’s also starting to think about saving up for bigger purchases,
 like a gaming console, and wants a straightforward way to track his progress.
 
 Alex user stories:
-
 As a part timer with irregular hours, I want to log each paycheck compare it to my spending to know how muhc i can safely spend each month.
 
-
+Requirement Specification:
 When Alex makes a purchase, the system shall automatically subtract the amount from his available balance and display the updated total so he can clearly see how much money he has left before his next paycheck. 
 While his balance is below a user-defined threshold, the system shall display a low-balance warning to help prevent him from running out of money. 
 The system shall present his income, expenses, and remaining balance in a simple, easy-to-read dashboard to avoid overwhelming him with complex financial tools. 
