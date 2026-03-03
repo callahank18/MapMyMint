@@ -12,3 +12,9 @@ In the long term, she hopes to move into a larger home, purchase a new car, and 
 She recently has paid off her school debt goal. Because of these goals, understanding where their money goes each month is very important to her future. 
 She does not currently use a budgeting app but is highly comfortable with technology, as is her fiance. 
 A financial management system that allows shared access, tracks spending categories clearly, and shows progress toward savings goals would help reduce her stress and support their future plans.
+
+
+Paige user stories:
+The system shall allow Paige and her fiancé to track shared expenses and categorize spending clearly, providing a transparent view of where their money is going each month. 
+It shall show progress toward short- and long-term savings goals, such as the wedding, a future home, or a new car, helping them plan without accumulating unnecessary debt. 
+The app shall allow secure shared access, generate simple visual summaries, and require minimal manual input while supporting both users in making collaborative financial decisions.
