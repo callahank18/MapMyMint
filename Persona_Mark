@@ -10,3 +10,9 @@ and would prefer to have as little input as possible for initial setup, without 
 
 Major goals:
 - Wants the software to be clean and free of clutter, ensuring he can check in on his finances during his busy workday
+
+
+Mark user stories:
+The system shall allow Mark to automatically track and categorize all his monthly expenses, providing a clear overview of where his money is going without requiring extensive manual input. 
+It shall generate simple, uncluttered visual summaries and highlight spending trends to help him quickly understand his financial situation. 
+The app shall ensure security while minimizing setup effort and allow easy access during his busy workday.
