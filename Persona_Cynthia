@@ -15,6 +15,9 @@ having to make an excel spreadsheet every single time.
 Cynthia's user stories:
 As a user familiar with secure systems, I want my accounts to be secure.
 
+As a retired person I want to be able to set a monthly budget for my map, 
+because my Social Security payments don't accurately reflect my funds.
+
 Requirement Specification:
 When Cynthia logs into the system, the system shall require secure authentication to protect her financial information. 
 The system shall display her retirement income, monthly expenses, and remaining budget in a clear summary view to help her monitor spending against her fixed income. 
