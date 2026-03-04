@@ -22,3 +22,20 @@ While his balance is below a user-defined threshold, the system shall display a 
 The system shall present his income, expenses, and remaining balance in a simple, easy-to-read dashboard to avoid overwhelming him with complex financial tools. 
 When Alex creates a savings goal for a larger purchase, the system shall display his progress as both a percentage and a remaining dollar amount so he can easily track how close he is to reaching it. 
 If Alex enters invalid transaction information, the system shall prompt him to correct it before saving to ensure accuracy.
+
+
+
+As a student working my first job, I want to quickly check how much money I have available so I can decide if I can afford something before buying it.
+As someone new to managing money, I want a straightforward way to record my spending so I can build better financial habits without getting confused.
+As a teenager who spends money on different things, I want my expenses grouped into categories so I can see what I spend the most on.
+As a part-time employee, I want to keep track of when I get paid and how long that money needs to last so I can plan ahead.
+As someone saving for a big purchase, I want to see steady progress toward my goal so I stay motivated to save.
+
+Requirement Specification:
+When a transaction is entered, the system shall update the user’s balance in real time so the remaining amount is always accurate.
+If the user attempts to spend more than the available balance, the system shall display a warning message before allowing the transaction to proceed.
+The system shall organize all transactions into predefined categories to give the user a clear overview of spending behavior.
+The system shall display upcoming or recent income alongside expenses so the user can better understand their financial timeline.
+When a savings goal is active, the system shall visually represent progress using a progress indicator to make tracking intuitive.
+The system shall prioritize a clean and minimal interface to ensure ease of use for users with little financial experience.
+If incomplete or invalid input is detected, the system shall prevent submission and request correct information from the user.
