@@ -15,16 +15,6 @@ Alex user stories:
 As a part timer with irregular hours, I want to log each paycheck compare it to my spending to know how muhc i can safely spend each month.
 As a teenager, I want the ability to make my own color sets for my map to match my school colors or my favorite characters.
 As a high school student my spending is limited already, I want to be able to budget efficiently for weekend expenditures.
-
-Requirement Specification:
-When Alex makes a purchase, the system shall automatically subtract the amount from his available balance and display the updated total so he can clearly see how much money he has left before his next paycheck. 
-While his balance is below a user-defined threshold, the system shall display a low-balance warning to help prevent him from running out of money. 
-The system shall present his income, expenses, and remaining balance in a simple, easy-to-read dashboard to avoid overwhelming him with complex financial tools. 
-When Alex creates a savings goal for a larger purchase, the system shall display his progress as both a percentage and a remaining dollar amount so he can easily track how close he is to reaching it. 
-If Alex enters invalid transaction information, the system shall prompt him to correct it before saving to ensure accuracy.
-
-
-
 As a student working my first job, I want to quickly check how much money I have available so I can decide if I can afford something before buying it.
 As someone new to managing money, I want a straightforward way to record my spending so I can build better financial habits without getting confused.
 As a teenager who spends money on different things, I want my expenses grouped into categories so I can see what I spend the most on.
@@ -32,6 +22,11 @@ As a part-time employee, I want to keep track of when I get paid and how long th
 As someone saving for a big purchase, I want to see steady progress toward my goal so I stay motivated to save.
 
 Requirement Specification:
+When Alex makes a purchase, the system shall automatically subtract the amount from his available balance and display the updated total so he can clearly see how much money he has left before his next paycheck. 
+While his balance is below a user-defined threshold, the system shall display a low-balance warning to help prevent him from running out of money. 
+The system shall present his income, expenses, and remaining balance in a simple, easy-to-read dashboard to avoid overwhelming him with complex financial tools. 
+When Alex creates a savings goal for a larger purchase, the system shall display his progress as both a percentage and a remaining dollar amount so he can easily track how close he is to reaching it. 
+If Alex enters invalid transaction information, the system shall prompt him to correct it before saving to ensure accuracy.
 When a transaction is entered, the system shall update the user’s balance in real time so the remaining amount is always accurate.
 If the user attempts to spend more than the available balance, the system shall display a warning message before allowing the transaction to proceed.
 The system shall organize all transactions into predefined categories to give the user a clear overview of spending behavior.
