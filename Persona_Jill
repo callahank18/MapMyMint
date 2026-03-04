@@ -16,6 +16,8 @@ As a married user, I want to be able to share accounts with my partner for a ful
 As a user dealing with many small purchases I want to be able to tag my purchases, 
 so I can separate subscriptions and ongoing payments with an end date from general categories. 
 
+As a user that likes visualization, I want to be able to have clear and well thought out visualizations for my budgeting.
+
 Requirements Specification:
 The system shall allow Jill to track all high-volume household expenses, automatically categorizing them and updating budget totals in real time. 
 At any time, it shall highlight unusual or unnecessary spending, including small fragmented purchases and recurring subscriptions, using clear visual indicators. 
