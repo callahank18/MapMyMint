@@ -18,6 +18,8 @@ He wants a good display of where his money is going into categories and be able 
 Joe user stories:
 As a user with expenses across many accounts and cards, I want a central dashboard to view all transactions
 
+As a user managing many recurring expenses, I want to set alerts that remind me what I need to pay and when.
+
 Requirement Specification:
 The system shall allow Joe to automatically track all his expenses across multiple accounts, categorizing them clearly so he can quickly see where his money is going. 
 It shall highlight recurring charges and subscriptions to help him manage and simplify spending. 
