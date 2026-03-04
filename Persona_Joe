@@ -27,3 +27,8 @@ The system shall allow Joe to automatically track all his expenses across multip
 It shall highlight recurring charges and subscriptions to help him manage and simplify spending. 
 The app shall provide simple visual summaries and allow exporting the data in a CSV format for storage and further analysis. 
 The system shall require minimal manual input, offering an automated, easy-to-use overview of his finances without detailed budgeting.
+
+Scenario;
+Joe logs into MapMyMint after noticing random recurring payments. He quickly finds three subscriptions that he had forgotten about, and deletes them
+While logged on, his eye catches a large visual block, representing this vehicle-related expenses. While his mind is set on purchasing this collection car, 
+it does make him consider new ways to free up a little extra money each month
