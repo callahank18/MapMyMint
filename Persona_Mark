@@ -14,6 +14,8 @@ As a user with many responsibilities, I want the setup process to be straighforw
 
 As a user with an existing spreadsheet, I want to be able to import what I already have so I don't need to start from scratch.
 
+As a user that is a project manager, I want to be able to manage my budgeting with a less time consuming and visual representation.
+
 Requirement Specification:
 The system shall allow Mark to automatically track and categorize all his monthly expenses, providing a clear overview of where his money is going without requiring extensive manual input. 
 It shall generate simple, uncluttered visual summaries and highlight spending trends to help him quickly understand his financial situation. 
