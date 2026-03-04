@@ -20,3 +20,19 @@ When James logs into the system, the system shall display his monthly income, fi
 When he records shared bills, the system shall calculate only his portion of the expense. 
 While his spending approaches or exceeds his monthly budget, the system shall generate a notification alert. When James sets a savings goal, the system shall calculate and track his required monthly contribution. 
 The system shall categorize discretionary expenses, such as dining and entertainment, to help him monitor spending trends.
+
+
+As a full-time professional managing multiple expenses, I want to see all my monthly bills in one place so I can better understand where my money is going.
+As someone splitting costs with a roommate, I want to track shared expenses so I can make sure I’m paying my fair share without confusion.
+As a young adult balancing lifestyle and responsibilities, I want to monitor how much I spend on entertainment so I don’t overspend on weekends and concerts.
+As someone starting to think about the future, I want to create a structured savings plan so I can build financial stability over time.
+As a subscriber to multiple services, I want to keep track of recurring payments so I know how much they add up each month.
+
+Requirement Specification:
+The system shall display all recurring expenses in a centralized view to give James a complete picture of his financial obligations.
+The system shall allow shared expense tracking, enabling users to split costs and calculate individual contributions for items like rent and utilities.
+The system shall categorize discretionary spending so James can evaluate and adjust his lifestyle expenses.
+The system shall provide a budgeting feature that compares planned spending against actual spending to highlight discrepancies.
+When James sets a savings goal, the system shall automatically allocate a suggested amount based on his income and expenses.
+The system shall notify James of upcoming or recurring payments to help him avoid missed bills.
+If spending exceeds a predefined budget in any category, the system shall generate an alert to encourage better financial control.
