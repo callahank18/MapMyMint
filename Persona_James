@@ -13,6 +13,8 @@ As a user with many recurring subscribtions, I want a breakdown of these payment
 
 As a user with an active social life, I want to single out my monthly entertainment expenses to see which is costing the most.
 
+As a user with many new expenditures in different areas, I want to be able to make sure I don't overspend and have a clear visual where my money goes each paycheck.
+
 Requirement Specification:
 When James logs into the system, the system shall display his monthly income, fixed expenses, and remaining discretionary income in a clear dashboard. 
 When he records shared bills, the system shall calculate only his portion of the expense. 
