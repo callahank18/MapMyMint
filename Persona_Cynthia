@@ -6,7 +6,7 @@ and has worked remotely handling insurance claims calls for the past 15 years wo
 
 Her experience with secure systems and multiple different logins means she understands the need for security, 
 and handling the family finances for years have led her to be very cautious surrounding her families finances. 
-She iss interested in MapMyMint to keep track of her retirement expenses against her set budget, and would 
+She is interested in MapMyMint to keep track of her retirement expenses against her set budget, and would 
 like to be able to look more closely at her husbands finances as he works to close his business. 
 With one of her children helping with her accounting, she wants to be able to share her budget without 
 having to make an excel spreadsheet every single time.
@@ -17,6 +17,8 @@ As a user familiar with secure systems, I want my accounts to be secure.
 
 As a retired person I want to be able to set a monthly budget for my map, 
 because my Social Security payments don't accurately reflect my funds.
+
+As someone who shares my budgeting, I want an easy and efficicient way to share with my children.
 
 Requirement Specification:
 When Cynthia logs into the system, the system shall require secure authentication to protect her financial information. 
