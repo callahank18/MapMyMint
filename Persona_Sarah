@@ -10,6 +10,7 @@ such as car repairs, arise. For Sarah, the goal is to optimize every dollar to p
 Sarah's user stories:
 As a user with a tight budget, I want to be warned if an expense goes higher than I can afford.
 As a user trying to manage every dollar, I want to be able to see how large my savings are compared to my regular income/expenses.
+As a user that has a hard time tracking small purchases, I want a well organized system that helps budget the small purchases like streaming services, field trips, or anything that may add up overtime.
 
 Requirement Specification:
 The system shall allow Sarah to track all household expenses, automatically categorizing them to highlight high-priority spending on housing, childcare, and utilities. 
