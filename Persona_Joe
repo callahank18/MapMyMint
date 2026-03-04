@@ -20,6 +20,8 @@ As a user with expenses across many accounts and cards, I want a central dashboa
 
 As a user managing many recurring expenses, I want to set alerts that remind me what I need to pay and when.
 
+As a user that has many different kinds of expenses, I would like clear layed out sections that I can look at and see if they need improving on.
+
 Requirement Specification:
 The system shall allow Joe to automatically track all his expenses across multiple accounts, categorizing them clearly so he can quickly see where his money is going. 
 It shall highlight recurring charges and subscriptions to help him manage and simplify spending. 
