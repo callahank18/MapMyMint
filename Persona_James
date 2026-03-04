@@ -11,6 +11,8 @@ James has recently begun to manage his budget a little closer, and wants to set 
 James's user stories:
 As a user with many recurring subscribtions, I want a breakdown of these payments to determine whether they are worth the cost.
 
+As a user with an active social life, I want to single out my monthly entertainment expenses to see which is costing the most.
+
 Requirement Specification:
 When James logs into the system, the system shall display his monthly income, fixed expenses, and remaining discretionary income in a clear dashboard. 
 When he records shared bills, the system shall calculate only his portion of the expense. 
