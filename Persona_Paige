@@ -22,6 +22,18 @@ I want to be able to scale my tracking and change whether expenses are viewed on
 
 As a user that wants to be open with expenditures with my fiance, I want a shared access system that clearly lays out my expenditures so we are able to save for our future.
 
+User Scenario:
+
+Paige opens MapMyMint while reviewing her monthly finances with her fiance.
+With their wedding coming up and new mortgage to manage, she wants to make sure they are staying on track financially.
+She navigates to the budgeting dashboard and notices a breakdown of their spending categories, including housing, groceries, and wedding expenses.
+
+After noticing that wedding related spending has grown larger than expected, Paige organizes recent purchases into a "Wedding" category or saving pod.
+She then creates a savings goal to track how much they still need to set aside before the wedding.
+Being able to clearly see their expenses and progress helps Paige feel more confident managing both their wedding budget and their monthly finances.
+
+
+
 Requirement Specification:
 The system shall allow Paige and her fiancé to track shared expenses and categorize spending clearly, providing a transparent view of where their money is going each month. 
 It shall show progress toward short- and long-term savings goals, such as the wedding, a future home, or a new car, helping them plan without accumulating unnecessary debt. 
