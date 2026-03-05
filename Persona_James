@@ -18,6 +18,14 @@ As a young adult balancing lifestyle and responsibilities, I want to monitor how
 As someone starting to think about the future, I want to create a structured savings plan so I can build financial stability over time.
 As a subscriber to multiple services, I want to keep track of recurring payments so I know how much they add up each month.
 
+User Scenario:
+James looks at his expenses after using MapMyMint and realizes that his monthly expenses feel higher than expected.
+After opening the dashboard, he sees a visual breakdown of his spending categories, including rent, transportation, subscriptions, and entertainment.
+Trying to figure out where most of that money is going to, he opens the subscriptions category and notices that several streaming services add up to a bigger monthly cost then expected.
+
+James goes on to review his entertainment spending and sees how much he has spent on concerts and weekends out with friends.
+After seeing the total spent displayed visually, he decides to cancel one subscription and set a savings goal for the upcoming months.
+With organizing his expenses and seeing them clearly and visually in one place that is easy to understand, James feels more confident about managing his spending and building a savings for the future.
 
 Requirement Specification:
 When James logs into the system, the system shall display his monthly income, fixed expenses, and remaining discretionary income in a clear dashboard. 
