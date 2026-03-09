@@ -18,7 +18,6 @@ As a user dealing with a busy schedule, I want to set reminders for myself so th
 As a user with limited income and busy schedule during the semester, I want a clear budget on what I am allowed to spend to reach my overall goal.
 
 User Scenario:
-
 Late on a Friday night, William gets home tired from working at his internship. He doesn't want to manually enter 40 receipts,
 so he goes to his bank site and exports his bank statement as a CSV file. He opens MindMyMint and clicks "import a file".
 He finds his banks CSV file, and clicks okay. The python backend reads the file, it ignores the extra information and extracts "Date", "Description", "Ammount".
