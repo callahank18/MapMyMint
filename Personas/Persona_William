@@ -26,7 +26,7 @@ He notices one expense is misattributed, so he double clicks it and renames the 
 that his "late night food" expenses on a monthly view are almost as large as his "wedding savings". He clicks save and closes the app.
 He texts his fiancee that they should eat in, rather than going out that night.
 
-Device Specification:
+Requirements:
 The system shall allow William to track all personal expenses and categorize spending automatically, providing a clear view of where his money goes each month. 
 It shall generate simple, visual summaries that require minimal setup and interaction, helping him manage finances efficiently while balancing school, internship, and future relocation plans. 
 The app shall be convenient, fast, and easy to use, avoiding unnecessary steps that might discourage regular use, and shall support shared visibility with his fiancée for joint financial planning.
