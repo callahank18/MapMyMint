@@ -11,17 +11,10 @@ She want to be able to easiler monitor retirement funds to ensure they last, sav
 User Stories:
 
 As a user that isn't super confident in technology, I want a system that is very easy to use and understand with clear instructions.
-
 As an aging user, I want the ability to increase the size of the text so that I can easily read it.
 As someone concerned about fraud, I want to easily spot unfamiliar or unusual charges, so that I can avoid scam-related losses.
 
-Wants: 
-- Large readable text
-- Simple dashboard showing only the things she needs
-- Alerts for unusual activity
-
-
-Scenarios:
+User Scenario:
 
 Maggie, a 93-year-old retired teacher, sits down in the evening with her tablet to review her finances. 
 She opens the financial tracking app that her grandson helped install and logs in. 
@@ -30,3 +23,8 @@ While reviewing the dashboard, Maggie notices an alert about an unusual charge o
 After reviewing it, she feels reassured that she can keep track of her money and spot potential scams.
 Before closing the app, Maggie quickly checks how much money she has set aside in savings for her grandchildren without getting lost in the weeds with clutter and features that don't matter to her. 
 Feeling confident that her finances are organized and secure, she puts down her tablet and continues her evening.
+
+Wants: 
+- Large readable text
+- Simple dashboard showing only the things she needs
+- Alerts for unusual activity
