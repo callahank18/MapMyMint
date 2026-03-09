@@ -32,10 +32,13 @@ Seeing his spending clearly organized helps him feel more confident about managi
 
 
 Requirement Specification:
-When Alex makes a purchase, the system shall automatically subtract the amount from his available balance and display the updated total so he can clearly see how much money he has left before his next paycheck. 
+When Alex makes a purchase, the system shall automatically subtract the amount from his available balance 
+and display the updated total so he can clearly see how much money he has left before his next paycheck. 
 While his balance is below a user-defined threshold, the system shall display a low-balance warning to help prevent him from running out of money. 
-The system shall present his income, expenses, and remaining balance in a simple, easy-to-read dashboard to avoid overwhelming him with complex financial tools. 
-When Alex creates a savings goal for a larger purchase, the system shall display his progress as both a percentage and a remaining dollar amount so he can easily track how close he is to reaching it. 
+The system shall present his income, expenses, and remaining balance in a simple, easy-to-read dashboard to avoid 
+overwhelming him with complex financial tools. 
+When Alex creates a savings goal for a larger purchase, the system shall display his progress as both a percentage and 
+a remaining dollar amount so he can easily track how close he is to reaching it. 
 If Alex enters invalid transaction information, the system shall prompt him to correct it before saving to ensure accuracy.
 When a transaction is entered, the system shall update the user’s balance in real time so the remaining amount is always accurate.
 If the user attempts to spend more than the available balance, the system shall display a warning message before allowing the transaction to proceed.
