@@ -13,7 +13,6 @@ She recently has paid off her school debt goal. Because of these goals, understa
 She does not currently use a budgeting app but is highly comfortable with technology, as is her fiance. 
 A financial management system that allows shared access, tracks spending categories clearly, and shows progress toward savings goals would help reduce her stress and support their future plans.
 
-
 Paige user stories:
 As a user with monthly and large upcoming expenses, I want to be able to track progress on saving goals.
 As a user who is working toward large purchases, and who just finished paying off student loans, 
@@ -27,8 +26,6 @@ She navigates to the budgeting dashboard and notices a breakdown of their spendi
 After noticing that wedding related spending has grown larger than expected, Paige organizes recent purchases into a "Wedding" category or saving pod.
 She then creates a savings goal to track how much they still need to set aside before the wedding.
 Being able to clearly see their expenses and progress helps Paige feel more confident managing both their wedding budget and their monthly finances.
-
-
 
 Requirement Specification:
 The system shall allow Paige and her fiancé to track shared expenses and categorize spending clearly, providing a transparent view of where their money is going each month. 
