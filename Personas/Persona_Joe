@@ -17,12 +17,14 @@ He wants a good display of where his money is going into categories and be able 
 
 Joe user stories:
 As a user with expenses across many accounts and cards, I want a central dashboard to view all transactions
-
 As a user managing many recurring expenses, I want to set alerts that remind me what I need to pay and when.
-
 As a user that has many different kinds of expenses, I would like clear layed out sections that I can look at and see if they need improving on.
-
 As a user with many monthly payments, I want to be able to group certain expenses together 
+
+User Scenario:
+Joe logs into MapMyMint after noticing unexpected recurring payments. He navigates to a list view, and finds the 'subscriptions' category. He then finds three 
+subscriptions that he had forgotten about, and deletes them. While logged on, his eye catches a large visual block, representing this vehicle-related expenses. 
+While his mind is set on purchasing this collection car, it does make him consider new ways to free up a little extra money each month.
 
 Requirement Specification:
 The system shall allow Joe to automatically track all his expenses across multiple accounts, categorizing them clearly so he can quickly see where his money is going. 
@@ -30,7 +32,3 @@ It shall highlight recurring charges and subscriptions to help him manage and si
 The app shall provide simple visual summaries and allow exporting the data in a CSV format for storage and further analysis. 
 The system shall require minimal manual input, offering an automated, easy-to-use overview of his finances without detailed budgeting.
 
-Scenario:
-Joe logs into MapMyMint after noticing unexpected recurring payments. He navigates to a list view, and finds the 'subscriptions' category. He then finds three 
-subscriptions that he had forgotten about, and deletes them. While logged on, his eye catches a large visual block, representing this vehicle-related expenses. 
-While his mind is set on purchasing this collection car, it does make him consider new ways to free up a little extra money each month.
