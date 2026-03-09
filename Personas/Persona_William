@@ -14,10 +14,10 @@ and wants a better way to grasp his expenditure of money.
 
 William's user stories:
 As a user with limited income, I want to be able to plan for expenses ahead of time.
-
 As a user dealing with a busy schedule, I want to set reminders for myself so the system notifies me when another payment needs to be made.
-
 As a user with limited income and busy schedule during the semester, I want a clear budget on what I am allowed to spend to reach my overall goal.
+
+User Scenario:
 
 Device Specification:
 The system shall allow William to track all personal expenses and categorize spending automatically, providing a clear view of where his money goes each month. 
