@@ -14,17 +14,15 @@ having to make an excel spreadsheet every single time.
 
 Cynthia's user stories:
 As a user familiar with secure systems, I want my accounts to be secure.
-
-As a retired person I want to be able to set a monthly budget for my map, 
-because my Social Security payments don't accurately reflect my funds.
-
+As a retired person I want to be able to set a monthly budget for my map, because my Social Security payments don't accurately reflect my funds.
 As someone who shares my budgeting, I want an easy and efficicient way to share with my children.
-
 As a retiree managing a fixed income, I want to monitor my monthly expenses against my budget so I can ensure my savings last over time.
 As someone experienced with financial responsibility, I want secure access to my financial information so I feel confident my data is protected.
 As a spouse of a business owner transitioning to retirement, I want visibility into my husband’s financial activity so I can stay informed about our overall finances.
 As a parent collaborating with my child on finances, I want to share my budgeting information easily so we can work together without extra manual effort.
 As someone who prefers clarity, I want to review detailed breakdowns of my spending so I can make careful and informed decisions.
+
+User Scenario: 
 
 Requirement Specification:
 When Cynthia logs into the system, the system shall require secure authentication to protect her financial information. 
