@@ -12,6 +12,8 @@ As a user with a tight budget, I want to be warned if an expense goes higher tha
 As a user trying to manage every dollar, I want to be able to see how large my savings are compared to my regular income/expenses.
 As a user that has a hard time tracking small purchases, I want a well organized system that helps budget the small purchases like streaming services, field trips, or anything that may add up overtime.
 
+User Scenario:
+
 Requirement Specification:
 The system shall allow Sarah to track all household expenses, automatically categorizing them to highlight high-priority spending on housing, childcare, and utilities. 
 It shall identify small, recurring costs and provide clear visual summaries to help prevent overspending and protect her emergency fund. 
