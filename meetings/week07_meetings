@@ -1,4 +1,4 @@
-Attendance
+
   Tom - Product Owner 
     Languages - Java, Python, HTML, CSS, SQL
   Kelsey - Scrum Master 
@@ -25,10 +25,30 @@ Scenerios [X]
 
 
 ## Assigned Work ##
- 
+Front End - Kelsey
+  - Javascript
+  - Design interface options
+  - 
+
+Back End - Tom
+  - find libraries
+  - python
+  - pandas, sql alchemy
+  - best effort security
+  - msd3 - MIT License
+
+Database - Gavin
+  - set up a database
+  - sqlite
+
 
 ## Meeting with Brian GOALS Monday 3/16/2026 ##
-
+  - Create a product Back Log
+  - Sprint Plan to start "next Monday" 3 weeks from now
+  - Requirements Report Finished and turned in
+  - Interface design options presented to the team
+  - Database example set up (local)
+  - 
 
 
 ----------------------------------------------------------------------------------------------------------
