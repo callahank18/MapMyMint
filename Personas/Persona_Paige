@@ -16,10 +16,8 @@ A financial management system that allows shared access, tracks spending categor
 
 Paige user stories:
 As a user with monthly and large upcoming expenses, I want to be able to track progress on saving goals.
-
 As a user who is working toward large purchases, and who just finished paying off student loans, 
-I want to be able to scale my tracking and change whether expenses are viewed on a daily, weekly, monthly, or yearly scale.
-
+As a user I want to be able to scale my tracking and change whether expenses are viewed on a daily, weekly, monthly, or yearly scale.
 As a user that wants to be open with expenditures with my fiance, I want a shared access system that clearly lays out my expenditures so we are able to save for our future.
 
 User Scenario:
