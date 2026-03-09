@@ -13,6 +13,10 @@ As a user trying to manage every dollar, I want to be able to see how large my s
 As a user that has a hard time tracking small purchases, I want a well organized system that helps budget the small purchases like streaming services, field trips, or anything that may add up overtime.
 
 User Scenario:
+Sarah logs into MapMyMint after paying her monthly rent and childcare expenses. As a single mother supporting two children, she wants to make sure there is still enough money left for the rest of the month.
+When she opens the dashboard, she sees a clear visual breakdown of her income and spending categories such as housing, utilities, childcare, groceries, and subscriptions. While reviewing the chart, she notices that several small expenses, including streaming services and a recent school field trip payment, have added up more than she expected.
+The app shows a warning that her remaining balance for the month is getting close to her planned spending limit. Sarah reviews the categories and decides to cancel one subscription and adjust a few non-essential expenses.
+She then checks the savings section to confirm that her emergency fund is still protected in case unexpected costs, like car repairs, occur. Seeing her finances clearly organized helps Sarah feel more confident that she can keep her household stable and prepared for emergencies.
 
 Requirement Specification:
 The system shall allow Sarah to track all household expenses, automatically categorizing them to highlight high-priority spending on housing, childcare, and utilities. 
