@@ -16,6 +16,10 @@ As a user dealing with many small purchases I want to be able to tag my purchase
 As a user that likes visualization, I want to be able to have clear and well thought out visualizations for my budgeting.
 
 User Scenario:
+Jill logs into MapMyMint after finishing the week’s grocery shopping and paying a few school and sports fees for her children. With a busy household of six, she wants to quickly check how the family budget is doing.
+When she opens the dashboard, she sees clear visual charts showing spending on groceries, utilities, school costs, and other household expenses. She notices that several small convenience purchases and a couple of subscriptions have added up more than expected this month.
+Jill reviews the categories and tags a few recurring subscriptions so they are easier to track. The dashboard updates and shows how the current spending affects the family’s savings goal for their future move.
+Before closing the app, Jill shares the updated budget summary with Jack so he can review it later. The clear visual overview helps Jill quickly understand the family’s finances and keep the household budget on track.
 
 Requirements Specification:
 The system shall allow Jill to track all high-volume household expenses, automatically categorizing them and updating budget totals in real time. 
