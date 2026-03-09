@@ -23,6 +23,13 @@ As a parent collaborating with my child on finances, I want to share my budgetin
 As someone who prefers clarity, I want to review detailed breakdowns of my spending so I can make careful and informed decisions.
 
 User Scenario: 
+Cynthia logs into MayMyMint while reviewing her monthly retirement finances.
+Since she now relies mostly on Social Secuirty and savings, she wants to make sure her spending stays within budget.
+During reviewing, she views the dashboard where her monthly income and expenses are displayed side by side in a clear visual.
+While looking at the spending categories, Cynthia notices that household expenses have increased slightly compared to last month.
+She opens the detailed category view to see which purchases contributed to it.
+Before finishing, Cynthia generates a report of her categorized expenses and securely shares it with her child who helps her with her finances.
+By seeing her income and spending clearly organized in one place, she feels way more confident to keeping her retirement budget on track.
 
 Requirement Specification:
 When Cynthia logs into the system, the system shall require secure authentication to protect her financial information. 
