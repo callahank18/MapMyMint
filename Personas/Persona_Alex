@@ -21,6 +21,16 @@ As a teenager who spends money on different things, I want my expenses grouped i
 As a part-time employee, I want to keep track of when I get paid and how long that money needs to last so I can plan ahead.
 As someone saving for a big purchase, I want to see steady progress toward my goal so I stay motivated to save.
 
+User Scenario:
+Alex logs into MapMyMint after recieving his paycheck from his part time job at McDonalds.
+Since this is the first time he has had regular income, he wants to make sure the money lasts until his next paycheck.
+When he opens the dashboard, he sees a simple visual display showing his recent income, current balance, and spending categories such as food, gaming, and subscriptions.
+While reviewing his expenses, Alex notices that he has spent more on gaming subscriptions than he expected.
+He checks how much money he still has available and sees a warning that his balance is getting close to the limit for the week.
+Alex chooses to reduce his spending for the week and add a savings goal for a new console.
+Seeing his spending clearly organized helps him feel more confident about managing his money.
+
+
 Requirement Specification:
 When Alex makes a purchase, the system shall automatically subtract the amount from his available balance and display the updated total so he can clearly see how much money he has left before his next paycheck. 
 While his balance is below a user-defined threshold, the system shall display a low-balance warning to help prevent him from running out of money. 
