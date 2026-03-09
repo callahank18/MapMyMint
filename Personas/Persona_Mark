@@ -11,19 +11,17 @@ and would prefer to have as little input as possible for initial setup, without 
 Mark user stories:
 As a user with numerous expenses, I want the software to be clean and free of clutter, ensuring he can check in on his finances during his busy workday
 As a user with many responsibilities, I want the setup process to be straightforward.
-
 As a user with an existing spreadsheet, I want to be able to import what I already have so I don't need to start from scratch.
-
 As a user that is a project manager, I want to be able to manage my budgeting with a less time consuming and visual representation.
 
-Requirement Specification:
-The system shall allow Mark to automatically track and categorize all his monthly expenses, providing a clear overview of where his money is going without requiring extensive manual input. 
-It shall generate simple, uncluttered visual summaries and highlight spending trends to help him quickly understand his financial situation. 
-The app shall ensure security while minimizing setup effort and allow easy access during his busy workday.
-
-Scenarios:
+User Scenario:
 Mark is a 45-year-old project manager with a busy schedule. During a short break at work, he opens the financial tracking app to get a clearer view of his monthly expenses. 
 Since he already tracks some expenses in a spreadsheet, he uses the app’s import feature to upload his existing data.
 The app quickly categorizes his expenses and generates a simple, uncluttered dashboard showing how much he spends on categories like mortgage, groceries, and subscriptions. 
 Mark reviews the visual summaries and notices that his dining expenses have increased over the past few months.
 In just a few minutes, Mark gains a better understanding of his spending without manually maintaining a complex spreadsheet, and he can easily check the app again whenever he has time during his workday.
+
+Requirement Specification:
+The system shall allow Mark to automatically track and categorize all his monthly expenses, providing a clear overview of where his money is going without requiring extensive manual input. 
+It shall generate simple, uncluttered visual summaries and highlight spending trends to help him quickly understand his financial situation. 
+The app shall ensure security while minimizing setup effort and allow easy access during his busy workday.
