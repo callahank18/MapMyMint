@@ -1,4 +1,7 @@
 3/30/2026
 Database - Cofirm Scheme of database
-Front end - Skelton visualizion 
-Back end - 
+         - make a dummy file that populates random info (test case)
+Front end - Skelton visualizion of the program. 
+          - Do a pull into the front end to ensure it can flow
+Back end  - phython function to query database load result into pandas dataframe. 
+          - Simple operation to ensure functionality. 
