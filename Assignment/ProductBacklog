@@ -5,3 +5,5 @@ Front end - Skelton visualizion of the program.
           - Do a pull into the front end to ensure it can flow
 Back end  - phython function to query database load result into pandas dataframe. 
           - Simple operation to ensure functionality. 
+          - writing things to manuipulate the data
+          - encryption process
