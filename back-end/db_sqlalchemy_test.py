@@ -1,7 +1,8 @@
 
 
-from sqlalchemy import create_engine, Column, Integer, String, Float
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship
+import pandas as pd
 #may need to do:
 #pip install SQLAlchemy
 #I am using VSCode , so I also had to do 
@@ -9,13 +10,28 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 Base = declarative_base()
 
-class User(Base):
+class Users(Base):
     __tablename__ = "Users"  # must match your SQL table name
 
     CustomerID = Column(Integer, primary_key=True, autoincrement=True)
     Username = Column(String, nullable=False, unique=True)
     Password = Column(String, nullable=False)
+    # optional: relationship to Goals
+    goals = relationship("Goals", back_populates="user")
 
+
+class Goals(Base):
+    __tablename__ = "Goals"
+    
+    goal_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("Users.CustomerID"), nullable=False)
+    goal_name = Column(String, nullable=False)
+    target_amount = Column(Float, nullable=False)
+    current_amount = Column(Float, default=0)
+    target_date = Column(String, nullable=True)  # or Date if you want proper date handling
+
+    # relationship to User
+    user = relationship("Users", back_populates="goals")
 
 
 #creating the engine creates the connection to the database
@@ -28,7 +44,7 @@ SessionLocal = sessionmaker(bind=engine)
 selectSession = SessionLocal()
 
 #query database for all users
-all_users = selectSession.query(User).all()
+all_users = selectSession.query(Users).all()
 
 #iterate through 
 for user in all_users:
@@ -38,6 +54,22 @@ for user in all_users:
 selectSession.close()
 
 
+GoalsSession = SessionLocal()
+
+goals = GoalsSession.query(Goals).filter(Goals.user_id == 1).all()
+
+
+#Convert to pandas DataFrame
+df_goals = pd.DataFrame([{
+    "goal_id": g.goal_id,
+    "user_id": g.user_id,
+    "goal_name": g.goal_name,
+    "target_amount": g.target_amount,
+    "current_amount": g.current_amount,
+    "target_date": g.target_date
+} for g in goals])
+
+print(df_goals)
 
 #new_user = User(Username="Vincent", Password="123")
 #whenever making a change to the database, you need to stage it:
