@@ -34,7 +34,7 @@ all_users = selectSession.query(User).all()
 for user in all_users:
     print(f"ID: {user.CustomerID}, Username: {user.Username}, Password: {user.Password}")
 
-# 6. Close the session when done
+#close the session when done
 selectSession.close()
 
 

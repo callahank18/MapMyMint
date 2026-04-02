@@ -12,10 +12,12 @@ for row in rows:
     print(row)
 
 
+'''
 cursor.execute(
     "INSERT INTO Users (Username, Password) VALUES (?, ?)",
     ("Bob", "pass123")
 )
+'''
 
 # Commit the change
 conn.commit()
