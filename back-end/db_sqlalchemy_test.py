@@ -27,11 +27,10 @@ SessionLocal = sessionmaker(bind=engine)
 
 selectSession = SessionLocal()
 
-#print user table:
-
+#query database for all users
 all_users = selectSession.query(User).all()
 
-# 5. Print each user
+#iterate through 
 for user in all_users:
     print(f"ID: {user.CustomerID}, Username: {user.Username}, Password: {user.Password}")
 
