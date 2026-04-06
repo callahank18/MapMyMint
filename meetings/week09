@@ -18,6 +18,18 @@ In Class Meeting w/ Professor - Monday's 2-3:15
 Second Meeting - Wednesday 2:00 - 3:15 Discord
 Third Meeting - Thursday @ 9am Discord
 ----------------------------------------------------------------------------------------------------
+## WEEK PRODUCT BACKLOG ##
+Database  - create classes for table (sq alchemy)
+Front end - create a landing page 
+          - work on getting the graph aspect to link
+          - take in and send csv file
+Back end  - changes being able to made push to front end input/request
+          - get to push to back end
+          - be able to read and insert csv files
+
+Documents - get the test delievery plan completed- how to test and then what is the final deliverable looking like. 
+-------------------------------------------------------------------------------------------------------
+
 ## 4/6/2026 ##
 ~# Completed Work #~
 Basic Interface
@@ -25,12 +37,12 @@ Database Tables completed
 Confirmed we have fast API to json
 
 ## Assigned Work ##
-Kelsey - Iron out interface of Front end
-Tom - 
-Ryan - 
-Vincent - Classes for the tables 
-Jayne - 
-Gavin - 
+Kelsey - Iron out interface of Front end / landing page
+Tom - Front end to back end push
+Ryan - Security and encryption
+Vincent - Classes for the tables / backend
+Jayne - json file to graph 
+Gavin - import and read csv file
 
 ## Meeting with Brian GOALS Monday 4/13/2026 ##
 Work through product backlog
@@ -38,7 +50,7 @@ Work through product backlog
 ----------------------------------------------------------------------------------------------------------
 ## 4/8/2026 ##
 ~# Completed Work #~
-Continued work from Monday assignments
+
 
 ## Assigned Work ##
 Continued work from Monday assignments
