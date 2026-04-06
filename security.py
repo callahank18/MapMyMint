@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
 import bcrypt
 from cryptography.fernet import Fernet
 import os
+
+load_dotenv()
 
 KEY = os.getenv("SECRET_KEY")
 
