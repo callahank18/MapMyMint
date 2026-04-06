@@ -1,6 +1,6 @@
 
 
-from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey, LargeBinary
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 import pandas as pd
 #may need to do:
@@ -15,7 +15,7 @@ class Users(Base):
 
     CustomerID = Column(Integer, primary_key=True, autoincrement=True)
     Username = Column(String, nullable=False, unique=True)
-    Password = Column(String, nullable=False)
+    Password = Column(LargeBinary, nullable=False)
     # optional: relationship to Goals
     goals = relationship("Goals", back_populates="user")
 
@@ -25,7 +25,7 @@ class Goals(Base):
     
     goal_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("Users.CustomerID"), nullable=False)
-    goal_name = Column(String, nullable=False)
+    goal_name = Column(LargeBinary, nullable=False)
     target_amount = Column(Float, nullable=False)
     current_amount = Column(Float, default=0)
     target_date = Column(String, nullable=True)  # or Date if you want proper date handling
