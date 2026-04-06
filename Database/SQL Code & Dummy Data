@@ -10,8 +10,10 @@ CREATE TABLE Categories (
     category_id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     name TEXT NOT NULL,
+    parent_category_id INTEGER,
     limit_amount REAL,
-    FOREIGN KEY (user_id) REFERENCES Users(CustomerID)
+    FOREIGN KEY (user_id) REFERENCES Users(CustomerID),
+    FOREIGN KEY (parent_category_id) REFERENCES Categories(category_id)
 );
 
 -- TRANSACTIONS
