@@ -42,6 +42,12 @@ class Category(Base):
     name = Column(String, nullable=False)
     parent_category_id = Column(Integer, ForeignKey("Categories.category_id"))
     limit_amount = Column(Float)
+     
+     # relationships
+    user = relationship("User", back_populates="categories")
+    parent = relationship("Category", remote_side=[category_id], backref="subcategories")
+
+
 
 
 class Transaction(Base):
@@ -54,6 +60,9 @@ class Transaction(Base):
     description = Column(LargeBinary, nullable=False)
     amount = Column(Float, nullable=False)
     transaction_type = Column(String, nullable=False)
+    
+    user = relationship("User", back_populates="transactions")
+    category = relationship("Category")
 
 
 
