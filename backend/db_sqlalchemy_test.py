@@ -1,6 +1,6 @@
 
 
-from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey, LargeBinary
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 import pandas as pd
 #may need to do:
@@ -15,7 +15,7 @@ class Users(Base):
 
     CustomerID = Column(Integer, primary_key=True, autoincrement=True)
     Username = Column(String, nullable=False, unique=True)
-    Password = Column(String, nullable=False)
+    Password = Column(LargeBinary, nullable=False)
     # optional: relationship to Goals
     goals = relationship("Goals", back_populates="user")
 
@@ -25,13 +25,45 @@ class Goals(Base):
     
     goal_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("Users.CustomerID"), nullable=False)
-    goal_name = Column(String, nullable=False)
+    goal_name = Column(LargeBinary, nullable=False)
     target_amount = Column(Float, nullable=False)
     current_amount = Column(Float, default=0)
     target_date = Column(String, nullable=True)  # or Date if you want proper date handling
 
     # relationship to User
     user = relationship("Users", back_populates="goals")
+
+
+class Category(Base):
+    __tablename__ = "Categories"
+
+    category_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("Users.CustomerID"), nullable=False)
+    name = Column(String, nullable=False)
+    parent_category_id = Column(Integer, ForeignKey("Categories.category_id"))
+    limit_amount = Column(Float)
+     
+     # relationships
+    user = relationship("User", back_populates="categories")
+    parent = relationship("Category", remote_side=[category_id], backref="subcategories")
+
+
+
+
+class Transaction(Base):
+    __tablename__ = "Transactions"
+
+    transaction_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("Users.CustomerID"), nullable=False)
+    category_id = Column(Integer, ForeignKey("Categories.category_id"))
+    transaction_date = Column(String, nullable=False)
+    description = Column(LargeBinary, nullable=False)
+    amount = Column(Float, nullable=False)
+    transaction_type = Column(String, nullable=False)
+    
+    user = relationship("User", back_populates="transactions")
+    category = relationship("Category")
+
 
 
 #creating the engine creates the connection to the database
