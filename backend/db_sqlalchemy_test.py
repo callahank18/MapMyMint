@@ -34,6 +34,29 @@ class Goals(Base):
     user = relationship("Users", back_populates="goals")
 
 
+class Category(Base):
+    __tablename__ = "Categories"
+
+    category_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("Users.CustomerID"), nullable=False)
+    name = Column(String, nullable=False)
+    parent_category_id = Column(Integer, ForeignKey("Categories.category_id"))
+    limit_amount = Column(Float)
+
+
+class Transaction(Base):
+    __tablename__ = "Transactions"
+
+    transaction_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("Users.CustomerID"), nullable=False)
+    category_id = Column(Integer, ForeignKey("Categories.category_id"))
+    transaction_date = Column(String, nullable=False)
+    description = Column(LargeBinary, nullable=False)
+    amount = Column(Float, nullable=False)
+    transaction_type = Column(String, nullable=False)
+
+
+
 #creating the engine creates the connection to the database
 engine = create_engine("sqlite:///mapmymint.db", echo=True)
 
