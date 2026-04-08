@@ -1,4 +1,4 @@
-3/30/2026
+----3/30/2026------------------------------------------------------------------
 Database - Cofirm Scheme of database
          - make a dummy file that populates random info (test case)
 Front end - Skelton visualizion of the program. 
@@ -7,3 +7,16 @@ Back end  - phython function to query database load result into pandas dataframe
           - Simple operation to ensure functionality. 
           - writing things to manuipulate the data
           - encryption process
+
+----4/6/2026-------------------------------------------------------------------
+Database  - create classes for table (sq alchemy)
+Front end - get to push to back end
+          - create a landing page 
+          - work on getting the graph aspect to link
+          - take in and send csv file
+Back end  - changes being able to made push to front end input/request
+
+Documents - get the test delievery plan completed- how to test and then what is the final deliverable looking like. 
+
+
+

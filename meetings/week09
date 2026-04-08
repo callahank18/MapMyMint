@@ -1,3 +1,4 @@
+
 Attendance
   Tom - Product Owner [X] [X] [X]
     Languages - Java, Python, HTML, CSS, SQL
@@ -16,59 +17,53 @@ Meeting Times-
 In Class Meeting w/ Professor - Monday's 2-3:15
 Second Meeting - Wednesday 2:00 - 3:15 Discord
 Third Meeting - Thursday @ 9am Discord
+----------------------------------------------------------------------------------------------------
+## WEEK PRODUCT BACKLOG ##
+Database  - create classes for table (sq alchemy)
+Front end - create a landing page 
+          - work on getting the graph aspect to link
+          - take in and send csv file
+Back end  - changes being able to made push to front end input/request
+          - get to push to back end
+          - be able to read and insert csv files
 
-----------------------------------------------------------------------------------------------------
-Database - Cofirm Scheme of database
-         - make a dummy file that populates random info (test case)
-Front end - Skelton visualizion of the program. 
-          - Do a pull into the front end to ensure it can flow
-Back end  - phython function to query database load result into pandas dataframe. 
-          - Simple operation to ensure functionality. 
-          - writing things to manuipulate the data
-          - encryption process
-----------------------------------------------------------------------------------------------------
-## 3/30/2026 ##
+Documents - get the test delievery plan completed- how to test and then what is the final deliverable looking like. 
+-------------------------------------------------------------------------------------------------------
+
+## 4/6/2026 ##
 ~# Completed Work #~
-Established a product back log
+Basic Interface
+Database Tables completed
+Confirmed we have fast API to json
 
 ## Assigned Work ##
-
+Kelsey - Iron out interface of Front end / landing page
+Tom - Front end to back end push
+Ryan - Security and encryption
+Vincent - Classes for the tables / backend
+Jayne - json file to graph 
+Gavin - import and read csv file
 
 ## Meeting with Brian GOALS Monday 4/13/2026 ##
 Work through product backlog
 
 ----------------------------------------------------------------------------------------------------------
-## 4/1/2026 ##
+## 4/8/2026 ##
 ~# Completed Work #~
 
 
 ## Assigned Work ##
-
+Continued work from Monday assignments
 
 ## Meeting with Brian GOALS Monday 4/13/2026 ##
 Work through product backlog
+
 ------------------------------------------------------------------------------------------------------------
-## 4/2/2026 ##
+## 4/9/2026 ##
 ~# Completed Work #~
 
-
 ## Assigned Work ## 
+Continued work from Monday assignments
 
-
-## Meeting with Brian GOALS Monday 4/13/2026 ##Personas [X]
-
-
-## Assigned Work ##
- 
-
-## Meeting with Brian GOALS Monday 3/9/2026 ##
+## Meeting with Brian GOALS Monday 4/13/2026 ##
 Work through product backlog
-------------------------------------------------------------------------------------------------------------
-## 3/5/2026 ##
-~# Completed Work #~
-
-
-## Assigned Work ## 
-
-## Meeting with Brian GOALS Monday 3/9/2026 ##
-
