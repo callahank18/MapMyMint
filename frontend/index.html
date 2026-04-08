@@ -25,7 +25,10 @@
   <!-- Header section with a title and a button to import CSV files -->
     <h1>Map Your <span class="teal-text">Spending</span></h1>
     <div class="controls">
-        <button class="btn-teal">Import CSV</button>
+      <!--  <button class="btn-teal">Import CSV</button>  (Commented out and replaced for CSV File Implmentation) -->
+<input type="file" id="csvFile" accept=".csv" style="display:none;">
+<button class="btn-teal" onclick="handleCSV()">Import CSV</button>
+<button class="btn-teal" onclick="downloadUpdatedCSV()">Download New CSV</button>
 
     </div>
 </header>
@@ -68,6 +71,65 @@
 </main>
 
 <script src="chart.js"></script>
+    
+    <! Handles CSV upload, updates the data, and lets the user download a new CSV file -->
+    
+<script>
+let csvData = "";
+let fileName = "updated";
+
+function handleCSV() {
+    const input = document.getElementById("csvFile");
+    input.click();
+
+    input.onchange = function () {
+        const file = input.files[0];
+        if (!file) return;
+
+        originalFileName = file.name.replace(/\.csv$/i, "");
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            let rows = e.target.result
+                .trim()
+                .split("\n")
+                .map(r => r.split(","));
+
+            rows = rows.map((row, i) => {
+                if (i === 0) {
+                    row.push("Status");
+                } else {
+                    row.push("Updated");
+                }
+                return row;
+            });
+
+            savedCSV = rows.map(r => r.join(",")).join("\n");
+            alert("CSV loaded and updated. Click 'Download New CSV'.");
+        };
+
+        reader.readAsText(file);
+    };
+}
+
+function downloadUpdatedCSV() {
+    if (!savedCSV) {
+        alert("Import a CSV first.");
+        return;
+    }
+
+    const blob = new Blob([savedCSV], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = originalFileName + "_MapByMint.csv";
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+</script>
 
 </body>
 </html>
