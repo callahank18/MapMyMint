@@ -23,7 +23,7 @@ DUE WEDENSDAY - TEST AND DELIVERY PLAN 4/15/2026
   Two tests - 1 needs to be automated
             - 1 can be manual
 Database  - 
-Front end - 
+Front end - Display does not automatically update with changes
           - 
           - 
 Back end  - 
@@ -43,7 +43,7 @@ Back end  - changes being able to made push to front end input/request
           - be able to read and insert csv files
 
 ## Assigned Work ##
-Kelsey - Finalize landing page
+Kelsey - Finalize landing page, work on having the index automatically update
 Tom - 
 Ryan - 
 Vincent - 
