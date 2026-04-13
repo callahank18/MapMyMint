@@ -17,8 +17,23 @@ Meeting Times-
 In Class Meeting w/ Professor - Monday's 2-3:15
 Second Meeting - Wednesday 2:00 - 3:15 Discord
 Third Meeting - Thursday @ 9am Discord
-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 ## WEEK PRODUCT BACKLOG ##
+DUE WEDENSDAY - TEST AND DELIVERY PLAN 4/15/2026
+  Two tests - 1 needs to be automated
+            - 1 can be manual
+Database  - 
+Front end - 
+          - 
+          - 
+Back end  - 
+          - 
+          - 
+
+
+-----------------------------------------------------------------------------------------------
+## 4/13/2026 ##
+~# Completed Work #~
 Database  - create classes for table (sq alchemy)
 Front end - create a landing page 
           - work on getting the graph aspect to link
@@ -27,28 +42,19 @@ Back end  - changes being able to made push to front end input/request
           - get to push to back end
           - be able to read and insert csv files
 
-Documents - get the test delievery plan completed- how to test and then what is the final deliverable looking like. 
--------------------------------------------------------------------------------------------------------
-
-## 4/6/2026 ##
-~# Completed Work #~
-Basic Interface
-Database Tables completed
-Confirmed we have fast API to json
-
 ## Assigned Work ##
-Kelsey - Iron out interface of Front end / landing page
-Tom - Front end to back end push
-Ryan - Security and encryption
-Vincent - Classes for the tables / backend
-Jayne - json file to graph 
-Gavin - import and read csv file
+Kelsey - Finalize landing page
+Tom - 
+Ryan - 
+Vincent - 
+Jayne - 
+Gavin - 
 
 ## Meeting with Brian GOALS Monday 4/13/2026 ##
 Work through product backlog
 
-----------------------------------------------------------------------------------------------------------
-## 4/8/2026 ##
+-----------------------------------------------------------------------------------------------
+## 4/15/2026 ##
 Check in everyone progressing on their tasks
 
 ## Assigned Work ##
@@ -57,8 +63,8 @@ Continued work from Monday assignments
 ## Meeting with Brian GOALS Monday 4/13/2026 ##
 Work through product backlog
 
-------------------------------------------------------------------------------------------------------------
-## 4/9/2026 ##
+-----------------------------------------------------------------------------------------------
+## 4/16/2026 ##
 Check in everyone progressing on their tasks
 
 ## Assigned Work ## 
