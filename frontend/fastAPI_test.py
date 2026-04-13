@@ -34,8 +34,11 @@ def read_goals(user_id: int, db:
     Session = Depends(get_db)):
 #the intention here is to use the existing SQLalchemy setup.
 #The intent is to query the Goals table for all goals associated with the given user_id and return them as a response.
-        goals = db.query(Goals).filter(Goals.user_id == user_id).all()
-        return goals
+        from backend.data_service import get_goals
+
+@app.get("/goals/{user_id}")
+def read_goals(user_id: int):
+    return get_goals(user_id)
 
 
 # For testing, run this bash code
