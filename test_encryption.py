@@ -1,4 +1,4 @@
-from data_service import create_user, login_user, create_goal, get_goals
+from backend.data_service import create_user, login_user, create_goal, get_goals
 
 # Create user
 create_user("ryan", "mypassword")
