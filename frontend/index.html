@@ -129,7 +129,56 @@ function downloadUpdatedCSV() {
 
     URL.revokeObjectURL(url);
 }
+
+document.getElementById("add-btn").addEventListener("click", async () => {
+    // 1. Grab values from the HTML form
+    const amountVal = document.getElementById("amount").value;
+    const categoryVal = document.getElementById("category").value;
+    const descriptionVal = document.getElementById("description").value;
+
+    // Validation Check
+    if (!amountVal || !descriptionVal) {
+        alert("Hold up! We need an amount and a description before sending to the Vault.");
+        return;
+    }
+
+    // 2. Prep the payload for Pydantic
+    const payload = {
+        user_id: 1, // Placeholder until login logic is added
+        goal_name: `${categoryVal}: ${descriptionVal}`,
+        target_amount: parseFloat(amountVal),
+        current_amount: 0
+    };
+
+    // 3. The API Call
+    try {
+        const response = await fetch("http://127.0.0.1:8000/goals/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            alert(`Success! Goal ID ${data.goal_id} is now in the database.`);
+            
+            // Clean up the form for the next entry
+            document.getElementById("transaction-form").reset();
+            
+            // NOTE: If chart.js has a 'refresh' function, we call it here.
+        } else {
+            const errorData = await response.json();
+            alert("The Server didn't like that: " + JSON.stringify(errorData.detail));
+        }
+    } catch (error) {
+        console.error("Connection Error:", error);
+        alert("Could not reach the FastAPI server. Is it running on port 8000?");
+    }
+});
 </script>
+
 
 </body>
 </html>
