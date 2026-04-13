@@ -1,5 +1,5 @@
-from db_sqlalchemy_test import SessionLocal, Users, Goals
-from security import hash_password, verify_password, encrypt_data, decrypt_data
+from backend.db_sqlalchemy_test import SessionLocal, Users, Goals
+from backend.security import hash_password, verify_password, encrypt_data, decrypt_data
 
 # CREATE USER
 def create_user(username: str, password: str):
