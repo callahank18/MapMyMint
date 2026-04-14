@@ -11,13 +11,15 @@ import pandas as pd
 Base = declarative_base()
 
 class Users(Base):
-    __tablename__ = "Users"  # must match your SQL table name
-
+    __tablename__ = "Users"
     CustomerID = Column(Integer, primary_key=True, autoincrement=True)
     Username = Column(String, nullable=False, unique=True)
     Password = Column(LargeBinary, nullable=False)
-    # optional: relationship to Goals
+    
+
     goals = relationship("Goals", back_populates="user")
+    categories = relationship("Category", back_populates="user")
+    transactions = relationship("Transaction", back_populates="user")
 
 
 class Goals(Base):
@@ -25,7 +27,7 @@ class Goals(Base):
     
     goal_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("Users.CustomerID"), nullable=False)
-    goal_name = Column(LargeBinary, nullable=False)
+    goal_name = Column(String, nullable=False)
     target_amount = Column(Float, nullable=False)
     current_amount = Column(Float, default=0)
     target_date = Column(String, nullable=True)  # or Date if you want proper date handling
@@ -42,6 +44,12 @@ class Category(Base):
     name = Column(String, nullable=False)
     parent_category_id = Column(Integer, ForeignKey("Categories.category_id"))
     limit_amount = Column(Float)
+     
+     # relationships
+    user = relationship("Users", back_populates="categories")
+    parent = relationship("Category", remote_side=[category_id], backref="subcategories")
+
+
 
 
 class Transaction(Base):
@@ -51,48 +59,60 @@ class Transaction(Base):
     user_id = Column(Integer, ForeignKey("Users.CustomerID"), nullable=False)
     category_id = Column(Integer, ForeignKey("Categories.category_id"))
     transaction_date = Column(String, nullable=False)
-    description = Column(LargeBinary, nullable=False)
+    description = Column(String, nullable=False)
     amount = Column(Float, nullable=False)
     transaction_type = Column(String, nullable=False)
+    
+    user = relationship("Users", back_populates="transactions")
+    category = relationship("Category")
 
 
 
 #creating the engine creates the connection to the database
 engine = create_engine("sqlite:///mapmymint.db", echo=True)
 
-
 #then, bind the engine to a new session
 SessionLocal = sessionmaker(bind=engine)
 
-selectSession = SessionLocal()
+if __name__ == "__main__":
+    #Manual testing here, everything below this line is for manual testing.
+    #FastAPI will ignore everything in this block.
 
-#query database for all users
-all_users = selectSession.query(Users).all()
 
-#iterate through 
-for user in all_users:
-    print(f"ID: {user.CustomerID}, Username: {user.Username}, Password: {user.Password}")
+    selectSession = SessionLocal()
+
+    #query database for all users
+    try:
+        all_users = selectSession.query(Users).all()
+
+        #iterate through 
+        for user in all_users:
+            print(f"ID: {user.CustomerID}, Username: {user.Username}, Password: {user.Password}")
+    except Exception as e:
+        print(f"Error occurred: {e}")
+    finally:
+        selectSession.close()
 
 #close the session when done
-selectSession.close()
+    selectSession.close()
 
 
-GoalsSession = SessionLocal()
+    GoalsSession = SessionLocal()
 
-goals = GoalsSession.query(Goals).filter(Goals.user_id == 1).all()
+    goals = GoalsSession.query(Goals).filter(Goals.user_id == 1).all()
 
 
 #Convert to pandas DataFrame
-df_goals = pd.DataFrame([{
-    "goal_id": g.goal_id,
-    "user_id": g.user_id,
-    "goal_name": g.goal_name,
-    "target_amount": g.target_amount,
-    "current_amount": g.current_amount,
-    "target_date": g.target_date
-} for g in goals])
+    df_goals = pd.DataFrame([{
+        "goal_id": g.goal_id,
+        "user_id": g.user_id,
+        "goal_name": g.goal_name,
+        "target_amount": g.target_amount,
+        "current_amount": g.current_amount,
+        "target_date": g.target_date
+    } for g in goals])
 
-print(df_goals)
+    print(df_goals)
 
 #new_user = User(Username="Vincent", Password="123")
 #whenever making a change to the database, you need to stage it:
