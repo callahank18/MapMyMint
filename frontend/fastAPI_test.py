@@ -4,6 +4,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
+#from backend.data_service import get_goals
 
 # Add the parent directory to the system path to allow imports from the backend directory
 sys.path.append(str(Path(__file__).resolve().parent.parent))
@@ -40,13 +41,13 @@ def get_db():
 @app.get("/goals/{user_id}")
 def read_goals(user_id: int, db:
     Session = Depends(get_db)):
-#the intention here is to use the existing SQLalchemy setup.
-#The intent is to query the Goals table for all goals associated with the given user_id and return them as a response.
-        from backend.data_service import get_goals
+    #the intention here is to use the existing SQLalchemy setup.
+    #The intent is to query the Goals table for all goals associated with the given user_id and return them as a response.
+    print("userid:", user_id)
 
-@app.get("/goals/{user_id}")
-def read_goals(user_id: int):
-    return get_goals(user_id)
+#@app.get("/goals/{user_id}")
+#def read_goals(user_id: int):
+#    return get_goals(user_id)
 
 @app.post("/goals/")
 def create_goal(goal: GoalCreate, db: Session = Depends(get_db)):
