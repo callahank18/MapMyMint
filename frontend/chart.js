@@ -113,17 +113,8 @@ const drawChart = async () => {
     const root = partition(data);
     root.each(d => d.current = d);
 
-    // 6. CREATE SVG (debounced to avoid excessive redraws)
-let resizeTimeout;
-window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(drawChart, 250);
-});
-
-// REFRESH: Public function to refresh chart when data changes
-const refreshChart = () => {
-    drawChart();
-}d("svg")
+    // 6. CREATE SVG
+    const svg = d3.select("#sunburst").append("svg")
         .attr("viewBox", [0, 0, width, width])
         .attr("preserveAspectRatio", "xMidYMid meet")
         .style("font", "12px sans-serif");
@@ -169,4 +160,14 @@ const refreshChart = () => {
 document.addEventListener("DOMContentLoaded", drawChart);
 
 // RESPONSIVE: Run on window resize
-window.addEventListener("resize", drawChart);
+window.addEventListener("resize", drawChart); (debounced)
+let resizeTimeout;
+window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(drawChart, 250);
+});
+
+// REFRESH: Public function to refresh chart when data changes
+const refreshChart = () => {
+    drawChart();
+}

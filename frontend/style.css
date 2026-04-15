@@ -308,3 +308,72 @@ svg {
 
 /* Alert color if over budget */
 .over-budget { background: var(--accent-pink) !important; }
+
+/* Edit Controls */
+.edit-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 12px !important;
+}
+
+.edit-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 80px;
+}
+
+.edit-subtract {
+    background: linear-gradient(135deg, #ff6b9d, #ff69b4);
+    color: white;
+}
+
+.edit-subtract:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+}
+
+.edit-add {
+    background: linear-gradient(135deg, #008080, #00a0a0);
+    color: white;
+}
+
+.edit-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);
+}
+
+.edit-custom {
+    background: linear-gradient(135deg, #666, #444);
+    color: white;
+    flex: 0.8;
+    min-width: 70px;
+}
+
+.edit-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.edit-input {
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    flex: 1;
+    min-width: 100px;
+    transition: all 0.3s ease;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: var(--primary-teal);
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
+}

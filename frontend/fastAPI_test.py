@@ -28,6 +28,9 @@ class GoalCreate(BaseModel):
      target_amount: float
      current_amount: float
 
+class GoalUpdate(BaseModel):
+     current_amount: float
+
 
 # Dependency to get DB session
 def get_db():
@@ -61,6 +64,25 @@ def create_goal(goal: GoalCreate, db: Session = Depends(get_db)):
         return {"status": "success", "goal_id": new_goal.goal_id}
     except Exception as e:
         db.rollback() # Undo if something goes wrong
+        raise HTTPException(status_code=500, detail=f"Database Error: {str(e)}")
+
+@app.put("/goals/{goal_id}")
+def update_goal(goal_id: int, goal_update: GoalUpdate, db: Session = Depends(get_db)):
+    try:
+        # Find the goal by ID
+        goal = db.query(Goals).filter(Goals.goal_id == goal_id).first()
+        if not goal:
+            raise HTTPException(status_code=404, detail=f"Goal with ID {goal_id} not found")
+        
+        # Update the current_amount
+        goal.current_amount = goal_update.current_amount
+        db.commit()
+        db.refresh(goal)
+        return {"status": "success", "goal_id": goal.goal_id, "current_amount": goal.current_amount}
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
         raise HTTPException(status_code=500, detail=f"Database Error: {str(e)}")
 # For testing, run this bash code
 # uvicorn frontend.fastAPI_test:app --reload
