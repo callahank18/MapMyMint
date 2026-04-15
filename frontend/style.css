@@ -14,9 +14,76 @@ body {
 nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem 5%;
-    background: var(--dark-bg);
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #0d0d0d 100%);
     color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--primary-teal);
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--primary-teal), var(--accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.brand:hover {
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-teal), var(--accent-pink));
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-teal);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a.active {
+    background: rgba(0, 128, 128, 0.2);
+    border: 1px solid var(--primary-teal);
+    color: var(--primary-teal);
+}
+
+.nav-links a.active::after {
+    width: 100%;
 }
 
 .hero {
@@ -34,6 +101,52 @@ nav {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Button Styling */
+.btn-teal {
+    background: linear-gradient(135deg, var(--primary-teal), #006666);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 128, 128, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-teal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 128, 128, 0.35);
+    background: linear-gradient(135deg, #00a0a0, #008080);
+}
+
+.btn-teal:active {
+    transform: translateY(-1px);
+}
+
+/* Controls Section */
+.controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.TitleSection {
+    padding: 30px 0;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 30px;
+}
+
+.TitleSection h1 {
+    margin: 0 0 20px 0;
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: 700;
 }
 #chart-container {
     width: 100%;
@@ -75,28 +188,90 @@ svg {
 
 /* Card Styling for the Form */
 .card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 128, 128, 0.12);
+    border: 1px solid rgba(0, 128, 128, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 12px 32px rgba(0, 128, 128, 0.18);
+    transform: translateY(-4px);
+}
+
+.card h3 {
+    margin: 0 0 25px 0;
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card h3::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(180deg, var(--primary-teal), var(--accent-pink));
+    border-radius: 2px;
 }
 
 .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: var(--teal);
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.95rem;
 }
 
-.input-group input, .input-group select {
+.input-group input,
+.input-group select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 12px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--primary-teal);
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
+    background-color: rgba(0, 128, 128, 0.02);
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+}
+
+.input-group select {
+    cursor: pointer;
+    appearance: none;
+    padding-right: 30px;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23008080' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 35px;
+}
+
+#add-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-top: 10px;
 }
 
 .container { padding: 20px 5%; max-width: 1000px; margin: 0 auto; }

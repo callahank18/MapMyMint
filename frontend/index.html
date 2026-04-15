@@ -21,6 +21,7 @@
    
 </nav>
 
+<main class="container">
 <header class="TitleSection">
   <!-- Header section with a title and a button to import CSV files -->
     <h1>Map Your <span class="teal-text">Spending</span></h1>
@@ -33,7 +34,7 @@
     </div>
 </header>
 <!-- Section to display the sunburst chart and a tooltip for additional information -->
-<main class="main-dashboard">
+<section class="main-dashboard">
     <section class="chart-column">
         <div id="sunburst"></div>
         <div id="tooltip" class="tooltip"></div>
@@ -68,6 +69,7 @@
             </form>
         </div>
     </aside>
+</section>
 </main>
 
 <script src="chart.js"></script>
@@ -167,7 +169,8 @@ document.getElementById("add-btn").addEventListener("click", async () => {
             // Clean up the form for the next entry
             document.getElementById("transaction-form").reset();
             
-            // NOTE: If chart.js has a 'refresh' function, we call it here.
+            // Refresh the chart with the new data
+            refreshChart();
         } else {
             const errorData = await response.json();
             alert("The Server didn't like that: " + JSON.stringify(errorData.detail));

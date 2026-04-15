@@ -28,12 +28,15 @@ Front end - Display does not automatically update with changes and read data and
           - add in additional display designs
           - Finalize the landing page
           - log in page
+          - Lables to the graph possible?
           - Working in login system and integrate multiple users
 Back end  - Encryption integration 
           - setting up the back end to handle login info 
-          - 
-
-
+          - work on the budget page and linking to database
+          - implement the testing plan 
+          - detecting errors on the csv file
+          - creating a list of alert hey csv is not correct
+          
 -----------------------------------------------------------------------------------------------
 ## 4/13/2026 ##
 ~# Completed Work #~
