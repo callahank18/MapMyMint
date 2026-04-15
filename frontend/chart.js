@@ -129,6 +129,68 @@ const drawChart = async () => {
         .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
         .attr("d", d => arc(d.current));
 
+    // 6b. ADD NAME LABELS
+    g.append("g")
+        .selectAll("text.label-name")
+        .data(root.descendants().slice(1))
+        .join("text")
+        .attr("class", "label-name")
+        .attr("transform", d => {
+            // Calculate the angle and radius for label positioning
+            const x0 = d.x0;
+            const x1 = d.x1;
+            const y0 = d.y0 * radius;
+            const y1 = d.y1 * radius;
+            
+            // Position label in the middle of the arc
+            const angle = (x0 + x1) / 2 - Math.PI / 2;
+            const dist = (y0 + y1) / 2;
+            
+            return `translate(${Math.cos(angle) * dist},${Math.sin(angle) * dist})`;
+        })
+        .attr("text-anchor", "middle")
+        .attr("dy", "-0.5em")
+        .style("font-size", d => {
+            // Scale font with arc size
+            return Math.max(5, (d.y1 - d.y0) * radius / 5) + "px";
+        })
+        .style("fill", "white")
+        .style("font-weight", "600")
+        .style("text-shadow", "0px 1px 3px rgba(0,0,0,0.5)")
+        .style("pointer-events", "none")
+        .text(d => d.data.name);
+
+    // 6c. ADD AMOUNT LABELS
+    g.append("g")
+        .selectAll("text.label-amount")
+        .data(root.descendants().slice(1))
+        .join("text")
+        .attr("class", "label-amount")
+        .attr("transform", d => {
+            // Calculate the angle and radius for label positioning
+            const x0 = d.x0;
+            const x1 = d.x1;
+            const y0 = d.y0 * radius;
+            const y1 = d.y1 * radius;
+            
+            // Position label in the middle of the arc
+            const angle = (x0 + x1) / 2 - Math.PI / 2;
+            const dist = (y0 + y1) / 2;
+            
+            return `translate(${Math.cos(angle) * dist},${Math.sin(angle) * dist})`;
+        })
+        .attr("text-anchor", "middle")
+        .attr("dy", "0.8em")
+        .style("font-size", d => {
+            // Smaller font for inner rings, larger for outer
+            return Math.max(4, (d.y1 - d.y0) * radius / 5.5) + "px";
+        })
+        .style("fill", "white")
+        .style("font-weight", "500")
+        .style("text-shadow", "0px 1px 3px rgba(0,0,0,0.5)")
+        .style("pointer-events", "none")
+        .text(d => d.value ? `$${d.value.toLocaleString()}` : "");
+
     // 7. TOOLTIP & INTERACTION
     const tooltip = d3.select("#tooltip");
 
@@ -146,14 +208,24 @@ const drawChart = async () => {
         d3.select(this).style("opacity", 1);
     });
 
-    // 8. CENTER TEXT
+    // 8. CENTER TEXT - Display total amount spent
+    const totalSpent = root.value;
     g.append("text")
         .attr("text-anchor", "middle")
-        .attr("dy", "0.35em")
+        .attr("dy", "-0.2em")
         .style("font-size", `${width / 25}px`) // Scales font size with chart
-        .style("fill", "#666")
+        .style("fill", "var(--primary-teal)")
         .style("font-weight", "bold")
-        .text("Total Map");
+        .text(`$${totalSpent.toLocaleString()}`)
+        
+    // Add "Total Spent" label below the amount
+    g.append("text")
+        .attr("text-anchor", "middle")
+        .attr("dy", "1.2em")
+        .style("font-size", `${width / 40}px`)
+        .style("fill", "#999")
+        .style("font-weight", "500")
+        .text("Total Spent");
 };
 
 // INITIALIZE: Run on load
