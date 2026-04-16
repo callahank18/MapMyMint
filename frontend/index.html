@@ -8,6 +8,8 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <!-- Link to the stylesheet for styling the page -->
     <link rel="stylesheet" href="style.css">
+    <!-- Theme Manager (must load before other scripts) -->
+    <script src="theme.js"></script>
 </head>
 <body>
 
@@ -16,7 +18,12 @@
     <div class="nav-links">
         <a href="index.html" class="active">View Map</a>
         <a href="buget.html">Budget List</a>
-        
+        <select id="theme-switcher" class="theme-switcher">
+            <option value="light">Light Theme</option>
+            <option value="dark">Dark Theme</option>
+            <option value="ocean">Ocean Theme</option>
+            <option value="minimal">Minimal Theme</option>
+        </select>
     </div>
    
 </nav>

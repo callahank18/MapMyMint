@@ -151,13 +151,23 @@ const drawChart = async () => {
         .attr("text-anchor", "middle")
         .attr("dy", "-0.5em")
         .style("font-size", d => {
-            // Scale font with arc size
-            return Math.max(5, (d.y1 - d.y0) * radius / 5) + "px";
+            // Only show labels if arc is large enough
+            const arcSize = (d.y1 - d.y0) * radius;
+            return Math.max(4, arcSize / 5.5) + "px";
         })
-        .style("fill", "white")
+        .style("fill", d => {
+            // Determine if background is light or dark
+            const arcSize = (d.y1 - d.y0) * radius;
+            return arcSize < 20 ? "#999" : "white"; // Gray for small segments
+        })
         .style("font-weight", "600")
-        .style("text-shadow", "0px 1px 3px rgba(0,0,0,0.5)")
+        .style("text-shadow", "0px 1px 2px rgba(0,0,0,0.4)")
         .style("pointer-events", "none")
+        .style("display", d => {
+            // Hide if too small
+            const arcSize = (d.y1 - d.y0) * radius;
+            return arcSize < 15 ? "none" : "block";
+        })
         .text(d => d.data.name);
 
     // 6c. ADD AMOUNT LABELS
@@ -182,13 +192,23 @@ const drawChart = async () => {
         .attr("text-anchor", "middle")
         .attr("dy", "0.8em")
         .style("font-size", d => {
-            // Smaller font for inner rings, larger for outer
-            return Math.max(4, (d.y1 - d.y0) * radius / 5.5) + "px";
+            // Scale with arc size
+            const arcSize = (d.y1 - d.y0) * radius;
+            return Math.max(3, arcSize / 6.5) + "px";
         })
-        .style("fill", "white")
+        .style("fill", d => {
+            // Determine if background is light or dark
+            const arcSize = (d.y1 - d.y0) * radius;
+            return arcSize < 20 ? "#999" : "white";
+        })
         .style("font-weight", "500")
-        .style("text-shadow", "0px 1px 3px rgba(0,0,0,0.5)")
+        .style("text-shadow", "0px 1px 2px rgba(0,0,0,0.4)")
         .style("pointer-events", "none")
+        .style("display", d => {
+            // Hide if too small
+            const arcSize = (d.y1 - d.y0) * radius;
+            return arcSize < 15 ? "none" : "block";
+        })
         .text(d => d.value ? `$${d.value.toLocaleString()}` : "");
 
     // 7. TOOLTIP & INTERACTION
