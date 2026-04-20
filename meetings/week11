@@ -1,0 +1,77 @@
+
+Attendance
+  Tom - Product Owner [X] [X] [X]
+    Languages - Java, Python, HTML, CSS, SQL
+  Kelsey - Scrum Master [X] [X] [X]
+    Languages - Java, Python, HTML, CSS, SQL
+  Gavin [X] [X] [X]
+    Languages - Main: C++, SQL / Some Experience: C#, Assembly, HTML
+  Jayne [X] [X] [X]
+    Languages - Java, Python, HTML, CSS, SQL, JavaScript
+  Vincent [X] [X] [X]
+    Languages - Java, Python, HTMl, PHP, SQL
+  Ryan [X] [X] [X]
+    Languages - Java, Python, HTML, CSS 
+
+## Meeting Times-
+In Class Meeting w/ Professor - Monday's 2-3:15
+Second Meeting - Wednesday 2:00 - 3:15 Discord
+Third Meeting - Thursday @ 9am Discord
+-----------------------------------------------------------------------------------------------
+## WEEK PRODUCT BACKLOG ##
+          - Display does not automatically update with changes and read data and implment it
+          - Update budget page
+          - Create log in page
+          - Keep working on the landing page
+          - Landing page to set the budget and it fills in and here what you have remaining
+          - log in page
+          - Lables to the graph possible?
+          - Working in login system and integrate multiple users
+          - Encryption integration 
+          - setting up the back end to handle login info 
+          - Working through bug fixes
+          - detecting errors on the csv file
+          - creating a list of alert hey csv is not correct
+          
+-----------------------------------------------------------------------------------------------
+## 4/20/2026 ##
+~# Completed Work #~
+  -Test and Delivery Plan
+  -Got a more favorable landing page
+  -Front end updating to back end
+  -CSV reworked to intake 
+  -Added template button 
+  -CSV template created
+  -Additional Display and Designs
+  -Back end logic made ready for front end display
+
+## Assigned Work ##
+Kelsey - Work on interface pages, Landing, Login, and Budget
+Tom - Working  bug fixes
+Ryan - Encryption tweaks
+Vincent - Work on user validation, input validation on back end
+Jayne - working on user validation
+Gavin - CSV file import and export and populate the data in the graph
+
+## Meeting with Brian GOALS Monday 4/13/2026 ##
+Work through product backlog
+
+-----------------------------------------------------------------------------------------------
+## 4/22/2026 ##
+Check in everyone progressing on their tasks
+
+## Assigned Work ##
+Continued work from Monday assignments
+
+## Meeting with Brian GOALS Monday 4/13/2026 ##
+Work through product backlog
+
+-----------------------------------------------------------------------------------------------
+## 4/23/2026 ##
+Check in everyone progressing on their tasks
+
+## Assigned Work ## 
+Continued work from Monday assignments
+
+## Meeting with Brian GOALS Monday 4/13/2026 ##
+Work through product backlog
