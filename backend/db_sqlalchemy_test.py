@@ -69,7 +69,7 @@ class Transaction(Base):
 
 
 #creating the engine creates the connection to the database
-engine = create_engine("sqlite:///mapmymint.db", echo=True)
+engine = create_engine("sqlite:///Database/MapMyMint.db", echo=True)
 
 #then, bind the engine to a new session
 SessionLocal = sessionmaker(bind=engine)

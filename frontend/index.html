@@ -156,7 +156,11 @@ function handleCSV() {
         const reader = new FileReader();
 
         reader.onload = async function (e) {
-            let rawRows = e.target.result.trim().split("\n");
+            const content = e.target.result;
+            savedCSV = content; // Save the original CSV content for later use
+
+
+            let rawRows = content.trim().split("\n");
             let dataRows = rawRows.slice(1);
 
             const importPromises = dataRows.map(line => {
@@ -187,7 +191,9 @@ function handleCSV() {
                 try {
                     await Promise.all(importPromises);
                     alert("CSV imported successfully! Refreshing the chart...");
-                    refreshChart();
+                    setTimeout(() => {
+                        if(window.refreshChart) window.refreshChart();
+                    }, 300);
                 } catch (error) {
                     console.error("Error importing CSV:", error);
                     alert("There was an issue importing the CSV. Check the console for details.");
@@ -256,13 +262,17 @@ document.getElementById("add-btn").addEventListener("click", async () => {
 
         if (response.ok) {
             const data = await response.json();
-            alert(`Success! Goal ID ${data.goal_id} is now in the database.`);
+            alert(`Success! Goal is now in the database.`);
             
             // Clean up the form for the next entry
             document.getElementById("transaction-form").reset();
             
             // Refresh the chart with the new data
-            refreshChart();
+            setTimeout(() => {
+                if (typeof window.refreshChart === "function") {
+                    window.refreshChart();
+                }
+            }, 300)
         } else {
             const errorData = await response.json();
             alert("The Server didn't like that: " + JSON.stringify(errorData.detail));
