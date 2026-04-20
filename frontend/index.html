@@ -96,7 +96,8 @@
     
     <!-- Handles CSV upload, updates the data, and lets the user download a new CSV file -->
     
-    <script>
+<script>
+    const currentUserId = 1; // Placeholder until login logic is added
 let savedCSV = "";
 let originalFileName = "updated";
 let importedTemplateRows = [];
@@ -140,35 +141,59 @@ function handleCSV() {
 
         const reader = new FileReader();
 
-        reader.onload = function (e) {
+        reader.onload = async function (e) {
             savedCSV = e.target.result;
 
             const rawRows = savedCSV.split("\n");
 
             const dataRows = rawRows.filter(line => {
                 const trimmed = line.trim();
-
-                if (!trimmed) return false;
-                if (trimmed.startsWith("Instructions:")) return false;
-                if (trimmed.startsWith("Entry Type,")) return false;
-                if (trimmed.replace(/,/g, "") === "") return false;
-
-                return true;
+                return trimmed && 
+                       !trimmed.startsWith("Instructions:") && 
+                       !trimmed.startsWith("Entry Type,") && 
+                       trimmed.replace(/,/g, "") !== "";
             });
 
-            importedTemplateRows = dataRows.map(line => {
+            // Convert CSV rows into API POST requests
+            const importPromises = dataRows.map(line => {
                 const columns = line.split(",");
+                
+                // Map based on template: 3=Category, 7=Description, 8=Amount
+                const category = (columns[3] || "").trim();
+                const description = (columns[7] || "").trim();
+                const rawAmount = (columns[8] || "0").replace(/[$,]/g, "");
+                const amount = parseFloat(rawAmount) || 0;
 
-                return {
-                    entryType: (columns[0] || "").trim(),
-                    category: (columns[3] || "").trim(),
-                    description: (columns[7] || "").trim(),
-                    amount: (columns[8] || "").trim()
-                };
-            }).filter(row => row.entryType !== "");
+                if (category && amount > 0) {
+                    return fetch("http://127.0.0.1:8000/goals/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            user_id: currentUserId,
+                            goal_name: `${category}: ${description}`,
+                            target_amount: amount,
+                            current_amount: 0
+                        })
+                    });
+                }
+                return null;
+            }).filter(p => p !== null);
 
-            console.log(importedTemplateRows);
-            alert("CSV imported successfully!");
+            if (importPromises.length > 0) {
+                try {
+                    await Promise.all(importPromises);
+                    alert("Vault Updated! Refreshing Map...");
+                    // Call the refresh function in chart.js
+                    if (typeof window.refreshChart === "function") {
+                        window.refreshChart();
+                    }
+                } catch (error) {
+                    console.error("Import Error:", error);
+                    alert("Could not save CSV data to the server.");
+                }
+            } else {
+                alert("No valid transaction data found in this CSV.");
+            }
         };
 
         reader.readAsText(file);
@@ -193,62 +218,54 @@ function downloadUpdatedCSV() {
 
     URL.revokeObjectURL(url);
 }
-</script>
-<script>
+
 document.getElementById("add-btn").addEventListener("click", async () => {
-     if (!currentUserId) {
-        alert("Please log in first");
+    // Check if user is logged in (using our global const)
+    if (typeof currentUserId === 'undefined') {
+        alert("Authentication Error: No User ID found.");
         return;
     }
-    // 1. Grab values from the HTML form
+
     const amountVal = document.getElementById("amount").value;
     const categoryVal = document.getElementById("category").value;
     const descriptionVal = document.getElementById("description").value;
 
-    // Validation Check
     if (!amountVal || !descriptionVal) {
-        alert("Hold up! We need an amount and a description before sending to the Vault.");
+        alert("Please provide both an amount and a description.");
         return;
     }
 
-    // 2. Prep the payload for Pydantic
     const payload = {
-        user_id: currentUserId, // Placeholder until login logic is added
+        user_id: currentUserId,
         goal_name: `${categoryVal}: ${descriptionVal}`,
         target_amount: parseFloat(amountVal),
         current_amount: 0
     };
 
-    // 3. The API Call
     try {
         const response = await fetch("http://127.0.0.1:8000/goals/", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
 
         if (response.ok) {
-            const data = await response.json();
-            alert(`Success! Goal is now in the database.`);
-            
-            // Clean up the form for the next entry
+            alert(`Success! Entry added to ${categoryVal}.`);
             document.getElementById("transaction-form").reset();
             
-            // Refresh the chart with the new data
+            // Trigger D3 redraw
             setTimeout(() => {
                 if (typeof window.refreshChart === "function") {
                     window.refreshChart();
                 }
-            }, 300)
+            }, 300);
         } else {
             const errorData = await response.json();
-            alert("The Server didn't like that: " + JSON.stringify(errorData.detail));
+            alert("Server Error: " + JSON.stringify(errorData.detail));
         }
     } catch (error) {
         console.error("Connection Error:", error);
-        alert("Could not reach the FastAPI server. Is it running on port 8000?");
+        alert("Could not reach the FastAPI server. Is it running?");
     }
 });
  
@@ -388,64 +405,4 @@ function downloadUpdatedCSV() {
 
     URL.revokeObjectURL(url);
 }
-
-document.getElementById("add-btn").addEventListener("click", async () => {
-     //if (!currentUserId) {
-       // alert("Please log in first");
-       // return;
-    //}
-    // 1. Grab values from the HTML form
-    const amountVal = document.getElementById("amount").value;
-    const categoryVal = document.getElementById("category").value;
-    const descriptionVal = document.getElementById("description").value;
-
-    // Validation Check
-    if (!amountVal || !descriptionVal) {
-        alert("Hold up! We need an amount and a description before sending to the Vault.");
-        return;
-    }
-
-    // 2. Prep the payload for Pydantic
-    const payload = {
-        user_id: currentUserId, // Placeholder until login logic is added
-        goal_name: `${categoryVal}: ${descriptionVal}`,
-        target_amount: parseFloat(amountVal),
-        current_amount: 0
-    };
-
-    // 3. The API Call
-    try {
-        const response = await fetch("http://127.0.0.1:8000/goals/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            alert(`Success! Goal ID ${data.goal_id} is now in the database.`);
-            
-            // Clean up the form for the next entry
-            document.getElementById("transaction-form").reset();
-            
-            // Refresh the chart with the new data
-            refreshChart();
-        } else {
-            const errorData = await response.json();
-            alert("The Server didn't like that: " + JSON.stringify(errorData.detail));
-        }
-    } catch (error) {
-        console.error("Connection Error:", error);
-        alert("Could not reach the FastAPI server. Is it running on port 8000?");
-    }
-});
- 
-
-</script>
-
-<script src="auth.js"></script>
-</body>
-</html>
 -->

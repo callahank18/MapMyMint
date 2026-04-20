@@ -1,5 +1,5 @@
-
-
+import os
+from pathlib import Path
 from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey, LargeBinary
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 import pandas as pd
@@ -69,8 +69,17 @@ class Transaction(Base):
 
 
 #creating the engine creates the connection to the database
-engine = create_engine("sqlite:///mapmymint.db", echo=True)
+BASE_DIR = Path(__file__).resolve().parent.parent
 
+# This builds: C:\...\MapMyMint\Database\MapMyMint.db
+DB_PATH = BASE_DIR / "Database" / "MapMyMint.db"
+
+# Create the engine
+engine = create_engine(
+    f"sqlite:///{DB_PATH}", 
+    echo=True, 
+    connect_args={"check_same_thread": False}
+)
 #then, bind the engine to a new session
 SessionLocal = sessionmaker(bind=engine)
 
