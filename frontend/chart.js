@@ -260,6 +260,8 @@ window.addEventListener("resize", () => {
 });
 
 // REFRESH: Public function to refresh chart when data changes
-const refreshChart = () => {
-    drawChart();
+window.refreshChart = async () => {
+    console.log("Refreshing chart with latest data...");
+    await drawChart();
+    console.log("Chart refreshed!");
 }

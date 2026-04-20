@@ -91,7 +91,7 @@ function handleCSV() {
     const input = document.getElementById("csvFile");
     input.click();
 
-    input.onchange = function () {
+    input.onchange = async function () {
         const file = input.files[0];
         if (!file) return;
 
@@ -99,26 +99,51 @@ function handleCSV() {
 
         const reader = new FileReader();
 
-        reader.onload = function (e) {
-            let rows = e.target.result
-                .trim()
-                .split("\n")
-                .map(r => r.split(","));
+        reader.onload = async function (e) {
+            let rawRows = e.target.result.trim().split("\n");
+            let dataRows = rawRows.slice(1);
 
-            rows = rows.map((row, i) => {
-                if (i === 0) {
-                    row.push("Status");
-                } else {
-                    row.push("Updated");
+            const importPromises = dataRows.map(line => {
+                
+                //MAKE SURE CSV MATCHES EXPECTED FORMAT: category, amount, description
+                const columns = line.split(",");
+                const [category, amount, description] = columns;
+                const cleanAmount = amount.replace(/[$,]/g, ""); // Remove $ and commas for parsing
+                const targetAmount = parseFloat(cleanAmount) || 0; // Default to 0 if parsing fails
+                if (category && amount && description) {
+                    //send it to the db
+                    return fetch("http://127.0.0.1:8000/goals/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            user_id: 1, // Placeholder until login logic is added
+                            goal_name: `${category.trim()}: ${description.trim()}`,
+                            target_amount: targetAmount,
+                            current_amount: 0
+                        })
+                    });
                 }
-                return row;
-            });
-
-            savedCSV = rows.map(r => r.join(",")).join("\n");
-            alert("CSV loaded and updated. Click 'Download New CSV'.");
+                return null; // Skip invalid rows
+            }).filter(p => p !== null); // Knock out any invalid rows before sending it on
+            if(importPromises.length >0){
+                try {
+                    await Promise.all(importPromises);
+                    alert("CSV imported successfully! Refreshing the chart...");
+                    refreshChart();
+                } catch (error) {
+                    console.error("Error importing CSV:", error);
+                    alert("There was an issue importing the CSV. Check the console for details.");
+                }
+            }
+            else {
+                alert("No valid data found in the CSV. Please check the format and try again.");
+            }            
         };
 
         reader.readAsText(file);
+
     };
 }
 
@@ -187,6 +212,8 @@ document.getElementById("add-btn").addEventListener("click", async () => {
         alert("Could not reach the FastAPI server. Is it running on port 8000?");
     }
 });
+ 
+
 </script>
 
 
