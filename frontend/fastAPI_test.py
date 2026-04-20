@@ -4,6 +4,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
+from backend.data_service import get_goals, login_user
 
 # Add the parent directory to the system path to allow imports from the backend directory
 sys.path.append(str(Path(__file__).resolve().parent.parent))
@@ -22,6 +23,7 @@ app.add_middleware(
 )
 
 #It is my understanding that I need some manner of schema here to satisfy the need for getting response from the front end for the database querry.
+#These create a schema to tell pydantic how to read in JSON files. 
 class GoalCreate(BaseModel):
      user_id: int
      goal_name: str
@@ -30,6 +32,11 @@ class GoalCreate(BaseModel):
 
 class GoalUpdate(BaseModel):
      current_amount: float
+
+     
+class LoginSchema(BaseModel):
+    username: str
+    password: str
 
 
 # Dependency to get DB session
@@ -40,13 +47,22 @@ def get_db():
     finally:
         db.close()
 
+
+@app.post("/users/")
+def retrieveLogin(user: LoginSchema):
+    print(user.username)
+    print(user.password)
+    login_user(user.username, user.password)
+
+
+
+
 @app.get("/goals/{user_id}")
-def read_goals(user_id: int, db:
-    Session = Depends(get_db)):
-#the intention here is to use the existing SQLalchemy setup.
-#The intent is to query the Goals table for all goals associated with the given user_id and return them as a response.
-        goals = db.query(Goals).filter(Goals.user_id == user_id).all()
-        return goals
+def read_goals(user_id: int):
+    #the intention here is to use the existing SQLalchemy setup.
+    #The intent is to query the Goals table for all goals associated with the given user_id and return them as a response.
+    print("userid:", user_id)
+    return get_goals(user_id)
 
 @app.post("/goals/")
 def create_goal(goal: GoalCreate, db: Session = Depends(get_db)):
