@@ -33,7 +33,6 @@ class GoalCreate(BaseModel):
 class GoalUpdate(BaseModel):
      current_amount: float
 
-     
 class LoginSchema(BaseModel):
     username: str
     password: str
