@@ -91,12 +91,26 @@ let csvData = "";
 // added Original and made F capitalized to match code further
     
 let originalFileName = "updated";
+//Added template 
+function downloadTemplateCSV() {
 
-    function downloadTemplateCSV() {
-    const templateCSV = `row_type,user_id,username,category_name,parent_category_name,limit_amount,transaction_date,description,amount,transaction_type,goal_name,target_amount,current_amount,target_date
+const templateCSV = `Instructions: Use CATEGORY rows to define categories and limits,,,,,,,,,,,,,
+Instructions: Use TRANSACTION rows to enter spending or income,,,,,,,,,,,,,
+Instructions: Use GOAL rows to enter savings goals,,,,,,,,,,,,,
+Instructions: Leave unused columns blank for that row type,,,,,,,,,,,,,
+
+Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date
 CATEGORY,1,Gavin,Housing,,1500,,,,,,,,
-TRANSACTION,1,Gavin,Groceries,,,2026-04-19,Walmart trip,82.43,expense,,,,
-GOAL,1,Gavin,,,,,,,,Emergency Fund,2000,500,2026-12-31`;
+CATEGORY,1,Gavin,Groceries,Living,400,,,,,,,,
+CATEGORY,1,Gavin,Entertainment,,200,,,,,,,,
+TRANSACTION,1,Gavin,Groceries,Living,,2026-04-19,Walmart trip,82.43,Expense,,,,
+TRANSACTION,1,Gavin,Housing,,,2026-04-01,April rent,1150.00,Expense,,,,
+TRANSACTION,1,Gavin,Income,,,2026-04-19,Work paycheck,1450.00,Income,,,,
+GOAL,1,Gavin,,,,,,,,Emergency Fund,2000,500,2026-12-31
+GOAL,1,Gavin,,,,,,,,Vacation Fund,1500,200,2026-08-01
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,`;
 
     const blob = new Blob([templateCSV], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
