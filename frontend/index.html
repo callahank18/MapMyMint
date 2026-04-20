@@ -96,7 +96,169 @@
     
     <!-- Handles CSV upload, updates the data, and lets the user download a new CSV file -->
     
-<script>
+    <script>
+let savedCSV = "";
+let originalFileName = "updated";
+let importedTemplateRows = [];
+
+function downloadTemplateCSV() {
+    const templateCSV = `Instructions: Use CATEGORY rows to define categories and limits,,,,,,,,,,,,,
+Instructions: Use TRANSACTION rows to enter spending or income,,,,,,,,,,,,,
+Instructions: Use GOAL rows to enter savings goals,,,,,,,,,,,,,
+Instructions: Leave unused columns blank for that row type,,,,,,,,,,,,,
+
+Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date
+CATEGORY,1,Gavin,Housing,,1500,,,,,,,,
+CATEGORY,1,Gavin,Groceries,Living,400,,,,,,,,
+TRANSACTION,1,Gavin,Groceries,Living,,2026-04-19,Walmart trip,82.43,Expense,,,,
+GOAL,1,Gavin,,,,,,,,Emergency Fund,2000,500,2026-12-31
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,`;
+
+    const blob = new Blob([templateCSV], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "MapByMint_Template.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+}
+
+function handleCSV() {
+    const input = document.getElementById("csvFile");
+    input.click();
+
+    input.onchange = function () {
+        const file = input.files[0];
+        if (!file) return;
+
+        originalFileName = file.name.replace(/\.csv$/i, "");
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            savedCSV = e.target.result;
+
+            const rawRows = savedCSV.split("\n");
+
+            const dataRows = rawRows.filter(line => {
+                const trimmed = line.trim();
+
+                if (!trimmed) return false;
+                if (trimmed.startsWith("Instructions:")) return false;
+                if (trimmed.startsWith("Entry Type,")) return false;
+                if (trimmed.replace(/,/g, "") === "") return false;
+
+                return true;
+            });
+
+            importedTemplateRows = dataRows.map(line => {
+                const columns = line.split(",");
+
+                return {
+                    entryType: (columns[0] || "").trim(),
+                    category: (columns[3] || "").trim(),
+                    description: (columns[7] || "").trim(),
+                    amount: (columns[8] || "").trim()
+                };
+            }).filter(row => row.entryType !== "");
+
+            console.log(importedTemplateRows);
+            alert("CSV imported successfully!");
+        };
+
+        reader.readAsText(file);
+    };
+}
+
+function downloadUpdatedCSV() {
+    if (!savedCSV) {
+        alert("Import a CSV first.");
+        return;
+    }
+
+    const blob = new Blob([savedCSV], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = originalFileName + "_MapByMint.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+}
+</script>
+document.getElementById("add-btn").addEventListener("click", async () => {
+     if (!currentUserId) {
+        alert("Please log in first");
+        return;
+    }
+    // 1. Grab values from the HTML form
+    const amountVal = document.getElementById("amount").value;
+    const categoryVal = document.getElementById("category").value;
+    const descriptionVal = document.getElementById("description").value;
+
+    // Validation Check
+    if (!amountVal || !descriptionVal) {
+        alert("Hold up! We need an amount and a description before sending to the Vault.");
+        return;
+    }
+
+    // 2. Prep the payload for Pydantic
+    const payload = {
+        user_id: currentUserId, // Placeholder until login logic is added
+        goal_name: `${categoryVal}: ${descriptionVal}`,
+        target_amount: parseFloat(amountVal),
+        current_amount: 0
+    };
+
+    // 3. The API Call
+    try {
+        const response = await fetch("http://127.0.0.1:8000/goals/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            alert(`Success! Goal is now in the database.`);
+            
+            // Clean up the form for the next entry
+            document.getElementById("transaction-form").reset();
+            
+            // Refresh the chart with the new data
+            setTimeout(() => {
+                if (typeof window.refreshChart === "function") {
+                    window.refreshChart();
+                }
+            }, 300)
+        } else {
+            const errorData = await response.json();
+            alert("The Server didn't like that: " + JSON.stringify(errorData.detail));
+        }
+    } catch (error) {
+        console.error("Connection Error:", error);
+        alert("Could not reach the FastAPI server. Is it running on port 8000?");
+    }
+});
+ 
+
+</script>
+
+<script src="auth.js"></script>
+</body>
+</html>
+
+<!-- <script> !COMMENTED OUT FOR REFERENCE IF WE NEED IT!
 let csvData = "";
 let savedCSV = "";
 // added Original and made F capitalized to match code further
@@ -225,67 +387,4 @@ function downloadUpdatedCSV() {
 
     URL.revokeObjectURL(url);
 }
-
-document.getElementById("add-btn").addEventListener("click", async () => {
-     if (!currentUserId) {
-        alert("Please log in first");
-        return;
-    }
-    // 1. Grab values from the HTML form
-    const amountVal = document.getElementById("amount").value;
-    const categoryVal = document.getElementById("category").value;
-    const descriptionVal = document.getElementById("description").value;
-
-    // Validation Check
-    if (!amountVal || !descriptionVal) {
-        alert("Hold up! We need an amount and a description before sending to the Vault.");
-        return;
-    }
-
-    // 2. Prep the payload for Pydantic
-    const payload = {
-        user_id: currentUserId, // Placeholder until login logic is added
-        goal_name: `${categoryVal}: ${descriptionVal}`,
-        target_amount: parseFloat(amountVal),
-        current_amount: 0
-    };
-
-    // 3. The API Call
-    try {
-        const response = await fetch("http://127.0.0.1:8000/goals/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            alert(`Success! Goal is now in the database.`);
-            
-            // Clean up the form for the next entry
-            document.getElementById("transaction-form").reset();
-            
-            // Refresh the chart with the new data
-            setTimeout(() => {
-                if (typeof window.refreshChart === "function") {
-                    window.refreshChart();
-                }
-            }, 300)
-        } else {
-            const errorData = await response.json();
-            alert("The Server didn't like that: " + JSON.stringify(errorData.detail));
-        }
-    } catch (error) {
-        console.error("Connection Error:", error);
-        alert("Could not reach the FastAPI server. Is it running on port 8000?");
-    }
-});
- 
-
-</script>
-
-<script src="auth.js"></script>
-</body>
-</html>
+-->
