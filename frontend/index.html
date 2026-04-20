@@ -83,12 +83,34 @@
 
 <script src="chart.js"></script>
     
-    <! Handles CSV upload, updates the data, and lets the user download a new CSV file -->
+    <!-- Handles CSV upload, updates the data, and lets the user download a new CSV file -->
     
 <script>
 let csvData = "";
-let fileName = "updated";
+    
+// added Original and made F capitalized to match code further
+    
+let originalFileName = "updated";
 
+    function downloadTemplateCSV() {
+    const templateCSV = `row_type,user_id,username,category_name,parent_category_name,limit_amount,transaction_date,description,amount,transaction_type,goal_name,target_amount,current_amount,target_date
+CATEGORY,1,Gavin,Housing,,1500,,,,,,,,
+TRANSACTION,1,Gavin,Groceries,,,2026-04-19,Walmart trip,82.43,expense,,,,
+GOAL,1,Gavin,,,,,,,,Emergency Fund,2000,500,2026-12-31`;
+
+    const blob = new Blob([templateCSV], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "MapByMint_Template.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+}
+    
 function handleCSV() {
     const input = document.getElementById("csvFile");
     input.click();
