@@ -156,7 +156,7 @@ function handleCSV() {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
-                            user_id: 1, // Placeholder until login logic is added
+                            user_id: currentUserId, // Placeholder until login logic is added
                             goal_name: `${category.trim()}: ${description.trim()}`,
                             target_amount: targetAmount,
                             current_amount: 0
@@ -216,7 +216,7 @@ document.getElementById("add-btn").addEventListener("click", async () => {
 
     // 2. Prep the payload for Pydantic
     const payload = {
-        user_id: 1, // Placeholder until login logic is added
+        user_id: currentUserId, // Placeholder until login logic is added
         goal_name: `${categoryVal}: ${descriptionVal}`,
         target_amount: parseFloat(amountVal),
         current_amount: 0
