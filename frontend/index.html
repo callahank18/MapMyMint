@@ -132,6 +132,13 @@ function handleCSV() {
     input.onchange = async function () {
         const file = input.files[0];
         if (!file) return;
+        
+        if (!currentUserId) {
+        alert("Please log in first");
+        return;
+    }
+
+    originalFileName = file.name.replace(/\.csv$/i, "");
 
         originalFileName = file.name.replace(/\.csv$/i, "");
 
@@ -203,6 +210,10 @@ function downloadUpdatedCSV() {
 }
 
 document.getElementById("add-btn").addEventListener("click", async () => {
+     if (!currentUserId) {
+        alert("Please log in first");
+        return;
+    }
     // 1. Grab values from the HTML form
     const amountVal = document.getElementById("amount").value;
     const categoryVal = document.getElementById("category").value;
