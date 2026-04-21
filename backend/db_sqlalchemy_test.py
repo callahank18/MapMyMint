@@ -14,7 +14,7 @@ class Users(Base):
     __tablename__ = "Users"
     CustomerID = Column(Integer, primary_key=True, autoincrement=True)
     Username = Column(String, nullable=False, unique=True)
-    Password = Column(LargeBinary, nullable=False)
+    Password = Column(String, nullable=False)
     
 
     goals = relationship("Goals", back_populates="user")
