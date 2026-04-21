@@ -1,5 +1,6 @@
 from backend.db_sqlalchemy_test import SessionLocal, Users, Goals
 from backend.security import hash_password, verify_password, encrypt_data, decrypt_data
+from sqlalchemy.exc import SQLAlchemyError
 
 # CREATE USER
 def create_user(username: str, password: str):
@@ -18,17 +19,22 @@ def create_user(username: str, password: str):
 
 
 # LOGIN USER
-def login_user(username: str, password: str):
-    session = SessionLocal()
+def login_user(username, password):
+    db = SessionLocal()
+    try:
+        user = db.query(Users).filter(Users.Username == username).first()
 
-    user = session.query(Users).filter(Users.Username == username).first()
+        if user is None:
+            return {"status": "login_error", "reason": "not_found"}
+        if not verify_password(password, user.Password):
+            return {"status": "login_error", "reason": "bad_password"}
+        if user.Username == username and verify_password(password, user.Password):
+            return {"status": "success", "uid":user.CustomerID}
+    except SQLAlchemyError as e:
+        return {"status": "db_error", "reason": "database_error"}
 
-    if user and verify_password(password, user.Password):
-        session.close()
-        return True
-    else:
-        session.close()
-        return False
+    
+
 
 
 # CREATE GOAL (ENCRYPTED)

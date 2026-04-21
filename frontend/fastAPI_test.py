@@ -47,13 +47,17 @@ def get_db():
         db.close()
 
 
-@app.post("/users/")
+@app.post("/login/")
 def retrieveLogin(user: LoginSchema):
     print(user.username)
     print(user.password)
-    login_user(user.username, user.password)
-
-
+    result = login_user(user.username, user.password)
+    if result["status"] == "login_error":
+        raise HTTPException(status_code=401, detail=result["reason"])
+    elif result["status"] == "db_error":
+        raise HTTPException(status_code=500, detail=result["reason"])
+    else:
+        return result
 
 
 @app.get("/goals/{user_id}")
