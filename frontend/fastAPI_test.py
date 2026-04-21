@@ -4,7 +4,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
-from backend.data_service import get_goals, login_user
+from backend.data_service import *
 
 # Add the parent directory to the system path to allow imports from the backend directory
 sys.path.append(str(Path(__file__).resolve().parent.parent))
@@ -58,6 +58,11 @@ def retrieveLogin(user: LoginSchema):
         raise HTTPException(status_code=500, detail=result["reason"])
     else:
         return result
+
+
+@app.post("/create_user/")
+def createUser(user: LoginSchema):
+    result = create_user(user.username, user.password)
 
 
 @app.get("/goals/{user_id}")

@@ -4,18 +4,30 @@ from sqlalchemy.exc import SQLAlchemyError
 
 # CREATE USER
 def create_user(username: str, password: str):
-    session = SessionLocal()
+    db = SessionLocal()
+    try:
 
-    hashed_pw = hash_password(password)
+        user = db.query(Users).filter(Users.Username == username).first()
+        if not user is None:
+            return {"status": "register_error", "reason": "user_exists"}
 
-    user = Users(
-        Username=username,
-        Password=hashed_pw
-    )
+        hashed_pw = hash_password(password)
 
-    session.add(user)
-    session.commit()
-    session.close()
+        user = Users(
+            Username=username,
+            Password=hashed_pw
+        )
+        db.add(user)
+        db.commit()
+
+        user = db.query(Users).filter(Users.Username == username).first()
+        if not user.Username is None:
+            return {"status": "success"}
+
+        db.close()
+
+    except SQLAlchemyError as e:
+        return {"status": "db_error", "reason": "database_error"}
 
 
 # LOGIN USER
@@ -29,7 +41,7 @@ def login_user(username, password):
         if not verify_password(password, user.Password):
             return {"status": "login_error", "reason": "bad_password"}
         if user.Username == username and verify_password(password, user.Password):
-            return {"status": "success", "uid":user.CustomerID}
+            return {"uid":user.CustomerID}
     except SQLAlchemyError as e:
         return {"status": "db_error", "reason": "database_error"}
 
