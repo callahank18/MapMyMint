@@ -16,7 +16,7 @@ def create_user(username: str, password: str):
     try:
 
         user = db.query(Users).filter(Users.Username == username).first()
-        if not user is None:
+        if user:
             return {"status": "register_error", "reason": "user_exists"}
 
         hashed_pw = hash_password(password)
@@ -27,13 +27,11 @@ def create_user(username: str, password: str):
         )
         db.add(user)
         db.commit()
-
-        user = db.query(Users).filter(Users.Username == username).first()
-        if not user.Username is None:
-            return {"status": "success"}
-            print(f"User '{username}' created successfully")
-
         db.close()
+        print(f"User '{username}' created successfully")
+        return {"status": "success"}
+            
+
 
     except SQLAlchemyError as e:
         return {"status": "db_error", "reason": "database_error"}
@@ -50,10 +48,13 @@ def login_user(username, password):
         user = db.query(Users).filter(Users.Username == username).first()
 
         if user is None:
+            db.close()
             return {"status": "login_error", "reason": "not_found"}
         if not verify_password(password, user.Password):
+            db.close()
             return {"status": "login_error", "reason": "bad_password"}
         if user.Username == username and verify_password(password, user.Password):
+            db.close()
             return {"status": "success", "user_id":user.CustomerID}
     except SQLAlchemyError as e:
         return {"status": "db_error", "reason": "database_error"}

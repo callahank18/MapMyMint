@@ -63,7 +63,10 @@ def retrieveLogin(user: LoginSchema):
 @app.post("/register/")
 def createUser(user: LoginSchema):
     result = create_user(user.username, user.password)
-    return result
+    if result["status"] == "register_error":
+        raise HTTPException(status_code=409, detail=result["reason"])
+    else:
+        return result
 
 
 @app.get("/goals/{user_id}")
