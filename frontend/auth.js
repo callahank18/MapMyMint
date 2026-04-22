@@ -58,6 +58,8 @@ async function registerUser() {
             })
         });
 
+        const data = await response.json();
+
         if (response.ok) {
             alert("Account created successfully!");
             window.location.href = "login.html";
