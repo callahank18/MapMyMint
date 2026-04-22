@@ -1,4 +1,5 @@
 from backend.db_sqlalchemy_test import SessionLocal, Users, Goals
+from sqlalchemy.exc import SQLAlchemyError
 from backend.security import (
     hash_password,
     verify_password,
@@ -11,49 +12,52 @@ from backend.security import (
 # CREATE USER
 # ------------------------
 def create_user(username: str, password: str):
-    session = SessionLocal()
+    db = SessionLocal()
+    try:
 
-    # Check if user already exists
-    existing_user = session.query(Users).filter_by(Username=username).first()
-    if existing_user:
-        print("User already exists")
-        session.close()
-        return False
+        user = db.query(Users).filter(Users.Username == username).first()
+        if user:
+            return {"status": "register_error", "reason": "user_exists"}
 
-    # Hash password
-    hashed_pw = hash_password(password)
+        hashed_pw = hash_password(password)
 
-    # Create new user
-    new_user = Users(
-        Username=username,
-        Password=hashed_pw
-    )
-
-    session.add(new_user)
-    session.commit()
-    session.close()
-
-    print(f"User '{username}' created successfully")
-    return True
+        user = Users(
+            Username=username,
+            Password=hashed_pw
+        )
+        db.add(user)
+        db.commit()
+        db.close()
+        print(f"User '{username}' created successfully")
+        return {"status": "success"}
+            
 
 
-# ------------------------
-# LOGIN USER
-# ------------------------
-def login_user(username: str, password: str) -> bool:
-    session = SessionLocal()
+    except SQLAlchemyError as e:
+        return {"status": "db_error", "reason": "database_error"}
 
-    user = session.query(Users).filter_by(Username=username).first()
 
-    if not user:
-        session.close()
-        return False
 
-    # Verify hashed password
-    is_valid = verify_password(password, user.Password)
 
-    session.close()
-    return is_valid
+
+
+
+def login_user(username, password):
+    db = SessionLocal()
+    try:
+        user = db.query(Users).filter(Users.Username == username).first()
+
+        if user is None:
+            db.close()
+            return {"status": "login_error", "reason": "not_found"}
+        if not verify_password(password, user.Password):
+            db.close()
+            return {"status": "login_error", "reason": "bad_password"}
+        if user.Username == username and verify_password(password, user.Password):
+            db.close()
+            return {"status": "success", "user_id":user.CustomerID}
+    except SQLAlchemyError as e:
+        return {"status": "db_error", "reason": "database_error"}
 
 
 # ------------------------

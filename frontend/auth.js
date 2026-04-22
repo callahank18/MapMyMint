@@ -6,7 +6,7 @@ async function loginUser() {
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch(`${BASE_URL}/users/`, {
+        const response = await fetch(`${BASE_URL}/login/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -23,9 +23,11 @@ async function loginUser() {
             localStorage.setItem("currentUserId", data.user_id);
 
             alert("Login successful!");
+            localStorage.setItem('loggedIn', 'true');
             window.location.href = "index.html";
-        } else {
-            alert("Invalid username or password");
+        }
+        else {
+            alert(data.detail || "Login failed");
         }
 
     } catch (error) {
@@ -60,7 +62,7 @@ async function registerUser() {
             alert("Account created successfully!");
             window.location.href = "login.html";
         } else {
-            alert("Registration failed");
+            alert(data.detail || "Login failed");
         }
 
     } catch (error) {
