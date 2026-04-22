@@ -33,12 +33,11 @@
     </div>
 </main>
 
+    <script src="auth.js"></script>
 <script>
 document.getElementById('login-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    // TODO: Add actual authentication logic here
-    localStorage.setItem('loggedIn', 'true');
-    window.location.href = 'index.html';
+    loginUser();
 });
 </script>
 
