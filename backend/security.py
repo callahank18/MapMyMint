@@ -1,15 +1,25 @@
-# backend/security.py
+from dotenv import load_dotenv
+import bcrypt
+from cryptography.fernet import Fernet
+import os
 
-def hash_password(password: str):
-    # Temporary placeholder logic
-    return f"hashed_{password}"
+load_dotenv()
 
-def verify_password(plain_password: str, hashed_password: str):
-    # Temporary placeholder logic
-    return hashed_password == f"hashed_{plain_password}"
+KEY = os.getenv("SECRET_KEY")
 
-def encrypt_data(data: str):
-    return data
+if KEY is None:
+    raise ValueError("SECRET_KEY not set")
 
-def decrypt_data(data: str):
-    return data
+cipher = Fernet(KEY)
+
+def hash_password(password: str) -> bytes:
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+def verify_password(password: str, hashed: bytes) -> bool:
+    return bcrypt.checkpw(password.encode(), hashed)
+
+def encrypt_data(data: str) -> bytes:
+    return cipher.encrypt(data.encode())
+
+def decrypt_data(data: bytes) -> str:
+    return cipher.decrypt(data).decode()

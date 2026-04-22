@@ -1,8 +1,16 @@
 from backend.db_sqlalchemy_test import SessionLocal, Users, Goals
-from backend.security import hash_password, verify_password, encrypt_data, decrypt_data
 from sqlalchemy.exc import SQLAlchemyError
+from backend.security import (
+    hash_password,
+    verify_password,
+    encrypt_data,
+    decrypt_data
+)
 
+
+# ------------------------
 # CREATE USER
+# ------------------------
 def create_user(username: str, password: str):
     db = SessionLocal()
     try:
@@ -23,6 +31,7 @@ def create_user(username: str, password: str):
         user = db.query(Users).filter(Users.Username == username).first()
         if not user.Username is None:
             return {"status": "success"}
+            print(f"User '{username}' created successfully")
 
         db.close()
 
@@ -30,7 +39,11 @@ def create_user(username: str, password: str):
         return {"status": "db_error", "reason": "database_error"}
 
 
-# LOGIN USER
+
+
+
+
+
 def login_user(username, password):
     db = SessionLocal()
     try:
@@ -41,32 +54,37 @@ def login_user(username, password):
         if not verify_password(password, user.Password):
             return {"status": "login_error", "reason": "bad_password"}
         if user.Username == username and verify_password(password, user.Password):
-            return {"uid":user.CustomerID}
+            return {"status": "success", "user_id":user.CustomerID}
     except SQLAlchemyError as e:
         return {"status": "db_error", "reason": "database_error"}
 
-    
 
-
-
+# ------------------------
 # CREATE GOAL (ENCRYPTED)
+# ------------------------
 def create_goal(user_id: int, goal_name: str, target_amount: float):
     session = SessionLocal()
 
+    # Encrypt goal name
     encrypted_name = encrypt_data(goal_name)
 
-    goal = Goals(
+    new_goal = Goals(
         user_id=user_id,
         goal_name=encrypted_name,
-        target_amount=target_amount
+        target_amount=target_amount,
+        current_amount=0
     )
 
-    session.add(goal)
+    session.add(new_goal)
     session.commit()
     session.close()
 
+    print("Goal created successfully")
 
+
+# ------------------------
 # GET GOALS (DECRYPTED)
+# ------------------------
 def get_goals(user_id: int):
     session = SessionLocal()
 
@@ -76,9 +94,11 @@ def get_goals(user_id: int):
     for g in goals:
         result.append({
             "goal_id": g.goal_id,
-            "goal_name": decrypt_data(g.goal_name),
+            "user_id": g.user_id,
+            "goal_name": decrypt_data(g.goal_name),  # 🔓 decrypted here
             "target_amount": g.target_amount,
-            "current_amount": g.current_amount
+            "current_amount": g.current_amount,
+            "target_date": g.target_date
         })
 
     session.close()
