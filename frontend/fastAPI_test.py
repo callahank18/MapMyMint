@@ -60,9 +60,10 @@ def retrieveLogin(user: LoginSchema):
         return result
 
 
-@app.post("/create_user/")
+@app.post("/register/")
 def createUser(user: LoginSchema):
     result = create_user(user.username, user.password)
+    return result
 
 
 @app.get("/goals/{user_id}")
