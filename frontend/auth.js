@@ -2,7 +2,7 @@
 const BASE_URL = "http://127.0.0.1:8000";
 
 async function loginUser() {
-    const username = document.getElementById("email").value;
+    const username = document.getElementById("name").value;
     const password = document.getElementById("password").value;
 
     try {
