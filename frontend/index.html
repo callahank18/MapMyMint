@@ -23,7 +23,7 @@
 <body>
 
 <nav>
-    <div class="brand">MapMyMint</div>
+    <a href="home.html" class="brand">MapMyMint</a>
     <div class="nav-links">
         <a href="home.html">Home</a>
         <a href="index.html" class="active">View Map</a>
@@ -33,7 +33,7 @@
             <option value="light">Light Theme</option>
             <option value="dark">Dark Theme</option>
             <option value="ocean">Ocean Theme</option>
-            <option value="minimal">Minimal Theme</option>
+            <option value="rainbow">Rainbow Theme</option>
         </select>
     </div>
    
@@ -182,17 +182,17 @@ function handleCSV() {
             if (importPromises.length > 0) {
                 try {
                     await Promise.all(importPromises);
-                    alert("Vault Updated! Refreshing Map...");
+                    console.log("Vault Updated! Refreshing Map...");
                     // Call the refresh function in chart.js
                     if (typeof window.refreshChart === "function") {
                         window.refreshChart();
                     }
                 } catch (error) {
                     console.error("Import Error:", error);
-                    alert("Could not save CSV data to the server.");
+                    console.error("Could not save CSV data to the server.");
                 }
             } else {
-                alert("No valid transaction data found in this CSV.");
+                console.error("No valid transaction data found in this CSV.");
             }
         };
 
@@ -202,7 +202,7 @@ function handleCSV() {
 
 function downloadUpdatedCSV() {
     if (!savedCSV) {
-        alert("Import a CSV first.");
+        console.error("Import a CSV first.");
         return;
     }
 
@@ -220,23 +220,20 @@ function downloadUpdatedCSV() {
 }
 
 document.getElementById("add-btn").addEventListener("click", async () => {
-    // Check if user is logged in (using our global const)
-    if (typeof currentUserId === 'undefined') {
-        alert("Authentication Error: No User ID found.");
-        return;
-    }
+    // Use default user ID if not logged in
+    const userId = currentUserId || 1;
 
     const amountVal = document.getElementById("amount").value;
     const categoryVal = document.getElementById("category").value;
     const descriptionVal = document.getElementById("description").value;
 
     if (!amountVal || !descriptionVal) {
-        alert("Please provide both an amount and a description.");
+        console.error("Please provide both an amount and a description.");
         return;
     }
 
     const payload = {
-        user_id: currentUserId,
+        user_id: userId,
         goal_name: `${categoryVal}: ${descriptionVal}`,
         target_amount: parseFloat(amountVal),
         current_amount: 0
@@ -250,7 +247,7 @@ document.getElementById("add-btn").addEventListener("click", async () => {
         });
 
         if (response.ok) {
-            alert(`Success! Entry added to ${categoryVal}.`);
+            console.log(`Success! Entry added to ${categoryVal}.`);
             document.getElementById("transaction-form").reset();
             
             // Trigger D3 redraw
@@ -261,11 +258,11 @@ document.getElementById("add-btn").addEventListener("click", async () => {
             }, 300);
         } else {
             const errorData = await response.json();
-            alert("Server Error: " + JSON.stringify(errorData.detail));
+            console.error("Server Error: " + JSON.stringify(errorData.detail));
         }
     } catch (error) {
         console.error("Connection Error:", error);
-        alert("Could not reach the FastAPI server. Is it running?");
+        console.error("Could not reach the FastAPI server. Is it running?");
     }
 });
  
@@ -325,8 +322,8 @@ function handleCSV() {
         if (!file) return;
         
         if (!currentUserId) {
-        alert("Please log in first");
-        return;
+        console.error("No user ID found - using default user");
+        // Use default user ID for demo purposes
     }
 
     originalFileName = file.name.replace(/\.csv$/i, "");
@@ -358,7 +355,7 @@ function handleCSV() {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
-                            user_id: currentUserId, // Placeholder until login logic is added
+                            user_id: currentUserId || 1, // Use default user ID if not logged in
                             goal_name: `${category.trim()}: ${description.trim()}`,
                             target_amount: targetAmount,
                             current_amount: 0
@@ -370,17 +367,16 @@ function handleCSV() {
             if(importPromises.length >0){
                 try {
                     await Promise.all(importPromises);
-                    alert("CSV imported successfully! Refreshing the chart...");
+                    console.log("CSV imported successfully! Refreshing the chart...");
                     setTimeout(() => {
                         if(window.refreshChart) window.refreshChart();
                     }, 300);
                 } catch (error) {
                     console.error("Error importing CSV:", error);
-                    alert("There was an issue importing the CSV. Check the console for details.");
                 }
             }
             else {
-                alert("No valid data found in the CSV. Please check the format and try again.");
+                console.error("No valid data found in the CSV. Please check the format and try again.");
             }            
         };
 
@@ -391,7 +387,7 @@ function handleCSV() {
 
 function downloadUpdatedCSV() {
     if (!savedCSV) {
-        alert("Import a CSV first.");
+        console.error("Import a CSV first.");
         return;
     }
 

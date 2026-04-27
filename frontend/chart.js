@@ -88,9 +88,17 @@ const drawChart = async () => {
     // 3. DATA: Fetch from backend
     const data = await fetchAndTransformData();
 
-    // 4. COLOR SCALE: Teal to Pink interpolation
+    // 4. COLOR SCALE: Theme-aware interpolation
+    const getThemeColors = () => {
+        const rootStyles = getComputedStyle(document.documentElement);
+        const primaryTeal = rootStyles.getPropertyValue('--primary-teal').trim() || '#008080';
+        const accentPink = rootStyles.getPropertyValue('--accent-pink').trim() || '#ff69b4';
+        return { primaryTeal, accentPink };
+    };
+
+    const { primaryTeal, accentPink } = getThemeColors();
     const color = d3.scaleOrdinal(
-        d3.quantize(d3.interpolate(d3.rgb("#008080"), d3.rgb("#ff69b4")), data.children.length + 1)
+        d3.quantize(d3.interpolate(d3.rgb(primaryTeal), d3.rgb(accentPink)), data.children.length + 1)
     );
 
     // 5. D3 PARTITION & ARC LOGIC
@@ -156,9 +164,12 @@ const drawChart = async () => {
             return Math.max(4, arcSize / 5.5) + "px";
         })
         .style("fill", d => {
-            // Determine if background is light or dark
+            // Determine text color based on theme
+            const rootStyles = getComputedStyle(document.documentElement);
+            const textPrimary = rootStyles.getPropertyValue('--text-primary').trim() || '#1a1a1a';
+            const textSecondary = rootStyles.getPropertyValue('--text-secondary').trim() || '#666666';
             const arcSize = (d.y1 - d.y0) * radius;
-            return arcSize < 20 ? "#999" : "white"; // Gray for small segments
+            return arcSize < 20 ? textSecondary : textPrimary;
         })
         .style("font-weight", "600")
         .style("text-shadow", "0px 1px 2px rgba(0,0,0,0.4)")
@@ -197,9 +208,12 @@ const drawChart = async () => {
             return Math.max(3, arcSize / 6.5) + "px";
         })
         .style("fill", d => {
-            // Determine if background is light or dark
+            // Determine text color based on theme
+            const rootStyles = getComputedStyle(document.documentElement);
+            const textPrimary = rootStyles.getPropertyValue('--text-primary').trim() || '#1a1a1a';
+            const textSecondary = rootStyles.getPropertyValue('--text-secondary').trim() || '#666666';
             const arcSize = (d.y1 - d.y0) * radius;
-            return arcSize < 20 ? "#999" : "white";
+            return arcSize < 20 ? textSecondary : textPrimary;
         })
         .style("font-weight", "500")
         .style("text-shadow", "0px 1px 2px rgba(0,0,0,0.4)")
@@ -243,7 +257,7 @@ const drawChart = async () => {
         .attr("text-anchor", "middle")
         .attr("dy", "1.2em")
         .style("font-size", `${width / 40}px`)
-        .style("fill", "#999")
+        .style("fill", "var(--text-secondary)")
         .style("font-weight", "500")
         .text("Total Spent");
 };

@@ -21,6 +21,11 @@ const applyTheme = (theme) => {
     if (switcher) {
         switcher.value = theme;
     }
+    
+    // Refresh chart if it exists (for theme-aware colors)
+    if (typeof window.refreshChart === "function") {
+        setTimeout(() => window.refreshChart(), 100);
+    }
 };
 
 // Initialize theme on page load

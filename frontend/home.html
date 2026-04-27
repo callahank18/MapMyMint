@@ -10,9 +10,9 @@
 <body>
 
 <nav>
-    <div class="brand">MapMyMint</div>
+    <a href="home.html" class="brand">MapMyMint</a>
     <div class="nav-links">
-        <a href="home.html" class="active">Home</a>
+        <a id="home-link" href="home.html" class="active">Home</a>
         <a href="index.html">View Map</a>
         <a href="buget.html">Budget List</a>
         <a href="login.html">Login</a>
@@ -20,7 +20,7 @@
             <option value="light">Light Theme</option>
             <option value="dark">Dark Theme</option>
             <option value="ocean">Ocean Theme</option>
-            <option value="minimal">Minimal Theme</option>
+            <option value="rainbow">Rainbow Theme</option>
         </select>
     </div>
 </nav>
@@ -30,6 +30,12 @@
         <h1>Welcome to <span class="teal-text">MapMyMint</span></h1>
         <p>Your visual budgeting companion</p>
     </header>
+
+    <section class="cta">
+        <h2>Ready to Map Your Mint?</h2>
+        <p>Join thousands of users who are taking control of their finances.</p>
+        <a href="register.html" class="btn-teal">Sign Up Now</a>
+    </section>
 
     <section class="summary">
         <div class="card">
@@ -54,6 +60,14 @@
         </div>
     </section>
 </main>
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle home link behavior based on login status
+    const homeLink = document.getElementById('home-link');
+    if (localStorage.getItem('loggedIn')) {
+        homeLink.href = 'index.html';
+    }
+});
+</script>
 </body>
 </html>

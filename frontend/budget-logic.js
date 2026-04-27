@@ -63,7 +63,6 @@ const updateGoalAmount = async (goalId, newCurrentAmount) => {
         return true;
     } catch (error) {
         console.error("Error updating goal:", error);
-        alert("Could not update goal. Make sure the backend is running.");
         return false;
     }
 };
@@ -90,7 +89,7 @@ const refreshBudgetDisplay = async () => {
                 <div class="progress-fill ${isOver ? 'over-budget' : ''}" 
                      style="width: ${percent}%"></div>
             </div>
-            <p style="font-size: 12px; margin-top: 5px; color: ${isOver ? '#ff69b4' : '#666'}">
+            <p style="font-size: 12px; margin-top: 5px; color: ${isOver ? 'var(--accent-pink)' : 'var(--text-secondary)'}">
                 ${isOver ? 'Over budget by $' + (item.spent - item.budgeted).toFixed(2) : (100 - percent).toFixed(0) + '% remaining'}
             </p>
             <div class="edit-controls" style="margin-top: 12px; display: flex; gap: 8px; align-items: center;">
@@ -129,7 +128,7 @@ const handleCustomAmount = async (category) => {
     const amount = parseFloat(input.value);
     
     if (isNaN(amount) || amount < 0) {
-        alert("Please enter a valid amount");
+        console.error("Please enter a valid amount");
         return;
     }
     
