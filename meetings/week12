@@ -45,11 +45,17 @@ Kelsey - Finish working on landing page:
     -Fixing the graph to show current left to spend visually
     -Fixing labeling on the graph to be more visually appealing
     -Automatically updates to the graph when money added/removed
-Tom - 
-Ryan - 
-Vincent - 
-Jayne - 
-Gavin - 
+    - Show Password Requirements on Account Registration Page
+Tom - Frontend Testing
+    - Bug Fixing
+    - Start Presentation
+Ryan - Working on Graph update with CSV import
+Vincent - Backend Testing
+        - Bug Fixing
+        - Start Presentation
+Jayne - Updating fetch information to match currently logged in user
+      - Password Requirements (One Uppercase, One Special Character, One Number)
+Gavin - Working on Graph update with CSV import
 
 ## Meeting with Brian GOALS Monday 4/13/2026 ##
 Work through product backlog
@@ -57,7 +63,7 @@ Work through product backlog
 -----------------------------------------------------------------------------------------------
 ## 4/29/2026 ##
 Check in everyone progressing on their tasks
-
+Start talking about how to wrap up the project and deploy the files.
 ## Assigned Work ##
 Continued work from Monday assignments
 
