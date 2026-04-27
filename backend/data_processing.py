@@ -1,6 +1,6 @@
 import pandas as pd
 from sqlalchemy.orm import sessionmaker
-from db_sqlalchemy_test import Users, Goals, engine
+from models import Users, Goals, engine
 import sqlite3
 
 conn = sqlite3.connect("mapmymint.db")

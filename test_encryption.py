@@ -1,5 +1,5 @@
 from backend.data_service import create_user, login_user, create_goal, get_goals
-from backend.db_sqlalchemy_test import SessionLocal, Users, Goals
+from backend.models import SessionLocal, Users, Goals
 
 print("\n--- TEST START ---\n")
 
