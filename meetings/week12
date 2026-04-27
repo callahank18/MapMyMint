@@ -1,0 +1,75 @@
+
+Attendance
+  Tom - Product Owner [X] [X] [X]
+    Languages - Java, Python, HTML, CSS, SQL
+  Kelsey - Scrum Master [X] [X] [X]
+    Languages - Java, Python, HTML, CSS, SQL
+  Gavin [X] [X] [X]
+    Languages - Main: C++, SQL / Some Experience: C#, Assembly, HTML
+  Jayne [X] [X] [X]
+    Languages - Java, Python, HTML, CSS, SQL, JavaScript
+  Vincent [X] [X] [X]
+    Languages - Java, Python, HTMl, PHP, SQL
+  Ryan [X] [X] [X]
+    Languages - Java, Python, HTML, CSS 
+
+## Meeting Times-
+In Class Meeting w/ Professor - Monday's 2-3:15
+Second Meeting - Wednesday 2:00 - 3:15 Discord
+Third Meeting - Thursday @ 9am Discord
+-----------------------------------------------------------------------------------------------
+## WEEK PRODUCT BACKLOG ##
+          - Display does not automatically update with changes and read data and implment it
+          - Visual enhancements for the page
+          - 
+          - 
+          - Landing page to set the budget and it fills in and here what you have remaining
+          - 
+          - 
+          - Working in login system and integrate multiple users
+          - Encryption integration 
+          - setting up the back end to handle login info 
+          - Working through bug fixes
+          - detecting errors on the csv file
+          - creating a list of alert hey csv is not correct
+          
+-----------------------------------------------------------------------------------------------
+## 4/27/2026 ##
+~# Completed Work #~
+  -Removed emaill from Registration page
+  -Added and cleaned up themes
+  -
+
+## Assigned Work ##
+Kelsey - Finish working on landing page:
+    -Fixing the graph to show current left to spend visually
+    -Fixing labeling on the graph to be more visually appealing
+    -Automatically updates to the graph when money added/removed
+Tom - 
+Ryan - 
+Vincent - 
+Jayne - 
+Gavin - 
+
+## Meeting with Brian GOALS Monday 4/13/2026 ##
+Work through product backlog
+
+-----------------------------------------------------------------------------------------------
+## 4/29/2026 ##
+Check in everyone progressing on their tasks
+
+## Assigned Work ##
+Continued work from Monday assignments
+
+## Meeting with Brian GOALS Monday 4/13/2026 ##
+Work through product backlog
+
+-----------------------------------------------------------------------------------------------
+## 4/30/2026 ##
+Check in everyone progressing on their tasks
+
+## Assigned Work ## 
+Continued work from Monday assignments
+
+## Meeting with Brian GOALS Monday 4/13/2026 ##
+Work through product backlog
