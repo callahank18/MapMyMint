@@ -10,7 +10,7 @@ from backend.data_service import *
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 
-from backend.db_sqlalchemy_test import SessionLocal, Goals #Intending on taking the existing data setup and working with it
+from backend.models import SessionLocal, Goals #Intending on taking the existing data setup and working with it
 
 app = FastAPI()
 

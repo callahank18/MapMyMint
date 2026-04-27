@@ -1,4 +1,4 @@
-from backend.db_sqlalchemy_test import SessionLocal, Users, Goals
+from backend.db_sqlalchemy import SessionLocal, Users, Goals
 from sqlalchemy.exc import SQLAlchemyError
 from backend.security import (
     hash_password,
