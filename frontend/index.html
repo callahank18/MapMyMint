@@ -170,7 +170,7 @@ function handleCSV() {
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             user_id: currentUserId,
-                            goal_name: `${category}: ${description}`,
+                            goal_name: `${category}: ${description || "Transaction"}`, // If no description, just label it as "Transaction"
                             target_amount: amount,
                             current_amount: 0
                         })
