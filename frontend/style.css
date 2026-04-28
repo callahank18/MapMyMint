@@ -21,6 +21,12 @@
     --nav-text: #ffffff;
     --card-bg: #ffffff;
     --card-shadow: 0 4px 15px rgba(0, 128, 128, 0.12);
+    --chart-start: #008080;
+    --chart-end: #ff69b4;
+    --chart-buffer: 0.35;
+    --chart-warning: #dc2626;
+    --chart-spending:  #008080;
+    --chart-savings:   #ff69b4;
 }
 
 /* Dark Theme */
@@ -34,6 +40,12 @@
     --nav-text: #ffffff;
     --card-bg: #1a1a1a;
     --card-shadow: 0 4px 15px rgba(0, 128, 128, 0.3);
+    --chart-start: #00b3b3;
+    --chart-end: #ff85c2;
+    --chart-buffer: 0.25;
+    --chart-warning: #ff4444;
+    --chart-spending:  #00b3b3;
+    --chart-savings:   #ff85c2;
 }
 
 /* Ocean Theme */
@@ -47,6 +59,12 @@
     --nav-text: #ffffff;
     --card-bg: #ffffff;
     --card-shadow: 0 4px 15px rgba(10, 58, 82, 0.15);
+    --chart-start: #0a3a52; 
+    --chart-end: #00aacc; 
+    --chart-buffer: 0.30;
+    --chart-warning: #e63946;
+    --chart-spending:  #0a3a52;
+    --chart-savings:   #00aacc;
 }
 
 /* Rainbow Theme */
@@ -60,6 +78,12 @@
     --nav-text: #ffffff;
     --card-bg: #ffffff;
     --card-shadow: 0 4px 15px rgba(139, 0, 0, 0.15);
+    --chart-start: #8b0000;
+    --chart-end: #8b008b;
+    --chart-buffer: 0.30;
+    --chart-warning: #ff0000;
+    --chart-spending:  #8b0000;
+    --chart-savings:   #8b008b;
 }
 
 body {
@@ -179,7 +203,7 @@ nav {
 .nav-links a:hover::after {
     width: 100%;
 }
-}
+
 
 .nav-links a.active {
     background: linear-gradient(135deg, rgba(0, 128, 128, 0.3), rgba(255, 105, 180, 0.2));

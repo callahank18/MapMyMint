@@ -75,9 +75,7 @@
                 <div class="input-group">
                     <label>Category</label>
                     <select id="category">
-                        <option value="Housing">Housing</option>
-                        <option value="Lifestyle">Lifestyle</option>
-                        <option value="Savings">Savings</option>
+                        <option value="">Loading categories...</option>
                     </select>
                 </div>
                 <!-- Input field for adding a description of the transaction -->
@@ -92,7 +90,7 @@
 </section>
 </main>
 
-<script src="chart.js"></script>
+<script src="chart-v2.js"></script>
     
     <!-- Handles CSV upload, updates the data, and lets the user download a new CSV file -->
     
@@ -105,19 +103,26 @@ let originalFileName = "updated";
 let importedTemplateRows = [];
 
 function downloadTemplateCSV() {
+    // 1. Grab the current user's data
+    const currentUserId = localStorage.getItem("currentUserId") || "1";
+    // If you don't store the username, you can default to "User" or fetch it
+    const currentUsername = localStorage.getItem("currentUsername") || "User";
+
+    // 2. Build the string using template literals (${}) to inject the ID and Name
     const templateCSV = `Instructions: Use CATEGORY rows to define categories and limits,,,,,,,,,,,,,
 Instructions: Use TRANSACTION rows to enter spending or income,,,,,,,,,,,,,
 Instructions: Use GOAL rows to enter savings goals,,,,,,,,,,,,,
 Instructions: Leave unused columns blank for that row type,,,,,,,,,,,,,
 
 Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date
-CATEGORY,1,Gavin,Housing,,1500,,,,,,,,
-CATEGORY,1,Gavin,Groceries,Living,400,,,,,,,,
-TRANSACTION,1,Gavin,Groceries,Living,,2026-04-19,Walmart trip,82.43,Expense,,,,
-GOAL,1,Gavin,,,,,,,,Emergency Fund,2000,500,2026-12-31
+CATEGORY,${currentUserId},${currentUsername},Housing,,1500,,,,,,,,
+CATEGORY,${currentUserId},${currentUsername},Groceries,Living,400,,,,,,,,
+TRANSACTION,${currentUserId},${currentUsername},Groceries,Living,,2026-04-19,Walmart trip,82.43,Expense,,,,
+GOAL,${currentUserId},${currentUsername},,,,,,,,Emergency Fund,2000,500,2026-12-31
 ,,,,,,,,,,,,,
 ,,,,,,,,,,,,,`;
 
+    // 3. Create the download as before
     const blob = new Blob([templateCSV], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
 
@@ -131,96 +136,64 @@ GOAL,1,Gavin,,,,,,,,Emergency Fund,2000,500,2026-12-31
     URL.revokeObjectURL(url);
 }
 
-/*
-OLD HANDLE CSV
 
-function handleCSV() {
-    const input = document.getElementById("csvFile");
-    input.click();
+//Connecting the manual "Quick Add" 
+document.getElementById("add-btn").addEventListener("click", async () => {
+    const amountInput = document.getElementById("amount").value;
+    const descInput = document.getElementById("description").value;
+    const catInput = document.getElementById("category").value;
 
-    input.onchange = function () {
-        const file = input.files[0];
-        if (!file) return;
+    if (!amountInput || !descInput) {
+        alert("Please enter an amount and description.");
+        return;
+    }
 
-        originalFileName = file.name.replace(/\.csv$/i, "");
-
-        const reader = new FileReader();
-
-        reader.onload = async function (e) {
-            savedCSV = e.target.result;
-
-            const rawRows = savedCSV.split("\n");
-
-            const dataRows = rawRows.filter(line => {
-                const trimmed = line.trim();
-                return trimmed && 
-                       !trimmed.startsWith("Instructions:") && 
-                       !trimmed.startsWith("Entry Type,") && 
-                       trimmed.replace(/,/g, "") !== "";
-            });
-
-            const importPromises = dataRows.map(line => {
-                const columns = line.split(",");
-                
-                const category = (columns[3] || "").trim();
-                const description = (columns[7] || "").trim();
-                const rawAmount = (columns[8] || "0").replace(/[$,]/g, "");
-                const amount = parseFloat(rawAmount) || 0;
-
-                if (category && amount > 0) {
-                    return fetch("http://127.0.0.1:8000/goals/", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            user_id: currentUserId,
-                            goal_name: `${category}: ${description || "Transaction"}`,
-                            target_amount: amount,
-                            current_amount: 0
-                        })
-                    });
-                }
-                return null;
-            }).filter(p => p !== null);
-
-            if (importPromises.length > 0) {
-                try {
-                    await Promise.all(importPromises);
-                    console.log("Vault Updated! Refreshing Map...");
-                    if (typeof window.refreshChart === "function") {
-                        window.refreshChart();
-                    }
-                } catch (error) {
-                    console.error("Import Error:", error);
-                    console.error("Could not save CSV data to the server.");
-                }
-            } else {
-                console.error("No valid transaction data found in this CSV.");
-            }
-        };
-
-        reader.readAsText(file);
+    const payload = {
+        user_id: parseInt(currentUserId),
+        description: descInput,
+        amount: parseFloat(amountInput),
+        category_id: parseInt(catInput), // Optional: logic to map 'Housing' to ID 1, etc.
+        transaction_date: new Date().toISOString().split('T')[0],
+        transaction_type: "expense"
     };
-}
-*/
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/transactions/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            console.log("Transaction saved to Vault.");
+            document.getElementById("transaction-form").reset();
+            if (typeof window.refreshChart === "function") window.refreshChart();
+        }
+    } catch (error) {
+        console.error("Failed to add transaction:", error);
+    }
+});
+
 
 // NEW HANDLE CSV
-function handleCSV() {
+async function handleCSV() {
     const input = document.getElementById("csvFile");
     input.click();
-
-    input.onchange = function () {
+ 
+    input.onchange = async function () {
         const file = input.files[0];
         if (!file) return;
-
+ 
+        // Preserve original filename for export
         originalFileName = file.name.replace(/\.csv$/i, "");
-
+ 
         const reader = new FileReader();
-
+ 
         reader.onload = async function (e) {
             savedCSV = e.target.result;
-
             const rawRows = savedCSV.split("\n");
-
+ 
+            // Clean rows — strip instructions, headers, and blank lines
             const dataRows = rawRows.filter(line => {
                 const trimmed = line.trim();
                 return trimmed &&
@@ -228,143 +201,167 @@ function handleCSV() {
                     !trimmed.startsWith("Entry Type,") &&
                     trimmed.replace(/,/g, "") !== "";
             });
-
-            const importPromises = dataRows.map(line => {
-                const columns = line.split(",");
-
-                const entryType = (columns[0] || "").trim().toUpperCase();
-
-                if (entryType !== "TRANSACTION" && entryType !== "GOAL") {
-                    return null;
-                }
-
-                const userId = parseInt(columns[1]) || currentUserId || 1;
-
-                const category = (columns[3] || "").trim();
-                const description = (columns[7] || "").trim();
-                const amount = parseFloat((columns[8] || "0").replace(/[$,]/g, "")) || 0;
-
-                const goalName = (columns[10] || "").trim();
-                const targetAmount = parseFloat((columns[11] || "0").replace(/[$,]/g, "")) || 0;
-                const currentAmount = parseFloat((columns[12] || "0").replace(/[$,]/g, "")) || 0;
-
-                let payload = null;
-
-                if (entryType === "TRANSACTION" && category && amount > 0) {
-                    payload = {
-                        user_id: userId,
-                        goal_name: `${category}: ${description || "Transaction"}`,
-                        target_amount: amount,
-                        current_amount: 0
-                    };
-                }
-
-                if (entryType === "GOAL" && goalName && targetAmount > 0) {
-                    payload = {
-                        user_id: userId,
-                        goal_name: `Savings: ${goalName}`,
-                        target_amount: targetAmount,
-                        current_amount: currentAmount
-                    };
-                }
-
-                if (!payload) return null;
-
-                return fetch("http://127.0.0.1:8000/goals/", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
-            }).filter(p => p !== null);
-
-            if (importPromises.length > 0) {
+ 
+            //Process CATEGORY rows first (serial, not parallel)
+            //    We use for...of with await so each category is fully created
+            //    before we fetch the updated ID map. Promise.all won't work here
+            //    because we need the DB to have committed before the next step.
+            const categoryRows = dataRows.filter(row =>
+                row.trim().toUpperCase().startsWith("CATEGORY")
+            );
+ 
+            for (const row of categoryRows) {
+                const col = row.split(",");
+                const name = (col[3] || "").trim();
+                const limitAmount = parseFloat((col[5] || "0").replace(/[$,]/g, "")) || 0;
+ 
+                if (!name) continue; // Skip rows with no category name
+ 
                 try {
-                    await Promise.all(importPromises);
-                    console.log("CSV imported successfully.");
-
-                    if (typeof window.refreshChart === "function") {
-                        window.refreshChart();
-                    }
-                } catch (error) {
-                    console.error("Import Error:", error);
-                    console.error("Could not save CSV data to the server.");
+                    await fetch("http://127.0.0.1:8000/categories/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            user_id: parseInt(currentUserId),
+                            name: name,
+                            limit_amount: limitAmount,
+                            parent_id: null // Subcategory support can be added later
+                        })
+                    });
+                } catch (err) {
+                    console.error(`Failed to create category "${name}":`, err);
+                }
+            }
+ 
+            // Refresh category map now that new ones are in the DB
+            let catMap = {};
+            try {
+                const catRes = await fetch(`http://127.0.0.1:8000/categories/${parseInt(currentUserId)}`);
+                if (catRes.ok) {
+                    const categories = await catRes.json();
+                    categories.forEach(c => catMap[c.name.toLowerCase()] = c.id);
+                }
+            } catch (err) {
+                console.error("Failed to fetch category map:", err);
+            }
+ 
+            // Process TRANSACTION and GOAL rows in parallel
+            const otherRows = dataRows.filter(row =>
+                !row.trim().toUpperCase().startsWith("CATEGORY")
+            );
+ 
+            const finalPromises = otherRows.map(row => {
+                const col = row.split(",");
+                const entryType = (col[0] || "").trim().toUpperCase();
+ 
+                // --- TRANSACTION ---
+                if (entryType === "TRANSACTION") {
+                    const catName = (col[3] || "").trim().toLowerCase();
+                    const amount = parseFloat((col[8] || "0").replace(/[$,]/g, "")) || 0;
+                    const description = (col[7] || "").trim();
+ 
+                    // Skip rows without enough data to be useful
+                    if (!description || amount <= 0) return null;
+ 
+                    return fetch("http://127.0.0.1:8000/transactions/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            user_id: parseInt(currentUserId),
+                            category_id: catMap[catName] || null,
+                            transaction_date: (col[6] || "").trim() || new Date().toISOString().split('T')[0],
+                            description: description,
+                            amount: amount,
+                            transaction_type: (col[9] || "expense").trim().toLowerCase()
+                        })
+                    });
+                }
+ 
+                // --- GOAL ---
+                if (entryType === "GOAL") {
+                    const goalName = (col[10] || "").trim();
+                    const targetAmount = parseFloat((col[11] || "0").replace(/[$,]/g, "")) || 0;
+                    const currentAmount = parseFloat((col[12] || "0").replace(/[$,]/g, "")) || 0;
+ 
+                    // Skip rows without enough data to be useful
+                    if (!goalName || targetAmount <= 0) return null;
+ 
+                    return fetch("http://127.0.0.1:8000/goals/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            user_id: parseInt(currentUserId),
+                            goal_name: goalName,
+                            target_amount: targetAmount,
+                            current_amount: currentAmount
+                        })
+                    });
+                }
+ 
+                return null; // Ignore any unrecognized row types
+            }).filter(p => p !== null);
+ 
+            // Execute all transaction/goal imports
+            if (finalPromises.length > 0) {
+                try {
+                    await Promise.all(finalPromises);
+                    console.log("Full CSV import complete.");
+                } catch (err) {
+                    console.error("Import error on transactions/goals:", err);
                 }
             } else {
-                console.error("No valid CSV rows found.");
+                console.warn("No valid TRANSACTION or GOAL rows found after category stage.");
             }
+ 
+            // Refresh chart and dropdown with latest data
+            if (typeof window.refreshChart === "function") window.refreshChart();
+            if (typeof populateCategoryDropdown === "function") populateCategoryDropdown();
         };
-
+ 
         reader.readAsText(file);
     };
 }
 
-/*
-OLD DOWNLOAD UPDATED CSV
-
-function downloadUpdatedCSV() {
-    if (!savedCSV) {
-        console.error("Import a CSV first.");
-        return;
-    }
-
-    const blob = new Blob([savedCSV], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = originalFileName + "_MapByMint.csv";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
-    URL.revokeObjectURL(url);
-}
-*/
 
 // NEW DOWNLOAD UPDATED CSV
 async function downloadUpdatedCSV() {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/goals/${currentUserId}`);
+        // Fetch both datasets at once
+        const [goalsResponse, txResponse] = await Promise.all([
+            fetch(`http://127.0.0.1:8000/goals/${currentUserId}`),
+            fetch(`http://127.0.0.1:8000/transactions/${currentUserId}`)
+        ]);
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch updated data");
+        if (!goalsResponse.ok || !txResponse.ok) {
+            throw new Error("Failed to fetch data from one or more endpoints");
         }
 
-        const goals = await response.json();
+        const goals = await goalsResponse.json();
+        const transactions = await txResponse.json();
 
         const header = "Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date";
 
-        const rows = goals.map(goal => {
-            const parts = goal.goal_name.split(": ");
-            const category = parts[0] || "";
-            const description = parts.slice(1).join(": ") || "";
+        // 1. Map Goals to CSV Rows
+        const goalRows = goals.map(goal => [
+            "GOAL", goal.user_id, "", "", "", "", "", "", "", "", 
+            goal.goal_name, goal.target_amount, goal.current_amount, goal.target_date || ""
+        ].join(","));
 
-            return [
-                "TRANSACTION",
-                goal.user_id,
-                "",
-                category,
-                "",
-                "",
-                "",
-                description,
-                goal.target_amount,
-                "Expense",
-                "",
-                goal.target_amount,
-                goal.current_amount,
-                ""
-            ].join(",");
-        });
+        // 2. Map Transactions to CSV Rows
+        const txRows = transactions.map(tx => [
+            "TRANSACTION", currentUserId, "", tx.category_name || "Uncategorized", "", "",
+            tx.date, tx.description, tx.amount, tx.type || "expense", "", "", "", ""
+        ].join(","));
 
-        const csvContent = [header, ...rows].join("\n");
+        // 3. Combine everything
+        const csvContent = [header, ...goalRows, ...txRows].join("\n");
 
         const blob = new Blob([csvContent], { type: "text/csv" });
         const url = URL.createObjectURL(blob);
 
         const a = document.createElement("a");
         a.href = url;
-        a.download = originalFileName + "_MapByMint.csv";
+        a.download = `${originalFileName}_Full_Backup.csv`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -373,10 +370,32 @@ async function downloadUpdatedCSV() {
 
     } catch (error) {
         console.error("Export Error:", error);
-        console.error("Could not export updated CSV.");
+        alert("Could not export data. Is the backend running?");
     }
 }
- 
+
+// Add this function alongside the other script functions
+async function populateCategoryDropdown() {
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/categories/${parseInt(currentUserId)}`);
+        const categories = await res.json();
+        const select = document.getElementById("category");
+
+        if (!categories.length) {
+            select.innerHTML = `<option value="">No categories yet</option>`;
+            return;
+        }
+        select.innerHTML = categories.map(c =>
+            `<option value="${c.id}">${c.name}</option>`
+        ).join("");
+    } catch (err) {
+        console.error("Failed to load categories:", err);
+    }
+}
+
+// Call on page load
+populateCategoryDropdown();
+
 
 </script>
 

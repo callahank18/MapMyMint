@@ -1,6 +1,6 @@
 import pandas as pd
 from sqlalchemy.orm import sessionmaker
-from models import Users, Goals, engine
+from models import Users, Goals, engine, SessionLocal #use the existing session
 import sqlite3
 
 conn = sqlite3.connect("mapmymint.db")
@@ -12,15 +12,15 @@ conn.close()
 SessionLocal = sessionmaker(bind=engine)
 session = SessionLocal()
 
-def get_all_users():
-    with SessionLocal() as session:
-        users = session.query(Users).all()
-        df_users = pd.DataFrame([{
-            "CustomerID": u.CustomerID,
-            "Username": u.Username,
-            "Password": u.Password
-        } for u in users])
-    return df_users
+# def get_all_users():
+#    with SessionLocal() as session:
+#        users = session.query(Users).all()
+#        df_users = pd.DataFrame([{
+#            "CustomerID": u.CustomerID,
+#            "Username": u.Username,
+#            "Password": u.Password
+#        } for u in users])
+#    return df_users
 
 def get_goals_for_user(user_id):
     with SessionLocal() as session:
