@@ -266,7 +266,7 @@ const drawChart = async () => {
 document.addEventListener("DOMContentLoaded", drawChart);
 
 // RESPONSIVE: Run on window resize
-window.addEventListener("resize", drawChart); (debounced)
+//window.addEventListener("resize", drawChart); (debounced) breaks code
 let resizeTimeout;
 window.addEventListener("resize", () => {
     clearTimeout(resizeTimeout);
