@@ -3,8 +3,8 @@
  * Responsive, Hierarchical Budget Visualization
  */
 
-const CURRENT_USER_ID = 1; // Placeholder until login logic is added
-
+//const CURRENT_USER_ID = 1; // Placeholder until login logic is added
+const CURRENT_USER_ID = localStorage.getItem("currentUserId") || 1;
 // Fetch goals from the backend and transform into hierarchical format
 const fetchAndTransformData = async () => {
     try {
