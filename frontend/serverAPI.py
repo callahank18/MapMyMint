@@ -51,6 +51,8 @@ def get_db():
 def retrieveLogin(user: LoginSchema):
     print(user.username)
     print(user.password)
+    if user.username == "" or user.password == "":
+        raise HTTPException(status_code=422, detail="credentials_empty")
     result = login_user(user.username, user.password)
     if result["status"] == "login_error":
         raise HTTPException(status_code=401, detail=result["reason"])
@@ -62,6 +64,9 @@ def retrieveLogin(user: LoginSchema):
 
 @app.post("/register/")
 def createUser(user: LoginSchema):
+    if user.username == "" or user.password == "":
+        raise HTTPException(status_code=422, detail="credentials_empty")
+
     result = create_user(user.username, user.password)
     if result["status"] == "register_error":
         raise HTTPException(status_code=409, detail=result["reason"])
