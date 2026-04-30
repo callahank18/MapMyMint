@@ -1,0 +1,3 @@
+Terminal script to download all dependencies to get MapMyMint running
+
+pip install sqlalchemy pandas bcrypt cryptography python-dotenv fastapi uvicorn pydanticp
