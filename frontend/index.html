@@ -373,6 +373,55 @@ async function downloadUpdatedCSV() {
         alert("Could not export data. Is the backend running?");
     }
 }
+/* async function clearGraph() { (Commented out, took from branch. Wouldn't let me commit in branch! Not finalized and put on product backlog) 
+    const confirmClear = confirm("Are you sure you want to clear this data?")
+
+    if (!confirmClear) return;
+
+    try {
+        await fetch(`http://127.0.0.1:8000/goals/${currentUserId}`, {
+method: "DELETE"
+        });
+        
+        await fetch(`http://127.0.0.1:8000/transactions/${currentUserId}`, {
+method: "DELETE"
+        });
+
+        await fetch(`http://127.0.0.1:8000/categories/${currentUserId}`, {
+method: "DELETE"
+        }); 
+
+        console.log("Data has been cleared :)");
+
+        if (typeof window.refreshChart === "function") {
+            window.refreshChart();
+        }
+    }
+    catch (err)
+    {
+        console.error("Error clearing data:", err);
+        alert("Failed to clear data");
+    }
+    }
+*/
+// Add this function alongside the other script functions
+async function populateCategoryDropdown() {
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/categories/${parseInt(currentUserId)}`);
+        const categories = await res.json();
+        const select = document.getElementById("category");
+
+        if (!categories.length) {
+            select.innerHTML = `<option value="">No categories yet</option>`;
+            return;
+        }
+        select.innerHTML = categories.map(c =>
+            `<option value="${c.id}">${c.name}</option>`
+        ).join("");
+    } catch (err) {
+        console.error("Failed to load categories:", err);
+    }
+}
 
 // Add this function alongside the other script functions
 async function populateCategoryDropdown() {
