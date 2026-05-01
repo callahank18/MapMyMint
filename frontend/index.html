@@ -97,7 +97,9 @@
     <!-- Handles CSV upload, updates the data, and lets the user download a new CSV file -->
     
 <script>
-    const currentUserId = 1; // Placeholder until login logic is added
+   // const currentUserId = 1; // Placeholder until login logic is added
+    // NEW
+const currentUserId = localStorage.getItem("currentUserId") || 1;
 let savedCSV = "";
 let originalFileName = "updated";
 let importedTemplateRows = [];
@@ -129,6 +131,9 @@ GOAL,1,Gavin,,,,,,,,Emergency Fund,2000,500,2026-12-31
     URL.revokeObjectURL(url);
 }
 
+/*
+OLD HANDLE CSV
+
 function handleCSV() {
     const input = document.getElementById("csvFile");
     input.click();
@@ -154,11 +159,9 @@ function handleCSV() {
                        trimmed.replace(/,/g, "") !== "";
             });
 
-            // Convert CSV rows into API POST requests
             const importPromises = dataRows.map(line => {
                 const columns = line.split(",");
                 
-                // Map based on template: 3=Category, 7=Description, 8=Amount
                 const category = (columns[3] || "").trim();
                 const description = (columns[7] || "").trim();
                 const rawAmount = (columns[8] || "0").replace(/[$,]/g, "");
@@ -170,7 +173,7 @@ function handleCSV() {
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             user_id: currentUserId,
-                            goal_name: `${category}: ${description || "Transaction"}`, // If no description, just label it as "Transaction"
+                            goal_name: `${category}: ${description || "Transaction"}`,
                             target_amount: amount,
                             current_amount: 0
                         })
@@ -183,7 +186,6 @@ function handleCSV() {
                 try {
                     await Promise.all(importPromises);
                     console.log("Vault Updated! Refreshing Map...");
-                    // Call the refresh function in chart.js
                     if (typeof window.refreshChart === "function") {
                         window.refreshChart();
                     }
@@ -199,6 +201,105 @@ function handleCSV() {
         reader.readAsText(file);
     };
 }
+*/
+
+// NEW HANDLE CSV
+function handleCSV() {
+    const input = document.getElementById("csvFile");
+    input.click();
+
+    input.onchange = function () {
+        const file = input.files[0];
+        if (!file) return;
+
+        originalFileName = file.name.replace(/\.csv$/i, "");
+
+        const reader = new FileReader();
+
+        reader.onload = async function (e) {
+            savedCSV = e.target.result;
+
+            const rawRows = savedCSV.split("\n");
+
+            const dataRows = rawRows.filter(line => {
+                const trimmed = line.trim();
+                return trimmed &&
+                    !trimmed.startsWith("Instructions:") &&
+                    !trimmed.startsWith("Entry Type,") &&
+                    trimmed.replace(/,/g, "") !== "";
+            });
+
+            const importPromises = dataRows.map(line => {
+                const columns = line.split(",");
+
+                const entryType = (columns[0] || "").trim().toUpperCase();
+
+                if (entryType !== "TRANSACTION" && entryType !== "GOAL") {
+                    return null;
+                }
+
+                const userId = parseInt(columns[1]) || currentUserId || 1;
+
+                const category = (columns[3] || "").trim();
+                const description = (columns[7] || "").trim();
+                const amount = parseFloat((columns[8] || "0").replace(/[$,]/g, "")) || 0;
+
+                const goalName = (columns[10] || "").trim();
+                const targetAmount = parseFloat((columns[11] || "0").replace(/[$,]/g, "")) || 0;
+                const currentAmount = parseFloat((columns[12] || "0").replace(/[$,]/g, "")) || 0;
+
+                let payload = null;
+
+                if (entryType === "TRANSACTION" && category && amount > 0) {
+                    payload = {
+                        user_id: userId,
+                        goal_name: `${category}: ${description || "Transaction"}`,
+                        target_amount: amount,
+                        current_amount: 0
+                    };
+                }
+
+                if (entryType === "GOAL" && goalName && targetAmount > 0) {
+                    payload = {
+                        user_id: userId,
+                        goal_name: `Savings: ${goalName}`,
+                        target_amount: targetAmount,
+                        current_amount: currentAmount
+                    };
+                }
+
+                if (!payload) return null;
+
+                return fetch("http://127.0.0.1:8000/goals/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+            }).filter(p => p !== null);
+
+            if (importPromises.length > 0) {
+                try {
+                    await Promise.all(importPromises);
+                    console.log("CSV imported successfully.");
+
+                    if (typeof window.refreshChart === "function") {
+                        window.refreshChart();
+                    }
+                } catch (error) {
+                    console.error("Import Error:", error);
+                    console.error("Could not save CSV data to the server.");
+                }
+            } else {
+                console.error("No valid CSV rows found.");
+            }
+        };
+
+        reader.readAsText(file);
+    };
+}
+
+/*
+OLD DOWNLOAD UPDATED CSV
 
 function downloadUpdatedCSV() {
     if (!savedCSV) {
@@ -218,53 +319,63 @@ function downloadUpdatedCSV() {
 
     URL.revokeObjectURL(url);
 }
+*/
 
-document.getElementById("add-btn").addEventListener("click", async () => {
-    // Use default user ID if not logged in
-    const userId = currentUserId || 1;
-
-    const amountVal = document.getElementById("amount").value;
-    const categoryVal = document.getElementById("category").value;
-    const descriptionVal = document.getElementById("description").value;
-
-    if (!amountVal || !descriptionVal) {
-        console.error("Please provide both an amount and a description.");
-        return;
-    }
-
-    const payload = {
-        user_id: userId,
-        goal_name: `${categoryVal}: ${descriptionVal}`,
-        target_amount: parseFloat(amountVal),
-        current_amount: 0
-    };
-
+// NEW DOWNLOAD UPDATED CSV
+async function downloadUpdatedCSV() {
     try {
-        const response = await fetch("http://127.0.0.1:8000/goals/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+        const response = await fetch(`http://127.0.0.1:8000/goals/${currentUserId}`);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch updated data");
+        }
+
+        const goals = await response.json();
+
+        const header = "Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date";
+
+        const rows = goals.map(goal => {
+            const parts = goal.goal_name.split(": ");
+            const category = parts[0] || "";
+            const description = parts.slice(1).join(": ") || "";
+
+            return [
+                "TRANSACTION",
+                goal.user_id,
+                "",
+                category,
+                "",
+                "",
+                "",
+                description,
+                goal.target_amount,
+                "Expense",
+                "",
+                goal.target_amount,
+                goal.current_amount,
+                ""
+            ].join(",");
         });
 
-        if (response.ok) {
-            console.log(`Success! Entry added to ${categoryVal}.`);
-            document.getElementById("transaction-form").reset();
-            
-            // Trigger D3 redraw
-            setTimeout(() => {
-                if (typeof window.refreshChart === "function") {
-                    window.refreshChart();
-                }
-            }, 300);
-        } else {
-            const errorData = await response.json();
-            console.error("Server Error: " + JSON.stringify(errorData.detail));
-        }
+        const csvContent = [header, ...rows].join("\n");
+
+        const blob = new Blob([csvContent], { type: "text/csv" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = originalFileName + "_MapByMint.csv";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        URL.revokeObjectURL(url);
+
     } catch (error) {
-        console.error("Connection Error:", error);
-        console.error("Could not reach the FastAPI server. Is it running?");
+        console.error("Export Error:", error);
+        console.error("Could not export updated CSV.");
     }
-});
+}
  
 
 </script>
@@ -273,132 +384,3 @@ document.getElementById("add-btn").addEventListener("click", async () => {
 </body>
 </html>
 
-<!-- <script> !COMMENTED OUT FOR REFERENCE IF WE NEED IT!
-let csvData = "";
-let savedCSV = "";
-// added Original and made F capitalized to match code further
-    
-let originalFileName = "updated";
-//Added template 
-function downloadTemplateCSV() {
-
-const templateCSV = `Instructions: Use CATEGORY rows to define categories and limits,,,,,,,,,,,,,
-Instructions: Use TRANSACTION rows to enter spending or income,,,,,,,,,,,,,
-Instructions: Use GOAL rows to enter savings goals,,,,,,,,,,,,,
-Instructions: Leave unused columns blank for that row type,,,,,,,,,,,,,
-
-Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date
-CATEGORY,1,Gavin,Housing,,1500,,,,,,,,
-CATEGORY,1,Gavin,Groceries,Living,400,,,,,,,,
-CATEGORY,1,Gavin,Entertainment,,200,,,,,,,,
-TRANSACTION,1,Gavin,Groceries,Living,,2026-04-19,Walmart trip,82.43,Expense,,,,
-TRANSACTION,1,Gavin,Housing,,,2026-04-01,April rent,1150.00,Expense,,,,
-TRANSACTION,1,Gavin,Income,,,2026-04-19,Work paycheck,1450.00,Income,,,,
-GOAL,1,Gavin,,,,,,,,Emergency Fund,2000,500,2026-12-31
-GOAL,1,Gavin,,,,,,,,Vacation Fund,1500,200,2026-08-01
-,,,,,,,,,,,,,
-,,,,,,,,,,,,,
-,,,,,,,,,,,,,`;
-
-    const blob = new Blob([templateCSV], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "MapByMint_Template.csv";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
-    URL.revokeObjectURL(url);
-}
-    
-function handleCSV() {
-    const input = document.getElementById("csvFile");
-    input.click();
-
-    input.onchange = async function () {
-        const file = input.files[0];
-        if (!file) return;
-        
-        if (!currentUserId) {
-        console.error("No user ID found - using default user");
-        // Use default user ID for demo purposes
-    }
-
-    originalFileName = file.name.replace(/\.csv$/i, "");
-
-        originalFileName = file.name.replace(/\.csv$/i, "");
-
-        const reader = new FileReader();
-
-        reader.onload = async function (e) {
-            const content = e.target.result;
-            savedCSV = content; // Save the original CSV content for later use
-
-
-            let rawRows = content.trim().split("\n");
-            let dataRows = rawRows.slice(1);
-
-            const importPromises = dataRows.map(line => {
-                
-                //MAKE SURE CSV MATCHES EXPECTED FORMAT: category, amount, description
-                const columns = line.split(",");
-                const [category, amount, description] = columns;
-                const cleanAmount = amount.replace(/[$,]/g, ""); // Remove $ and commas for parsing
-                const targetAmount = parseFloat(cleanAmount) || 0; // Default to 0 if parsing fails
-                if (category && amount && description) {
-                    //send it to the db
-                    return fetch("http://127.0.0.1:8000/goals/", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            user_id: currentUserId || 1, // Use default user ID if not logged in
-                            goal_name: `${category.trim()}: ${description.trim()}`,
-                            target_amount: targetAmount,
-                            current_amount: 0
-                        })
-                    });
-                }
-                return null; // Skip invalid rows
-            }).filter(p => p !== null); // Knock out any invalid rows before sending it on
-            if(importPromises.length >0){
-                try {
-                    await Promise.all(importPromises);
-                    console.log("CSV imported successfully! Refreshing the chart...");
-                    setTimeout(() => {
-                        if(window.refreshChart) window.refreshChart();
-                    }, 300);
-                } catch (error) {
-                    console.error("Error importing CSV:", error);
-                }
-            }
-            else {
-                console.error("No valid data found in the CSV. Please check the format and try again.");
-            }            
-        };
-
-        reader.readAsText(file);
-
-    };
-}
-
-function downloadUpdatedCSV() {
-    if (!savedCSV) {
-        console.error("Import a CSV first.");
-        return;
-    }
-
-    const blob = new Blob([savedCSV], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = originalFileName + "_MapByMint.csv";
-    a.click();
-
-    URL.revokeObjectURL(url);
-}
--->

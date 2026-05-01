@@ -1,5 +1,5 @@
-const CURRENT_USER_ID = 1; // Placeholder until login logic is added
-
+//const CURRENT_USER_ID = 1; // Placeholder until login logic is added
+const CURRENT_USER_ID = localStorage.getItem("currentUserId") || 1;
 // Fetch goals from backend and group by category
 const fetchBudgetData = async () => {
     try {
