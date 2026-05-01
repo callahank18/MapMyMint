@@ -167,6 +167,38 @@ def update_goal(goal_id: int, goal_update: GoalUpdate):
     if result["status"] != "success":
         raise HTTPException(status_code=400, detail=result.get("reason", "error"))
     return result
+
+# @app.delete("/goals/{user_id}")
+#def delete_goals(user_id: int):
+#    db = SessionLocal()
+#    try:
+#       db.query(Goals).filter(Goals.user_id == user_id).delete()
+#        db.commit()
+#        return {"status": "success"}
+#    finally:
+#       db.close()
+
+# @app.delete("/transactions/{user_id}")
+# def delete_transactions(user_id: int):
+#    db = SessionLocal()
+#    try:
+#        db.query(Transaction).filter(Transaction.user_id == user_id).delete()
+#        db.commit()
+#       return {"status": "success"}
+#    finally:
+#        db.close()
+
+# @app.delete("/categories/{user_id}")
+# def delete_categories(user_id: int):
+#    db = SessionLocal()
+#    try:
+#        db.query(Category).filter(Category.user_id == user_id).delete()
+#        db.commit()
+#        return {"status": "success"}
+#    finally:
+#        db.close()
+# Part of clear function, put on backlog for future reference
+
 # For testing, run this bash code
 # uvicorn frontend.serverAPI:app --reload
 # If that gives errors, try:  python -m uvicorn frontend.serverAPI:app --reload
