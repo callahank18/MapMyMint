@@ -89,6 +89,11 @@ def create_goal(user_id: int, goal_name: str, target_amount: float):
 def get_goals(user_id: int):
     session = SessionLocal()
 
+    user = session.query(Users).filter(Users.CustomerID == user_id).first()
+    if user is None:
+        session.close()
+        return {"status": "user_not_found", "reason": "not_found"}
+
     goals = session.query(Goals).filter(Goals.user_id == user_id).all()
 
     result = []

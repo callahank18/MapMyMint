@@ -78,11 +78,18 @@ def createUser(user: LoginSchema):
 def read_goals(user_id: int):
     #the intention here is to use the existing SQLalchemy setup.
     #The intent is to query the Goals table for all goals associated with the given user_id and return them as a response.
+   
+    result = get_goals(user_id)
+    if isinstance(result, dict) and result.get("status") == "user_not_found":
+        raise HTTPException(status_code=404, detail="User not found")
+    
     print("userid:", user_id)
-    return get_goals(user_id)
+    return result
 
 @app.post("/goals/")
 def create_goal(goal: GoalCreate, db: Session = Depends(get_db)):
+    if goal.goal_name == "" :
+        raise HTTPException(status_code=422, detail="goal_name_empty")
     try:
         # Create the SQLAlchemy model instance from the Pydantic data
         new_goal = Goals(
@@ -118,6 +125,6 @@ def update_goal(goal_id: int, goal_update: GoalUpdate, db: Session = Depends(get
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Database Error: {str(e)}")
 # For testing, run this bash code
-# uvicorn frontend.fastAPI_test:app --reload
-# If that gives errors, try:  python -m uvicorn frontend.fastAPI_test:app --reload
+# uvicorn frontend.serverAPI:app --reload
+# If that gives errors, try:  python -m uvicorn frontend.serverAPI:app --reload
 # then go to http://127.0.0.1:8000/goals/1 in your browser to verify that goals for user with ID 1 are visible. Adjust to view different users.
