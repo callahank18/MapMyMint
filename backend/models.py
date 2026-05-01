@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey, LargeBinary
+from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 import pandas as pd
 #may need to do:
@@ -45,9 +45,10 @@ class Category(Base):
     parent_category_id = Column(Integer, ForeignKey("Categories.category_id"))
     limit_amount = Column(Float)
      
-     # relationships
+    # relationships
     user = relationship("Users", back_populates="categories")
     parent = relationship("Category", remote_side=[category_id], backref="subcategories")
+    transactions = relationship("Transaction", back_populates="category")
 
 
 
@@ -64,7 +65,7 @@ class Transaction(Base):
     transaction_type = Column(String, nullable=False)
     
     user = relationship("Users", back_populates="transactions")
-    category = relationship("Category")
+    category = relationship("Category", back_populates="transactions")
 
 
 
@@ -102,8 +103,6 @@ if __name__ == "__main__":
     finally:
         selectSession.close()
 
-#close the session when done
-    selectSession.close()
 
 
     GoalsSession = SessionLocal()

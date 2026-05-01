@@ -1,9 +1,22 @@
 //const CURRENT_USER_ID = 1; // Placeholder until login logic is added
-const CURRENT_USER_ID = localStorage.getItem("currentUserId") || 1;
+const getCurrentUserId = () => {
+    const id = localStorage.getItem("currentUserId");
+
+    if(!id){
+        console.error("No logged-in user found");
+        window.location.href = "/login.html";
+        return null;
+    }
+    return parseInt(id, 10);
+};
 // Fetch goals from backend and group by category
 const fetchBudgetData = async () => {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/goals/${CURRENT_USER_ID}`);
+        const userId = getCurrentUserId();
+        if (!userId) return [];
+
+        const response = await fetch(`http://127.0.0.1:8000/goals/${userId}`);
+        
         if (!response.ok) throw new Error("Failed to fetch goals");
         
         const goals = await response.json();
@@ -71,10 +84,13 @@ const updateGoalAmount = async (goalId, newCurrentAmount) => {
 const refreshBudgetDisplay = async () => {
     const budgetData = await fetchBudgetData();
     const container = document.getElementById("budget-list-container");
+    if (!container) return;
     container.innerHTML = ""; // Clear existing content
     
     budgetData.forEach(item => {
-        const percent = Math.min((item.spent / item.budgeted) * 100, 100);
+        const percent = item.budgeted > 0
+        ? Math.min((item.spent / item.budgeted) * 100, 100)
+        : 0;
         const isOver = item.spent > item.budgeted;
 
         const row = document.createElement("div");
