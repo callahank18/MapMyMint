@@ -599,7 +599,7 @@ svg {
 /* The "Spent" Fill */
 .progress-fill {
     height: 100%;
-    background: var(--teal); /* Uses your brand color */
+    background: var(--primary-teal); /* Uses your brand color */
     transition: width 0.5s ease-in-out;
 }
 
