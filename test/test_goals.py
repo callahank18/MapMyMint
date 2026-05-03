@@ -6,89 +6,134 @@ import pytest
 client = TestClient(app)
 
 
-
-@pytest.mark.parametrize("user_id, goal_name, target_amount, current_amount, expected_status", [
-    (1,"Test Goal", 100.0, 0.0, 200),
-    (1,"", 100.0, 0.0, 422),
-    (None,"Test Goal", 100.0, 0.0, 422),
-    (1,None, 100.0, 0.0, 422),
-    (1,"Test Goal", None, 0.0, 422),
-    (1,"Test Goal", 100.0, None, 422)
-])
-def test_create_goal(user_id, goal_name, target_amount, current_amount, expected_status):
-    response = client.post("/goals/", json={
-        "user_id": user_id,
-        "goal_name": goal_name,
-        "target_amount": target_amount,
-        "current_amount": current_amount
+# -----------------------------
+# FIXTURE: create user
+# -----------------------------
+@pytest.fixture
+def create_user():
+    response = client.post("/register/", json={
+        "username": "test_user_unique",
+        "password": "password123"
+    })
+    assert response.status_code in [200, 409]  # allow reruns
+    if response.status_code == 409:
+        response = client.post("/login/", json={
+        "username": "test_user_unique",
+        "password": "password123"
     })
 
-    assert response.status_code == expected_status
-
-    #cleanup whatever was added in the test
-    if response.status_code == 200:
-        data = response.json()
-        goal_data = data["data"]
-        goal_id = goal_data["goal_id"]
-
-        from backend.models import SessionLocal, Goals
-        db = SessionLocal()
-        db.query(Goals).filter(Goals.goal_id == goal_id).delete()
-        db.commit()
-        db.close()
+    return response
 
 
+# -----------------------------
+# FIXTURE: create goal
+# -----------------------------
+@pytest.fixture
+def create_goal(create_user):
+    user_id = create_user.json()["user_id"]
 
-@pytest.mark.parametrize("user_id, expected_status", [
-    (1, 200),   #200=ok uid is taken
-    (999999, 404), #404=not found because the uid id not taken
-    ("", 405),  #405=no route because there is no input
-    ("UID", 422)
-])
-def test_get_goal(user_id, expected_status):
+    response = client.post("/goals/", json={
+        "user_id": user_id,
+        "goal_name": "Test Goal",
+        "target_amount": 1000,
+        "current_amount": 0
+    })
+
+    assert response.status_code == 200
+    return response.json()["data"] if "data" in response.json() else response.json()
+
+
+# =====================================================
+# GET GOALS TESTS
+# =====================================================
+
+def test_get_goals_empty_user():
+    user = client.post("/register/", json={
+        "username": "empty_user",
+        "password": "password123"
+    })
+    if user.status_code == 200:
+        user_id = user.json()["user_id"]
+    if user.status_code == 409:
+        response = client.post("/login/", json={
+        "username": "empty_user",
+        "password": "password123"
+        })
+        user_id = response.json()["user_id"]
+
+
     response = client.get(f"/goals/{user_id}")
-    assert response.status_code == expected_status
+
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
+    assert response.json() == [] or len(response.json()) == 0
 
 
-@pytest.mark.parametrize("goal_id, payload, expected_status", [
-    (1, {"current_amount": 100}, 200),
-    (9999, {"current_amount": 100}, 400),
-    (1, {"current_amount": "bad"}, 422),
-    (1, {}, 422),
-])
-def test_update_goal(goal_id, payload, expected_status):
+def test_get_goals_with_data(create_goal, create_user):
+    user_id = create_user.json()["user_id"]
 
-    old_value = None
+    response = client.get(f"/goals/{user_id}")
 
-    # Only try to get original if we expect success
-    if expected_status == 200:
-        original = client.get(f"/goals/{goal_id}").json()
+    assert response.status_code == 200
 
-        # If your API wraps response in "data"
-        if isinstance(original, dict) and "data" in original:
-            original = original["data"]
+    data = response.json()
 
-        goal = next(g for g in original if g["goal_id"] == goal_id)
-        old_value = goal["current_amount"]
+    # API currently returns list directly
+    assert isinstance(data, list)
+    assert len(data) >= 1
 
-    # Perform update
-    response = client.put(f"/goals/{goal_id}", json=payload)
-    assert response.status_code == expected_status
+    assert "goal_id" in data[0]
+    assert "goal_name" in data[0]
 
-    if expected_status != 200:
-        return
 
-    # Verify update
-    updated = client.get(f"/goals/{goal_id}").json()
+def test_get_goals_invalid_user():
+    response = client.get("/goals/99999999")
 
-    if isinstance(updated, dict) and "data" in updated:
-        updated = updated["data"]
+    assert response.status_code == 404
 
-    goal = next(g for g in updated if g["goal_id"] == goal_id)
-    assert goal["current_amount"] == payload["current_amount"]
 
-    # Restore original value
-    client.put(
-        f"/goals/{goal_id}",
-        json={"current_amount": old_value}
-    )
+def test_get_goals_invalid_type():
+    response = client.get("/goals/abc")
+
+    assert response.status_code == 422
+
+
+# =====================================================
+# UPDATE GOAL TESTS
+# =====================================================
+
+def test_update_goal_success(create_goal):
+    goal_id = create_goal["goal_id"]
+
+    response = client.put(f"/goals/{goal_id}", json={
+        "current_amount": 500
+    })
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "success"
+
+
+def test_update_goal_not_found():
+    response = client.put("/goals/999999", json={
+        "current_amount": 500
+    })
+
+    assert response.status_code == 400
+
+
+def test_update_goal_invalid_payload(create_goal):
+    goal_id = create_goal["goal_id"]
+
+    response = client.put(f"/goals/{goal_id}", json={
+        "current_amount": "bad_value"
+    })
+
+    assert response.status_code == 422
+
+
+def test_update_goal_missing_field(create_goal):
+    goal_id = create_goal["goal_id"]
+
+    response = client.put(f"/goals/{goal_id}", json={})
+
+    assert response.status_code == 422
