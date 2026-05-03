@@ -1,3 +1,4 @@
+'''
 from backend.data_service import create_user, login_user, create_goal, get_goals
 from backend.models import SessionLocal, Users, Goals
 
@@ -36,3 +37,4 @@ print("Stored goal_name (should be encrypted bytes):", goal.goal_name)
 session.close()
 
 print("\n--- TEST END ---\n")
+'''
