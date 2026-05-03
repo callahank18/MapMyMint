@@ -52,8 +52,8 @@
 :root[data-theme="ocean"] {
     --bg-primary: #e8f4f8;
     --bg-secondary: #d4e8f0;
-    --text-primary: #0a3a52;
-    --text-secondary: #1a5568;
+    --text-primary: #B87A00;
+    --text-secondary: #343535;
     --border-color: #a0d4e8;
     --nav-bg: linear-gradient(135deg, #0a3a52 0%, #1a5568 100%);
     --nav-text: #ffffff;
@@ -64,7 +64,7 @@
     --chart-buffer: 0.30;
     --chart-warning: #e63946;
     --chart-spending:  #0a3a52;
-    --chart-savings:   #00aacc;
+    --chart-savings:   #1a7a9e;
 }
 
 /* Rainbow Theme */
@@ -599,7 +599,7 @@ svg {
 /* The "Spent" Fill */
 .progress-fill {
     height: 100%;
-    background: var(--teal); /* Uses your brand color */
+    background: var(--primary-teal); /* Uses your brand color */
     transition: width 0.5s ease-in-out;
 }
 
