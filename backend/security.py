@@ -25,8 +25,10 @@ def hash_password(password: str) -> bytes:
 
 
 def verify_password(password: str, hashed: str) -> bool:
-    return bcrypt.checkpw(password.encode(), hashed.encode())
+    if isinstance(hashed, str):
+        hashed = hashed.encode()   # only encode if needed
 
+    return bcrypt.checkpw(password.encode(), hashed)
 
 # =========================
 # ENCRYPTION FUNCTIONS
