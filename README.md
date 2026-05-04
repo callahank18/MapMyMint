@@ -28,8 +28,7 @@ cd MapMyMint
 
 
 ## Dependencies
-pip install sqlalchemy pandas bcrypt cryptography python-dotenv fastapi uvicorn pydanticp
-
+pip install sqlalchemy pandas bcrypt cryptography python-dotenv fastapi uvicorn pydantic
 
 ##Environment Setup (.env)
 Create a `.env` file in the root directory and add:
