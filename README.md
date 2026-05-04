@@ -60,13 +60,14 @@ http://127.0.0.1:8000
 
 ### Open Frontend (VS Code)
 
-This project uses the **Live Preview extension** in Visual Studio Code.
+This project uses the **Live Preview extension by Microsoft** in Visual Studio Code.
 
 Steps:
 
 1. Install "Live Preview" from Extensions
-2. Right click `index.html`
-3. Click **Open with Live Preview**
+2. Install on Codespace
+3. Right click `home.html`
+4. Click **Open with Live Preview or Preview**
 
 ---
 
