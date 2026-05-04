@@ -86,7 +86,7 @@ Steps:
 
 This project includes a simple automated test file called automated_test.py that checks the main backend functionality.
 
-What it tests
+**What it tests**
 
 The automated test checks that the backend API is working by testing:
 
@@ -99,10 +99,17 @@ Checking that data exists for CSV export
 
 **How to run**
 Start the backend:
+
+```bash
 uvicorn frontend.serverAPI:app --reload
+```
 In a new terminal, run:
+
+```bash
 python automated_test.py
-What you will see
+```
+
+**What you will see**
 
 The test will print results like:
 
@@ -114,7 +121,7 @@ PASSED: Create Category
 
 Each test will show PASSED or FAILED depending on if it works.
 
-Notes
+**Notes**
 The test creates a new user each time it runs
 No setup data is needed before running it
 It tests the backend endpoints that the frontend uses
@@ -130,7 +137,7 @@ One main test we perform is using the provided CSV files. These should be import
 3. Goals CSV
 4. All-in-one CSV (all 3 combined)
 
-After each import, we verify that:
+**After each import, we verify that:**
 
 * The data appears correctly in the application
 * Categories, transactions, and goals are properly created
@@ -139,7 +146,7 @@ After each import, we verify that:
 
 We also test exporting the data back into a CSV file to make sure it matches what was entered.
 
-Other manual tests include:
+**Other manual tests include:**
 
 * Creating a user and logging in
 * Adding transactions manually and checking updates
