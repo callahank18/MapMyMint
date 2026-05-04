@@ -31,6 +31,8 @@ def test_register_user(username, password, expected_status):
     ("testuser123", "wrongpass", 401),
     ("wronguser", "wrongpass", 401),
     (15, "password123", 422),
+    ("testuser123", 21, 422),
+    (True, "password123", 422),
     ("", "password123", 422),
     ("testuser123", "", 422),
     ("testuser123", None, 422),
