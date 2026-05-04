@@ -82,6 +82,43 @@ Steps:
 
 ---
 
+## Auto Testing
+
+This project includes a simple automated test file called automated_test.py that checks the main backend functionality.
+
+What it tests
+
+The automated test checks that the backend API is working by testing:
+
+User registration and login
+Creating and getting categories
+Creating and getting transactions
+Creating and getting goals
+Updating goal progress
+Checking that data exists for CSV export
+
+**How to run**
+Start the backend:
+uvicorn frontend.serverAPI:app --reload
+In a new terminal, run:
+python automated_test.py
+What you will see
+
+The test will print results like:
+
+Testing: Register User
+PASSED: Register User
+
+Testing: Create Category
+PASSED: Create Category
+
+Each test will show PASSED or FAILED depending on if it works.
+
+Notes
+The test creates a new user each time it runs
+No setup data is needed before running it
+It tests the backend endpoints that the frontend uses
+
 ## Manual Testing
 
 Testing is mainly done by interacting with the application and checking that everything works correctly.
