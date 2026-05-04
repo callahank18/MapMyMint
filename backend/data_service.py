@@ -44,7 +44,7 @@ def login_user(username: str, password: str):
                 return {"status": "login_error", "reason": "not_found"}
  
             # Re-encode stored string back to bytes before verifying
-            if not verify_password(password, user.Password):
+            if not verify_password(password, user.Password.encode('utf-8')):
                 return {"status": "login_error", "reason": "bad_password"}
  
             return {"status": "success", "user_id": user.CustomerID}
@@ -86,12 +86,16 @@ def create_goal(user_id: int, goal_name: str, target_amount: float):
 def get_goals(user_id: int):
     with SessionLocal() as session:
         try:
-            user = session.query(Users).filter(Users.CustomerID == user_id).first()
-            if user is None:
-                session.close()
-                return {"status": "user_not_found", "reason": "not_found"}
-
             goals = session.query(Goals).filter(Goals.user_id == user_id).all()
+
+<<<<<<< HEAD
+    user = session.query(Users).filter(Users.CustomerID == user_id).first()
+    if user is None:
+        session.close()
+        return {"status": "user_not_found", "reason": "not_found"}
+
+    goals = session.query(Goals).filter(Goals.user_id == user_id).all()
+=======
             result = []
             for g in goals:
                 raw_data = g.goal_name.encode('utf-8') if isinstance(g.goal_name, str) else g.goal_name
@@ -103,6 +107,7 @@ def get_goals(user_id: int):
                     "current_amount": g.current_amount,
                     "target_date": g.target_date
                 })
+>>>>>>> main
 
             return result
         except SQLAlchemyError as e:
