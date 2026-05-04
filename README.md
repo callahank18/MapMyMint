@@ -19,7 +19,7 @@ Make sure Python is installed (Python 3.9+ recommended).
 Install dependencies:
 
 ```bash
-pip install fastapi uvicorn sqlalchemy pandas bcrypt cryptography python-dotenv
+pip install fastapi uvicorn requests sqlalchemy pandas bcrypt cryptography python-dotenv
 ```
 
 ---
