@@ -1,6 +1,6 @@
 # MapMyMint
 
-MapMyMint is a full-stack budgeting application that helps users track spending, visualize financial data, and manage savings goals. It includes a FastAPI backend, SQLite database, and a dynamic frontend dashboard.
+MapMyMint is a full-stack budgeting application that helps users track spending, visualize financial data, and manage savings goals. It includes a FastAPI backend, SQLite database & SQLalchemy library, and a dynamic frontend dashboard.
 
 ## Features
 - User account creation and login (secure password hashing)
