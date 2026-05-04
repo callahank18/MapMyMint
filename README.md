@@ -41,7 +41,7 @@ print(Fernet.generate_key())
 ## Running the Backend
 Start the FastAPI server:
 ```bash
-uvicorn frontend.fastAPI_test:app --reload
+uvicorn frontend.serverAPI:app --reload
 
 
 
