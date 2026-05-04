@@ -88,14 +88,6 @@ def get_goals(user_id: int):
         try:
             goals = session.query(Goals).filter(Goals.user_id == user_id).all()
 
-<<<<<<< HEAD
-    user = session.query(Users).filter(Users.CustomerID == user_id).first()
-    if user is None:
-        session.close()
-        return {"status": "user_not_found", "reason": "not_found"}
-
-    goals = session.query(Goals).filter(Goals.user_id == user_id).all()
-=======
             result = []
             for g in goals:
                 raw_data = g.goal_name.encode('utf-8') if isinstance(g.goal_name, str) else g.goal_name
@@ -107,7 +99,6 @@ def get_goals(user_id: int):
                     "current_amount": g.current_amount,
                     "target_date": g.target_date
                 })
->>>>>>> main
 
             return result
         except SQLAlchemyError as e:
