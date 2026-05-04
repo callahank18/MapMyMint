@@ -16,6 +16,9 @@ MapMyMint is a full-stack budgeting application that helps users track spending,
 - Secret key stored securely using environment variables (.env)
 - System supports both encrypted and legacy plaintext data safely
 
+## Codespace/Software Used
+Visual Studio Code
+(Codespaces via Github was causing multiple errors!)
 
 ## Installation
 1. Clone the repository:
@@ -43,6 +46,9 @@ Start the FastAPI server:
 ```bash
 uvicorn frontend.serverAPI:app --reload
 
+## Auto Test
+```bash
+pytest
 
 
 
