@@ -136,6 +136,7 @@ One main test we perform is using the provided CSV files. These should be import
 2. Transactions CSV
 3. Goals CSV
 4. All-in-one CSV (all 3 combined)
+_THESE ARE INCLUDED IN ZIP AND NAMED_
 
 **After each import, we verify that:**
 
