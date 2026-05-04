@@ -1,0 +1,11 @@
+Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date
+CATEGORY,1,DemoUser,Travel,,1000,,,,,,,,
+CATEGORY,1,DemoUser,Fitness,,300,,,,,,,,
+CATEGORY,1,DemoUser,Food,,600,,,,,,,,
+CATEGORY,1,DemoUser,Bills,,800,,,,,,,,
+TRANSACTION,1,DemoUser,Travel,,,2026-06-01,Flight ticket,400,expense,,,,
+TRANSACTION,1,DemoUser,Fitness,,,2026-06-02,Gym membership,60,expense,,,,
+TRANSACTION,1,DemoUser,Food,,,2026-06-03,Dinner out,90,expense,,,,
+TRANSACTION,1,DemoUser,Bills,,,2026-06-04,Electric bill,120,expense,,,,
+GOAL,1,DemoUser,,,,,,,,Hawaii Trip,3000,800,2027-05-01
+GOAL,1,DemoUser,,,,,,,,New Bike,800,200,2026-10-01
