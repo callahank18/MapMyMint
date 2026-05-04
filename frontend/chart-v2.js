@@ -123,7 +123,7 @@ const drawChart = async () => {
         d3.select("#sunburst").selectAll("*").remove(); 
 
         const width = container.offsetWidth;
-        const radius = width / 8;
+        const radius = width / 6;
 
         const { hierarchy, meta } = await fetchAndTransformData();
         const theme = getThemeColors();

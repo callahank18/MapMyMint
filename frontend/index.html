@@ -328,32 +328,20 @@ async function handleCSV() {
 async function downloadUpdatedCSV() {
     try {
         // Fetch both datasets at once
-        const [goalsResponse, txResponse, catResponse] = await Promise.all([
+        const [goalsResponse, txResponse] = await Promise.all([
             fetch(`http://127.0.0.1:8000/goals/${currentUserId}`),
-            fetch(`http://127.0.0.1:8000/transactions/${currentUserId}`),
-            fetch(`http://127.0.0.1:8000/categories/${currentUserId}`)
+            fetch(`http://127.0.0.1:8000/transactions/${currentUserId}`)
         ]);
 
-        if (!goalsResponse.ok || !txResponse.ok || !catResponse.ok) {
+        if (!goalsResponse.ok || !txResponse.ok) {
             throw new Error("Failed to fetch data from one or more endpoints");
         }
 
         const goals = await goalsResponse.json();
         const transactions = await txResponse.json();
-        const categories = await catResponse.json();
 
         const header = "Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date";
-        // Map category data into CSV format (only category and limit fields are used) Was only showing transactions and goals originally
-        const categoryRows = categories.map(cat => [
-            "CATEGORY",
-            currentUserId,
-            "",
-            cat.name,
-            "",
-            cat.limit || 0,
-            "", "", "", "", "", "", "", ""
-            ].join(","));
-        
+
         // 1. Map Goals to CSV Rows
         const goalRows = goals.map(goal => [
             "GOAL", goal.user_id, "", "", "", "", "", "", "", "", 
@@ -367,7 +355,7 @@ async function downloadUpdatedCSV() {
         ].join(","));
 
         // 3. Combine everything
-        const csvContent = [header, ...categoryRows, ...goalRows, ...txRows].join("\n");
+        const csvContent = [header, ...goalRows, ...txRows].join("\n");
 
         const blob = new Blob([csvContent], { type: "text/csv" });
         const url = URL.createObjectURL(blob);
