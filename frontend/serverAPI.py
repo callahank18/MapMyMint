@@ -78,8 +78,6 @@ def get_db():
 def retrieveLogin(user: LoginSchema):
     print(user.username)
     print(user.password)
-    if user.username == "" or user.password == "":
-        raise HTTPException(status_code=422, detail="credentials_empty")
     result = login_user(user.username, user.password)
     if result["status"] == "login_error":
         raise HTTPException(status_code=401, detail=result["reason"])
@@ -92,9 +90,6 @@ def retrieveLogin(user: LoginSchema):
 
 @app.post("/register/")
 def createUser(user: LoginSchema):
-    if user.username == "" or user.password == "":
-        raise HTTPException(status_code=422, detail="credentials_empty")
-
     result = create_user(user.username, user.password)
     if result["status"] == "register_error":
         raise HTTPException(status_code=409, detail=result["reason"])
@@ -120,13 +115,8 @@ def create_category_route(cat: CategoryCreate):
 def read_goals(user_id: int):
     #the intention here is to use the existing SQLalchemy setup.
     #The intent is to query the Goals table for all goals associated with the given user_id and return them as a response.
-   
-    result = get_goals(user_id)
-    if isinstance(result, dict) and result.get("status") == "user_not_found":
-        raise HTTPException(status_code=404, detail="User not found")
-    
     print("userid:", user_id)
-    return result
+    return get_goals(user_id)
 
 @app.get("/categories/{user_id}")
 def read_categories(user_id: int):
@@ -138,9 +128,6 @@ def read_transactions(user_id: int):
 
 @app.post("/goals/")
 def create_goal(goal: GoalCreate):
-    if goal.goal_name == "" :
-        raise HTTPException(status_code=422, detail="goal_name_empty")
-
     try:
         # We call the logic function from data_service.py
         # It handles the encryption of goal_name for us
