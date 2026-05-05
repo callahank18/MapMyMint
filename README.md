@@ -1,22 +1,19 @@
 # MapMyMint
 
 ## Overview
-
 MapMyMint is a budgeting web application that helps users keep track of their spending, categories, and financial goals. It also includes a visual chart to show how money is being used.
 
 The project was built using:
-
-* Frontend: HTML, CSS, JavaScript (D3.js)
-* Backend: Python (FastAPI)
-* Database: SQLite (SQLAlchemy)
+- Frontend: HTML, CSS, JavaScript (D3.js)
+- Backend: Python (FastAPI)
+- Database: SQLite (SQLAlchemy)
 
 ---
 
 ## Requirements
 
-Make sure Python is installed (Python 3.9+ recommended).
-
-Make sure repository is opened in Visual Studio Code
+- Python 3.9+ installed  
+- Repository opened in Visual Studio Code  
 
 Install dependencies:
 
@@ -52,7 +49,7 @@ From the main project folder, run:
 uvicorn frontend.serverAPI:app --reload
 ```
 
-This will start the backend at:
+Backend runs at:
 
 ```
 http://127.0.0.1:8000
@@ -62,107 +59,113 @@ http://127.0.0.1:8000
 
 ### Open Frontend (VS Code)
 
-This project uses the **Live Preview extension by Microsoft** in Visual Studio Code.
+This project uses the **Live Preview extension by Microsoft**.
 
 Steps:
-
-1. Install "Live Preview" from Extensions
-2. Install on Codespace
-3. Right click `home.html`
-4. Click **Open with Live Preview or Preview**
+1. Install "Live Preview" from Extensions  
+2. Install on Codespace  
+3. Right click `home.html`  
+4. Click **Open with Live Preview**  
 
 ---
 
 ## Features
 
-* Create and log into an account
-* Add and track transactions
-* Create budget categories
-* Track savings goals
-* View spending using a chart
-* Import and export data using CSV
+- Create and log into an account  
+- Add and track transactions  
+- Create budget categories  
+- Track savings goals  
+- View spending using a chart  
+- Import and export data using CSV  
 
 ---
 
 ## Auto Testing
 
-This project includes a simple automated test file called automated_test.py that checks the main backend functionality.
+This project includes an automated test file:
 
-**What it tests**
+```
+Auto_Testing/automated_test.py
+```
 
-The automated test checks that the backend API is working by testing:
+### What it tests
 
-User registration and login
-Creating and getting categories
-Creating and getting transactions
-Creating and getting goals
-Updating goal progress
-Checking that data exists for CSV export
+- User registration and login  
+- Creating and retrieving categories  
+- Creating and retrieving transactions  
+- Creating and retrieving goals  
+- Updating goal progress  
+- Checking that data exists for CSV export  
 
-**How to run**
-Start the backend:
+### How to run
+
+1. Start the backend:
 
 ```bash
 uvicorn frontend.serverAPI:app --reload
 ```
-In a new terminal, run:
+
+2. In a new terminal, run:
 
 ```bash
 python Auto_Testing/automated_test.py
 ```
 
-**What you will see**
+### Output
 
-The test will print results like:
+You will see results like:
 
+```
 Testing: Register User
 PASSED: Register User
 
 Testing: Create Category
 PASSED: Create Category
+```
 
-Each test will show PASSED or FAILED depending on if it works.
+Each test shows **PASSED** or **FAILED**.
 
-**Notes**
-The test creates a new user each time it runs
-No setup data is needed before running it
-It tests the backend endpoints that the frontend uses
+### Notes
+
+- A new user is created each time the test runs  
+- No setup data is required  
+- Tests use the same API endpoints as the frontend  
+
+---
 
 ## Manual Testing
 
-Testing is mainly done by interacting with the application and checking that everything works correctly.
+Testing is done by interacting with the application.
 
-One main test we perform is using the provided CSV files. These should be imported in the following order:
+### CSV Testing
 
-1. Categories CSV
-2. Transactions CSV
-3. Goals CSV
-4. All-in-one CSV (all 3 combined)
-_THESE CSVs ARE INCLUDED IN Manual_Testing FILE_
+Use the provided CSV files in the `Manual_Testing` folder in this order:
 
-**After each import, we verify that:**
+1. Categories CSV  
+2. Transactions CSV  
+3. Goals CSV  
+4. Combined CSV (all data)
 
-* The data appears correctly in the application
-* Categories, transactions, and goals are properly created
-* The chart updates based on the imported data
-* No errors occur during the import process
+After each import, verify:
+- Data appears correctly  
+- Categories, transactions, and goals are created  
+- The chart updates properly  
+- No errors occur  
 
-We also test exporting the data back into a CSV file to make sure it matches what was entered.
+Also test exporting CSV to confirm it matches the input.
 
-**Other manual tests include:**
+### Other Manual Tests
 
-* Creating a user and logging in
-* Adding transactions manually and checking updates
-* Creating goals and updating progress
-* Verifying that changes are reflected in the UI and database
+- Create a user and log in  
+- Add transactions manually  
+- Create and update goals  
+- Verify UI and database updates  
 
 ---
 
 ## Notes
 
-* The backend must be running before using the frontend
-* Make sure the `.env` file is set up or the app will not start
-* Live Preview is required to properly view the frontend
-* The project is meant to run locally
-
----
+- Backend must be running before using the frontend  
+- `.env` file is required or the app will not start  
+- Live Preview is required for frontend  
+- The project runs locally  
