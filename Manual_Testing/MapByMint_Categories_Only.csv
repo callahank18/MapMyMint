@@ -1,0 +1,5 @@
+Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date
+CATEGORY,1,DemoUser,Housing,,1500,,,,,,,,
+CATEGORY,1,DemoUser,Groceries,,500,,,,,,,,
+CATEGORY,1,DemoUser,Entertainment,,300,,,,,,,,
+CATEGORY,1,DemoUser,Utilities,,400,,,,,,,,
