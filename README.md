@@ -16,6 +16,8 @@ The project was built using:
 
 Make sure Python is installed (Python 3.9+ recommended).
 
+Make sure repository is opened in Visual Studio Code
+
 Install dependencies:
 
 ```bash
