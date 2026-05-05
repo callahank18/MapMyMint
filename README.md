@@ -106,7 +106,7 @@ uvicorn frontend.serverAPI:app --reload
 In a new terminal, run:
 
 ```bash
-python automated_test.py
+python Auto_Testing/automated_test.py
 ```
 
 **What you will see**
