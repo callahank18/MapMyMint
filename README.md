@@ -165,7 +165,27 @@ Also test exporting CSV to confirm it matches the input.
 
 ## Notes
 
-- Backend must be running before using the frontend  
-- `.env` file is required or the app will not start  
-- Live Preview is required for frontend  
-- The project runs locally  
+- The backend must be running before using the frontend  
+- The `.env` file must be set up or the app will not start  
+- Live Preview is required to properly view the frontend  
+- The project runs locally
+
+- CSV imports require the correct format (use the provided template)  
+- Duplicate categories may be created if the same CSV is imported multiple times  
+- The automated test requires the backend to be running before execution
+
+## Licenses / Third Party Libraries
+
+This project uses the following open-source tools and libraries:
+
+- FastAPI - MIT License
+- Uvicorn - BSD 3-Clause License
+- Requests - Apache 2.0 License
+- SQLAlchemy - MIT License
+- Pandas - BSD 3-Clause License
+- bcrypt - Apache 2.0 License
+- cryptography - Apache 2.0 OR BSD 3-Clause License
+- python-dotenv - BSD License
+- Pydantic - MIT License
+- D3.js - ISC License
+- SQLite - Public Domain
