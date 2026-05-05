@@ -1,0 +1,34 @@
+'=== MAPMYMINT CSV TEMPLATE ===',,,,,,,,,,,,,
+Use this file to import your data into MapMyMint,,,,,,,,,,,,,
+
+--- HOW TO USE ---,,,,,,,,,,,,,
+1. Each row must start with CATEGORY, TRANSACTION, or GOAL,,,,,,,,,,,,,
+2. Fill out only the columns needed for that row type,,,,,,,,,,,,,
+3. Leave unused columns blank,,,,,,,,,,,,,
+4. Use the example rows below as a guide,,,,,,,,,,,,,
+
+--- CATEGORY ROWS ---,,,,,,,,,,,,,
+Fill: Category name (Column D) and optional limit (Column F),,,,,,,,,,,,,
+
+--- TRANSACTION ROWS ---,,,,,,,,,,,,,
+Fill: Category, Date, Description, Amount, Type (Expense/Income),,,,,,,,,,,,,
+
+--- GOAL ROWS ---,,,,,,,,,,,,,
+Fill: Goal Name, Target Amount, Current Amount,,,,,,,,,,,,,
+
+Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date
+
+CATEGORY,1,TestUser,Housing,,1500,,,,,,,,
+CATEGORY,1,TestUser,Groceries,,400,,,,,,,,
+CATEGORY,1,TestUser,Entertainment,,200,,,,,,,,
+CATEGORY,1,TestUser,Transportation,,300,,,,,,,,
+
+TRANSACTION,1,TestUser,Housing,,,2026-04-01,Rent payment,1200,Expense,,,,
+TRANSACTION,1,TestUser,Groceries,,,2026-04-10,Walmart groceries,85.50,Expense,,,,
+TRANSACTION,1,TestUser,Entertainment,,,2026-04-15,Movie night,25,Expense,,,,
+TRANSACTION,1,TestUser,Transportation,,,2026-04-18,Gas fill-up,45,Expense,,,,
+
+GOAL,1,TestUser,,,,,,,,Emergency Fund,2000,500,2026-12-31
+GOAL,1,TestUser,,,,,,,,Vacation,1500,200,2026-08-01
+GOAL,1,TestUser,,,,,,,,New Laptop,1800,300,2026-09-15
+GOAL,1,TestUser,,,,,,,,Car Savings,3000,750,2027-01-01
