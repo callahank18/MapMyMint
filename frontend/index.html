@@ -110,18 +110,40 @@ function downloadTemplateCSV() {
     const currentUsername = localStorage.getItem("currentUsername") || "User";
 
     // 2. Build the string using template literals (${}) to inject the ID and Name
-    const templateCSV = `Instructions: Use CATEGORY rows to define categories and limits,,,,,,,,,,,,,
-Instructions: Use TRANSACTION rows to enter spending or income,,,,,,,,,,,,,
-Instructions: Use GOAL rows to enter savings goals,,,,,,,,,,,,,
-Instructions: Leave unused columns blank for that row type,,,,,,,,,,,,,
+    const templateCSV = `'=== MAPMYMINT CSV TEMPLATE ===',,,,,,,,,,,,,
+Use this file to import your data into MapMyMint,,,,,,,,,,,,,
+
+--- HOW TO USE ---,,,,,,,,,,,,,
+1. Each row must start with CATEGORY, TRANSACTION, or GOAL,,,,,,,,,,,,,
+2. Fill out only the columns needed for that row type,,,,,,,,,,,,,
+3. Leave unused columns blank,,,,,,,,,,,,,
+4. Use the example rows below as a guide,,,,,,,,,,,,,
+
+--- CATEGORY ROWS ---,,,,,,,,,,,,,
+Fill: Category name (Column D) and optional limit (Column F),,,,,,,,,,,,,
+
+--- TRANSACTION ROWS ---,,,,,,,,,,,,,
+Fill: Category, Date, Description, Amount, Type (Expense/Income),,,,,,,,,,,,,
+
+--- GOAL ROWS ---,,,,,,,,,,,,,
+Fill: Goal Name, Target Amount, Current Amount,,,,,,,,,,,,,
 
 Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date
+
 CATEGORY,${currentUserId},${currentUsername},Housing,,1500,,,,,,,,
-CATEGORY,${currentUserId},${currentUsername},Groceries,Living,400,,,,,,,,
-TRANSACTION,${currentUserId},${currentUsername},Groceries,Living,,2026-04-19,Walmart trip,82.43,Expense,,,,
+CATEGORY,${currentUserId},${currentUsername},,,,,,,,,,,
+CATEGORY,${currentUserId},${currentUsername},,,,,,,,,,,
+CATEGORY,${currentUserId},${currentUsername},,,,,,,,,,,
+
+TRANSACTION,${currentUserId},${currentUsername},Housing,,,2026-04-19,Rent payment,1200,Expense,,,,
+TRANSACTION,${currentUserId},${currentUsername},,,,,,,,,,,
+TRANSACTION,${currentUserId},${currentUsername},,,,,,,,,,,
+TRANSACTION,${currentUserId},${currentUsername},,,,,,,,,,,
+
 GOAL,${currentUserId},${currentUsername},,,,,,,,Emergency Fund,2000,500,2026-12-31
-,,,,,,,,,,,,,
-,,,,,,,,,,,,,`;
+GOAL,${currentUserId},${currentUsername},,,,,,,,,,,,
+GOAL,${currentUserId},${currentUsername},,,,,,,,,,,,
+GOAL,${currentUserId},${currentUsername},,,,,,,,,,,,`;
 
     // 3. Create the download as before
     const blob = new Blob([templateCSV], { type: "text/csv" });
