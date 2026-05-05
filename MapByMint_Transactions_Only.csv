@@ -1,5 +1,0 @@
-Entry Type,User ID,Username,Category,Parent Category,Category Limit,Transaction Date,Description,Amount,Transaction Type,Goal Name,Target Amount,Current Amount,Target Date
-TRANSACTION,1,DemoUser,Groceries,,,2026-05-01,Walmart trip,120,expense,,,,
-TRANSACTION,1,DemoUser,Housing,,,2026-05-02,Rent payment,250,expense,,,,
-TRANSACTION,1,DemoUser,Entertainment,,,2026-05-03,Movie night,75,expense,,,,
-TRANSACTION,1,DemoUser,Utilities,,,2026-05-04,Electric bill,180,expense,,,,
