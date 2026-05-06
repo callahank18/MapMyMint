@@ -28,7 +28,9 @@ pip install fastapi uvicorn requests sqlalchemy pandas bcrypt cryptography pytho
 A `.env` file is included in the main project folder.
 
 Open the `.env` file and replace the placeholder value with your own generated secret key:
+
 **Note: There will be a tester key in the field, please replace with your own!**
+
 ```env
 SECRET_KEY=your_generated_key_here
 ```
