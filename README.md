@@ -57,7 +57,7 @@ python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().d
 
 **This is the current viable remote installation process**
 
-### Open Frontend (VS Code)
+### Install Live Preview (Microsoft) (VS Code)
 
 This project uses the **Live Preview extension by Microsoft**.
 
