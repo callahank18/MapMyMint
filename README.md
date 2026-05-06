@@ -25,14 +25,14 @@ pip install fastapi uvicorn requests sqlalchemy pandas bcrypt cryptography pytho
 
 ## Environment Setup
 
-Create a `.env` file in the main project folder and add:
+A `.env` file is included in the main project folder.
 
-```
-SECRET_KEY=your_key_here
-```
+Open the `.env` file and replace the placeholder value with your own generated secret key:
 
-To generate a key, run:
+```env
+SECRET_KEY=your_generated_key_here
 
+To generate a secret key, run:
 ```bash
 python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
 ```
