@@ -55,9 +55,7 @@ Steps:
 1. Install "Live Preview" from Extensions using this command, this should install the extension and apply it to the workspace.
 ```bash
 code --install-extension ms-vscode.live-server
-```   
-2. Right click `home.html`  
-3. Click **Open with Live Preview**  
+```    
 
 ---
 
@@ -75,6 +73,8 @@ Backend runs at:
 ```
 http://127.0.0.1:8000
 ```
+2. Right click `home.html`  
+3. Click **Open with Live Preview** 
 
 ---
 
