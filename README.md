@@ -25,23 +25,42 @@ pip install fastapi uvicorn requests sqlalchemy pandas bcrypt cryptography pytho
 
 ## Environment Setup
 
+
 A `.env` file is included in the main project folder.
 
 Open the `.env` file and replace the placeholder value with your own generated secret key:
 
-**Note: There will be a tester key in the field, please replace with your own!**
-
-```env
+```.env
 SECRET_KEY=your_generated_key_here
 ```
-**To generate personal secret key, run:**
+
+**Note: There will be a tester key in the field, please replace with your own!**
+
+To generate personal secret key, run:
 ```bash
 python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
 ```
 
 ---
 
+
 ## Running the Project
+
+
+### Open Frontend (VS Code)
+
+This project uses the **Live Preview extension by Microsoft**.
+
+Steps:
+1. Install "Live Preview" from Extensions using this command, this should install the extension and apply it to the workspace.
+```bash
+code --install-extension ms-vscode.live-server
+```   
+2. Right click `home.html`  
+3. Click **Open with Live Preview**  
+
+---
+
 
 ### Start Backend
 
@@ -59,19 +78,6 @@ http://127.0.0.1:8000
 
 ---
 
-### Open Frontend (VS Code)
-
-This project uses the **Live Preview extension by Microsoft**.
-
-Steps:
-1. Install "Live Preview" from Extensions using this command, this should install the extension and apply it to the workspace.
-```bash
-code --install-extension ms-vscode.live-server
-```   
-2. Right click `home.html`  
-3. Click **Open with Live Preview**  
-
----
 
 ## Features
 
