@@ -17,65 +17,23 @@ Attendance
 In Class Meeting w/ Professor - Monday's 2-3:15
 Second Meeting - Wednesday 2:00 - 3:15 Discord
 Third Meeting - Thursday @ 9am Discord
+        
 -----------------------------------------------------------------------------------------------
-## WEEK PRODUCT BACKLOG ##
-          - Display does not automatically update with changes and read data and implment it
-          - Visual enhancements for the page
-          - 
-          - 
-          - Landing page to set the budget and it fills in and here what you have remaining
-          - 
-          - 
-          - Working in login system and integrate multiple users
-          - Encryption integration 
-          - setting up the back end to handle login info 
-          - Working through bug fixes
-          - detecting errors on the csv file
-          - creating a list of alert hey csv is not correct
-          
------------------------------------------------------------------------------------------------
-## 4/27/2026 ##
+## 5/6/2026 ##
 ~# Completed Work #~
   -Removed emaill from Registration page
   -Added and cleaned up themes
+  -Graph automatically updates
+  -Finalized Interface
   -
 
 ## Assigned Work ##
-Kelsey - Finish working on landing page:
-    -Fixing the graph to show current left to spend visually
-    -Fixing labeling on the graph to be more visually appealing
-    -Automatically updates to the graph when money added/removed
-    - Show Password Requirements on Account Registration Page
-Tom - Frontend Testing
-    - Bug Fixing
-    - Start Presentation
-Ryan - Working on Graph update with CSV import
-Vincent - Backend Testing
-        - Bug Fixing
-        - Start Presentation
-Jayne - Updating fetch information to match currently logged in user
-      - Password Requirements (One Uppercase, One Special Character, One Number)
-Gavin - Working on Graph update with CSV import
-
-## Meeting with Brian GOALS Monday 4/13/2026 ##
-Work through product backlog
+Entire team- work on finishing up last min documentation and test files and Work on bugs 
 
 -----------------------------------------------------------------------------------------------
-## 4/29/2026 ##
-Check in everyone progressing on their tasks
-Start talking about how to wrap up the project and deploy the files.
+## 5/7/2026 ##
+
 ## Assigned Work ##
-Continued work from Monday assignments
+Entire team when through testing and approval of documenation
 
-## Meeting with Brian GOALS Monday 4/13/2026 ##
-Work through product backlog
 
------------------------------------------------------------------------------------------------
-## 4/30/2026 ##
-Check in everyone progressing on their tasks
-
-## Assigned Work ## 
-Continued work from Monday assignments
-
-## Meeting with Brian GOALS Monday 4/13/2026 ##
-Work through product backlog
