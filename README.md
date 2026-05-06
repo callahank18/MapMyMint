@@ -31,6 +31,7 @@ Open the `.env` file and replace the placeholder value with your own generated s
 
 ```env
 SECRET_KEY=your_generated_key_here
+```
 
 To generate a secret key, run:
 ```bash
