@@ -46,6 +46,16 @@ python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().d
 
 ## Running the Project
 
+## How to run from GitHub Repositiory
+
+1. Open our Github Repository - https://github.com/callahank18/MapMyMint.git
+2. Click on Green <> Code Button
+3. Click Green Create Codespace on Main
+4. Close Out Codespace Webpage that Pops Up
+5. Go Back to Repository and Click the Three Dots Next to Active ...
+6. Click Open in Visual Studio Code
+
+**This is the current viable remote installation process**
 
 ### Open Frontend (VS Code)
 
