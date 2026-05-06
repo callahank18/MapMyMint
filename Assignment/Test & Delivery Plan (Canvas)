@@ -1,0 +1,21 @@
+Test Plan
+System Testing
+Our team regularly performs system testing during each sprint, ensuring proper implementation of each PBI. This involves team members interacting with the GUI, and viewing the database after each test. This way, we know that the GUI works as intended, and that each level between the GUI and database functions properly.
+Feature Testing
+	The user working on each PBI is responsible for performing additional feature tests to ensure that their feature works as intended. For front-end developers, this usually involves hard-coding values, and viewing the changes in the GUI. For back-end developers, this involves hard coding values, and printing results to the console. 
+
+
+Delivery Plan
+Web Application Source Code
+The client will receive a project package via GitHub, for a fully functioning web application. This application will consist of a JavaScript frontend, a Python backend, and a locally hosted SQLite database. 
+This application will provide the the following core features: 
+Create and manage accounts
+Track transactions and financial goals
+Visualize spending patterns 
+Securely store and manage user data
+The project may be considered delivered when the core features are implemented and the application runs without errors. The GitHub repository will be provided to the client, containing the source code, database and setup instructions.
+Local Database + Schema
+The database used will be included in the GitHub repository, along with an sql file containing the schema of the database for replication purposes. Additionally, the provided database will be populated with example data for demonstration purposes.
+
+Setup Instructions
+	Given that this application is hosted locally, users will need to ensure that they have dependencies installed on their machine before it can be used. For this reason, the repository will contain a README file with setup instructions and a list of dependencies needed before use. 
