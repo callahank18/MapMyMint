@@ -60,7 +60,7 @@ code --install-extension ms-vscode.live-server
 ---
 
 
-### Start Backend
+### Start Backend / Frontend
 
 From the main project folder, run:
 
