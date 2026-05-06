@@ -62,10 +62,12 @@ http://127.0.0.1:8000
 This project uses the **Live Preview extension by Microsoft**.
 
 Steps:
-1. Install "Live Preview" from Extensions  
-2. Install on Codespace  
-3. Right click `home.html`  
-4. Click **Open with Live Preview**  
+1. Install "Live Preview" from Extensions using this command, this should install the extension and apply it to the workspace.
+```bash
+code --install-extension ms-vscode.live-server
+```   
+2. Right click `home.html`  
+3. Click **Open with Live Preview**  
 
 ---
 
