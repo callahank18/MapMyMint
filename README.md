@@ -13,18 +13,29 @@ The project was built using:
 ## Requirements
 
 - Python 3.9+ installed  
-- Repository opened in Visual Studio Code  
+- Repository opened in Visual Studio Code  & Visual Studio Code Installed and Linked to Github
+
+## Running the Project
+
+## How to run from GitHub Repositiory
+
+1. Open our Github Repository - https://github.com/callahank18/MapMyMint.git
+2. Click on Green <> Code Button
+3. Click Green Create Codespace on Main
+4. Close Out Codespace Webpage that Pops Up
+5. Go Back to Repository and Click the Three Dots Next to Active ...
+6. Click Open in Visual Studio Code
+
+**This is the current viable remote installation process**
+
+## Environment Setup
 
 Install dependencies:
 
 ```bash
 pip install fastapi uvicorn requests sqlalchemy pandas bcrypt cryptography python-dotenv
 ```
-
 ---
-
-## Environment Setup
-
 
 A `.env` file is included in the main project folder.
 
@@ -42,20 +53,6 @@ python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().d
 ```
 
 ---
-
-
-## Running the Project
-
-## How to run from GitHub Repositiory
-
-1. Open our Github Repository - https://github.com/callahank18/MapMyMint.git
-2. Click on Green <> Code Button
-3. Click Green Create Codespace on Main
-4. Close Out Codespace Webpage that Pops Up
-5. Go Back to Repository and Click the Three Dots Next to Active ...
-6. Click Open in Visual Studio Code
-
-**This is the current viable remote installation process**
 
 ### Install Live Preview (Microsoft) (VS Code)
 
