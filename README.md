@@ -17,7 +17,7 @@ The project was built using:
 
 ## Running the Project
 
-## How to run from GitHub Repositiory
+**How to run from GitHub Repositiory**
 
 1. Open our Github Repository - https://github.com/callahank18/MapMyMint.git
 2. Click on Green <> Code Button
