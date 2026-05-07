@@ -13,13 +13,15 @@ The project was built using:
 ## Requirements
 
 - Python 3.9+ installed  
-- Repository opened in Visual Studio Code  & Visual Studio Code Installed and Linked to Github
+- Visual Studio Code installed
+- Repository opened in Visual Studio Code
+- GitHub account connected to Visual Studio Code
 
 ## Running the Project
 
 **How to run from GitHub Repositiory**
 
-1. Open our Github Repository - https://github.com/callahank18/MapMyMint.git
+1. Open our GitHub Repository - https://github.com/callahank18/MapMyMint.git
 2. Click on Green <> Code Button
 3. Click Green Create Codespace on Main
 4. Close Out Codespace Webpage that Pops Up
