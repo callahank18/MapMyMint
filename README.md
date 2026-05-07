@@ -83,9 +83,8 @@ Backend runs at:
 http://127.0.0.1:8000
 ```
 2. Right click `home.html` located in frontend folder
-3. Click **Open with Live Preview or Preview**
+3. Click **Open with Live Preview or Preview** (May Need To Make Preview Bigger)
 
-_Extend Window As You Please_
 ---
 
 
