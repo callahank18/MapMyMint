@@ -1,4 +1,4 @@
-# MapMyMint
+# MapMyMint (README Visually Best In GitHub)
 
 ## Overview
 MapMyMint is a budgeting web application that helps users keep track of their spending, categories, and financial goals. It also includes a visual chart to show how money is being used.
@@ -80,7 +80,7 @@ Backend runs at:
 ```
 http://127.0.0.1:8000
 ```
-2. Right click `home.html`  
+2. Right click `home.html` located in frontend folder
 3. Click **Open with Live Preview** 
 
 ---
