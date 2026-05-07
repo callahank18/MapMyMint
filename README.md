@@ -30,7 +30,7 @@ The project was built using:
 
 ## Environment Setup
 
-Install dependencies:
+**Install dependencies:**
 
 ```bash
 pip install fastapi uvicorn requests sqlalchemy pandas bcrypt cryptography python-dotenv
@@ -116,7 +116,7 @@ Auto_Testing/automated_test.py
 
 ### How to run
 
-1. Start the backend:
+1. Ensure the backend is running:
 
 ```bash
 uvicorn frontend.serverAPI:app --reload
